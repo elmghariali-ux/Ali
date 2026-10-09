@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ZAYA — The Ritual</title>
+<meta name="description" content="ZAYA. Organic Afro House in Barcelona. The ritual returns. By invitation.">
+<meta name="theme-color" content="#070404">
+<meta property="og:title" content="ZAYA — The Ritual">
+<meta property="og:description" content="The ritual returns. Request an invitation.">
+<meta property="og:image" content="/img/og.jpg">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23070404'/%3E%3Ccircle cx='16' cy='16' r='5' fill='%23B3261E'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@300;400&display=swap">
+<style>
+:root{--bg:#070404;--ink:#f3ebe4;--soft:#d6cac1;--mute:#a3958d;--hot:#ff6b4d;--accent:#B3261E;--serif:'Cormorant Garamond',Georgia,serif;--sans:'Jost',system-ui,sans-serif}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:300;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none;transition:color .3s}a:hover{color:var(--hot)}
+img{display:block}
+::selection{background:var(--accent);color:#fff}
+:focus-visible{outline:1px solid var(--hot);outline-offset:4px}
+.cap{font-size:11px;letter-spacing:.42em;text-transform:uppercase}
+.wrap{padding-left:5vw;padding-right:5vw}
+.serif{font-family:var(--serif);font-weight:300}
+
+/* I. pulse */
+.hero{min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:space-between;padding-top:32px;padding-bottom:32px}
+.bar{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;color:var(--mute)}
+.bar a{padding:12px 0}
+.center{display:flex;flex-direction:column;align-items:center;gap:56px;text-align:center;padding:80px 0}
+.beat{position:relative;width:10px;height:10px}
+.beat span{position:absolute;inset:0;border-radius:50%;background:var(--accent)}
+.beat .dot{box-shadow:0 0 24px var(--accent);animation:beat .49s ease-out infinite}
+.beat .halo{animation:halo .98s ease-out infinite}
+@keyframes beat{0%{transform:scale(1)}14%{transform:scale(1.9);opacity:.55}30%,100%{transform:scale(1);opacity:1}}
+@keyframes halo{0%{transform:scale(.6);opacity:.55}100%{transform:scale(7);opacity:0}}
+h1{margin:0;padding-left:.6em;font-size:clamp(44px,6vw,84px);letter-spacing:.6em;line-height:1}
+.tag{margin:0;font-family:var(--serif);font-style:italic;font-size:clamp(20px,2vw,26px);color:#c9bcb3}
+.in1,.in2,.in3{opacity:0}
+.in1{animation:rise 1.6s ease .6s forwards}.in2{animation:rise 1.6s ease 1.4s forwards}.in3{animation:fade 2.4s ease 2.4s forwards}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes fade{to{opacity:1}}
+
+/* reveal on scroll */
+.rv{opacity:0;transform:translateY(24px);transition:opacity 1.6s ease,transform 1.6s ease}
+.rv.on{opacity:1;transform:none}
+
+/* II */
+.line{padding-top:26vh;padding-bottom:30vh}
+.line p{margin:0 auto;max-width:1040px;text-align:center;font-size:clamp(32px,4.4vw,64px);line-height:1.18}
+.line em{color:var(--hot)}
+
+/* III hold */
+.hold{padding-bottom:28vh;display:flex;flex-direction:column;align-items:center;gap:36px}
+.frame{position:relative;width:100%;max-width:460px;aspect-ratio:3/4;overflow:hidden;background:#0f0707}
+.frame img{width:100%;height:100%;object-fit:cover;filter:blur(26px) brightness(.35) saturate(1.4);transform:scale(1.12);transition:filter 1.4s ease,transform 4s ease}
+.frame .veil{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;transition:opacity .8s}
+.frame.open img{filter:none;transform:scale(1)}
+.frame.open .veil{opacity:0}
+.btn-line{min-height:52px;padding:0 30px;background:transparent;border:1px solid rgba(233,225,218,.35);color:var(--ink);font-family:var(--sans);cursor:pointer;user-select:none;-webkit-user-select:none;touch-action:none;-webkit-touch-callout:none}
+
+/* IV */
+.three{padding-bottom:28vh;max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;gap:64px 40px;text-align:center}
+.three div{flex:1 1 240px;display:flex;flex-direction:column;gap:16px}
+.three .cap{margin:0;color:var(--hot)}
+.three p.serif{margin:0;font-size:24px;line-height:1.45;color:var(--soft);font-weight:400}
+
+/* V */
+.record{padding-bottom:28vh;max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:28px;align-items:center;text-align:center}
+.record p{margin:0}
+.rule{width:1px;height:80px;background:linear-gradient(var(--hot),transparent)}
+
+/* VI request */
+.req{padding-bottom:22vh;max-width:520px;margin:0 auto;display:flex;flex-direction:column;gap:40px;align-items:center;text-align:center}
+.req h2{margin:0;font-size:clamp(38px,4vw,56px);line-height:1.1}
+form{width:100%;display:flex;flex-direction:column;gap:22px}
+label{display:flex;flex-direction:column;gap:8px;text-align:left;font-size:10px;letter-spacing:.4em;text-transform:uppercase;color:var(--mute)}
+input{min-height:48px;padding:0;background:transparent;border:0;border-bottom:1px solid rgba(233,225,218,.3);border-radius:0;color:var(--ink);font-family:var(--serif);font-size:22px;letter-spacing:0;text-transform:none}
+input::placeholder{color:#8f817a}
+input:focus{outline:none;border-bottom-color:var(--hot)}
+.hp{position:absolute;left:-9999px}
+.send{margin-top:18px;min-height:54px;background:var(--accent);color:#fff;border:0;font-family:var(--sans);cursor:pointer;transition:filter .3s}
+.send:hover{filter:brightness(1.15)}
+.done{display:none;flex-direction:column;gap:18px;align-items:center;padding:40px 0}
+.req.sent form{display:none}.req.sent .done{display:flex}
+.done .d{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 20px var(--accent);animation:beat .49s ease-out infinite}
+
+footer{padding-top:28px;padding-bottom:36px;border-top:1px solid rgba(233,225,218,.08)}
+footer div{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;color:#8f817a}
+footer a{padding:12px 0}
+.mail{letter-spacing:.2em;text-transform:none}
+
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.in1,.in2,.in3,.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<section class="hero wrap">
+  <header class="bar cap"><span>Barcelona</span><a href="#request">Request an invitation</a></header>
+  <div class="center">
+    <div class="beat" aria-hidden="true"><span class="halo"></span><span class="dot"></span></div>
+    <h1 class="serif in1">ZAYA</h1>
+    <p class="tag in2">The ritual returns.</p>
+  </div>
+  <div class="bar cap in3"><span>Edition IV</span><span>122 BPM</span><span>XI · MMXXVI</span></div>
+</section>
+
+<section class="line wrap">
+  <p class="serif rv">Many nights in this city promise Afro House.<br><em>One of them keeps the promise.</em></p>
+</section>
+
+<section class="hold wrap">
+  <div class="frame rv" id="frame">
+    <img src="/img/inside.jpg" alt="Inside a ZAYA night: the red-lit staircase" draggable="false">
+    <div class="veil cap">Members of the night only</div>
+  </div>
+  <button type="button" class="btn-line cap" id="holdBtn">Press and hold to look inside</button>
+</section>
+
+<section class="wrap">
+  <div class="three">
+    <div class="rv"><p class="cap">I · Sound</p><p class="serif">Organic Afro House.<br>Nothing else, all night.</p></div>
+    <div class="rv"><p class="cap">II · Ceremony</p><p class="serif">Live musicians.<br>Henna. Heritage.</p></div>
+    <div class="rv"><p class="cap">III · Crowd</p><p class="serif">Curated capacity.<br>Never the hype.</p></div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="record rv">
+    <p class="cap" style="color:var(--mute)">Hotel El Palace · Editions I — III</p>
+    <p class="serif" style="font-size:clamp(30px,3.4vw,46px);line-height:1.3">Three rooms. Three sold out.<br>No advertising. Ever.</p>
+    <div class="rule"></div>
+    <p class="serif" style="font-style:italic;font-size:22px;color:#c9bcb3">The next room is larger, older, and not yet named.</p>
+  </div>
+</section>
+
+<section class="wrap" id="request">
+  <div class="req rv" id="req">
+    <div style="display:flex;flex-direction:column;gap:18px;align-items:center">
+      <p class="cap" style="margin:0;color:var(--hot)">Edition IV · November · Barcelona</p>
+      <h2 class="serif">Request an invitation.</h2>
+      <p style="margin:0;font-size:15px;line-height:1.8;color:var(--mute)">The location is shared with guests 48 hours before.<br>Every request is read by hand.</p>
+    </div>
+    <form id="form" novalidate>
+      <label>Name<input type="text" name="name" placeholder="Your name" autocomplete="name" required></label>
+      <label>Email<input type="email" name="email" placeholder="you@domain.com" autocomplete="email" required></label>
+      <label>Instagram<input type="text" name="instagram" placeholder="@"></label>
+      <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <button type="submit" class="send cap">Send request</button>
+    </form>
+    <div class="done" role="status">
+      <span class="d" aria-hidden="true"></span>
+      <p class="serif" style="margin:0;font-style:italic;font-size:28px">Received.</p>
+      <p style="margin:0;font-size:15px;line-height:1.8;color:var(--mute)">If there is a place for you, you will hear from us.</p>
+    </div>
+  </div>
+</section>
+
+<footer class="wrap">
+  <div class="cap">
+    <span>ZAYA · The Ritual</span>
+    <a href="https://www.instagram.com/zaya.ritual/" target="_blank" rel="noopener">@zaya.ritual</a>
+    <a class="mail" href="mailto:contact@zayacollective.com">contact@zayacollective.com</a>
+  </div>
+</footer>
+
+<script>
+/* Where invitation requests go. Paste a Formspree (or similar) form URL here.
+   Left empty, the form opens a pre-filled email to CONTACT instead. */
+const FORM_ENDPOINT = "";
+const CONTACT = "contact@zayacollective.com";
+
+// scroll reveal
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } }), { threshold: .2 });
+document.querySelectorAll('.rv').forEach(el => io.observe(el));
+
+// hold to look inside
+const frame = document.getElementById('frame'), btn = document.getElementById('holdBtn');
+const open = e => { e.preventDefault(); frame.classList.add('open'); btn.textContent = 'Keep holding'; if (navigator.vibrate) navigator.vibrate(12); };
+const close = () => { frame.classList.remove('open'); btn.textContent = 'Press and hold to look inside'; };
+btn.addEventListener('pointerdown', open);
+['pointerup','pointerleave','pointercancel'].forEach(t => btn.addEventListener(t, close));
+btn.addEventListener('keydown', e => { if ((e.key === ' ' || e.key === 'Enter') && !e.repeat) open(e); });
+btn.addEventListener('keyup', e => { if (e.key === ' ' || e.key === 'Enter') close(); });
+btn.addEventListener('contextmenu', e => e.preventDefault());
+
+// request an invitation
+document.getElementById('form').addEventListener('submit', async e => {
+  e.preventDefault();
+  const f = e.target, d = new FormData(f);
+  if (d.get('_gotcha')) return;
+  if (!f.name.value.trim() || !f.email.checkValidity()) { (f.name.value.trim() ? f.email : f.name).focus(); return; }
+  if (FORM_ENDPOINT) {
+    try { await fetch(FORM_ENDPOINT, { method: 'POST', body: d, headers: { Accept: 'application/json' } }); } catch (_) {}
+  } else {
+    const body = `Name: ${d.get('name')}\nEmail: ${d.get('email')}\nInstagram: ${d.get('instagram') || '-'}`;
+    location.href = `mailto:${CONTACT}?subject=${encodeURIComponent('Invitation request — ZAYA Edition IV')}&body=${encodeURIComponent(body)}`;
+  }
+  document.getElementById('req').classList.add('sent');
+});
+</script>
+</body>
+</html>
