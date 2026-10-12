@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ZAYA — The Ritual</title>
-<meta name="description" content="ZAYA. Afro House in Barcelona. Edition III, November. By invitation.">
+<meta name="description" content="ZAYA. Afro House in Barcelona. Edition III, Saturday 21 November. Tickets for invited guests only.">
 <meta name="theme-color" content="#070404">
 <meta property="og:title" content="ZAYA — The Ritual">
-<meta property="og:description" content="Edition III · November · Barcelona. Request an invitation.">
+<meta property="og:description" content="Edition III · Saturday 21 November · Barcelona. Tickets for invited guests only — request an invitation.">
 <meta property="og:image" content="https://zaya-ritual.vercel.app/img/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -92,6 +92,11 @@ h1{margin:0;padding-left:.6em;font-size:clamp(44px,6vw,84px);letter-spacing:.6em
 .signal{padding-bottom:26vh;max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:44px}
 .signal .head{display:flex;flex-direction:column;gap:18px;align-items:center;text-align:center}
 .signal h2{margin:0;font-size:clamp(36px,4vw,54px);line-height:1.1}
+.bigdate{font-variant-numeric:lining-nums;font-feature-settings:"lnum" 1;margin:6px 0 -6px;font-size:clamp(96px,17vw,190px);line-height:.9;letter-spacing:.02em;color:var(--ink)}
+.bigdate span{color:var(--accent)}
+.tix{margin:8px 0 6px;font-style:italic;font-size:clamp(22px,2.4vw,28px);color:var(--soft)}
+.signal .head .solid{text-decoration:none}
+.signal .head .solid:hover{color:#fff;filter:brightness(1.15)}
 .signal ol{list-style:none;margin:0;padding:0;border-top:1px solid rgba(233,225,218,.12)}
 .signal li{display:flex;align-items:center;gap:20px;padding:22px 0;border-bottom:1px solid rgba(233,225,218,.12)}
 .signal .n{width:44px;flex:none;color:#8f817a}
@@ -172,7 +177,7 @@ footer a{padding:12px 0}
     <p class="tag in2">The ritual returns.</p>
     <p class="cap hint in3" id="hint">Tap the pulse to enter</p>
   </div>
-  <div class="bar cap in3"><span>Edition III</span><span>123 BPM</span><span>XI · MMXXVI</span></div>
+  <div class="bar cap in3"><span>Edition III</span><span>123 BPM</span><span>21 · XI · MMXXVI</span></div>
 </section>
 
 <section class="line wrap">
@@ -212,13 +217,15 @@ footer a{padding:12px 0}
 <section class="wrap" id="signal">
   <div class="signal">
     <div class="head rv">
-      <p class="cap" style="margin:0;color:var(--hot)">The Signal</p>
-      <h2 class="serif">Edition III is coming into focus.</h2>
-      <p style="margin:0;font-size:15px;line-height:1.8;color:var(--mute)">Four signals. Each one is released here first.</p>
+      <p class="cap" style="margin:0;color:var(--hot)">The Signal · Edition III</p>
+      <p class="bigdate serif">21<span>.</span>11</p>
+      <p class="cap" style="margin:0;color:var(--soft)">Saturday · November · Barcelona</p>
+      <p class="tix serif">Tickets are released to invited guests only.</p>
+      <a class="solid cap" href="#request">Request an invitation</a>
     </div>
     <ol class="rv">
       <li class="open"><span class="cap n">I</span><span class="what">The sound</span><span class="cap st"><button type="button" id="listen">Received · Listen</button></span></li>
-      <li class="sealed"><span class="cap n">II</span><span class="what"><span>The colour</span></span><span class="cap st">Sealed</span></li>
+      <li class="open"><span class="cap n">II</span><span class="what">The date</span><span class="cap st">Received · 21 November</span></li>
       <li class="sealed"><span class="cap n">III</span><span class="what"><span>The room</span></span><span class="cap st">Sealed</span></li>
       <li class="sealed"><span class="cap n">IV</span><span class="what"><span>The address</span></span><span class="cap st">Guests · 48h before</span></li>
     </ol>
@@ -228,9 +235,9 @@ footer a{padding:12px 0}
 <section class="wrap" id="request">
   <div class="req rv" id="req">
     <div style="display:flex;flex-direction:column;gap:18px;align-items:center">
-      <p class="cap" style="margin:0;color:var(--hot)">Edition III · November<br>Barcelona</p>
+      <p class="cap" style="margin:0;color:var(--hot)">Edition III · Saturday 21 November<br>Barcelona</p>
       <h2 class="serif">Request an invitation.</h2>
-      <p style="margin:0;font-size:15px;line-height:1.8;color:var(--mute)">The location is shared with guests 48 hours before.<br>Every request is read by hand.</p>
+      <p style="margin:0;font-size:15px;line-height:1.8;color:var(--mute)">Tickets are released to invited guests only.<br>The location is shared 48 hours before. Every request is read by hand.</p>
     </div>
     <form id="form" novalidate>
       <label>Name<input type="text" name="name" placeholder="Your name" autocomplete="name" required></label>

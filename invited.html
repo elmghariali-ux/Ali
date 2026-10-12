@@ -8,7 +8,7 @@
 <meta name="description" content="ZAYA · Edition III · Barcelona. You are invited.">
 <meta name="theme-color" content="#070404">
 <meta property="og:title" content="You are invited — ZAYA">
-<meta property="og:description" content="Edition III · November · Barcelona. The address arrives 48 hours before.">
+<meta property="og:description" content="Edition III · Saturday 21 November · Barcelona. The address arrives 48 hours before.">
 <meta property="og:image" content="https://zaya-ritual.vercel.app/img/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -68,13 +68,13 @@ footer a{min-height:44px;display:inline-flex;align-items:center}
   <header class="bar cap"><span>Barcelona</span><a href="/">ZAYA</a></header>
   <div class="center">
     <button type="button" class="enter rise" id="enter" aria-label="Play the sound"><div class="beat" aria-hidden="true"><span class="halo"></span><span class="dot"></span></div></button>
-    <p class="cap ed rise d1">Edition III · November · Barcelona</p>
+    <p class="cap ed rise d1">Edition III · Saturday 21 November · Barcelona</p>
     <h1 class="name rise d2" id="name">Guest</h1>
     <p class="inv rise d2">You are invited.</p>
     <div class="rule rise d3"></div>
-    <p class="note rise d4">The address arrives 48 hours before.<br>Until then, keep the night free and the secret close.</p>
+    <p class="note rise d4">Your ticket link comes with your invitation email.<br>The address arrives 48 hours before. Until then, keep the night free and the secret close.</p>
   </div>
-  <div class="bar cap rise d4"><span>Edition III</span><span>123 BPM</span><span>XI · MMXXVI</span></div>
+  <div class="bar cap rise d4"><span>Edition III</span><span>123 BPM</span><span>21 · XI · MMXXVI</span></div>
 </section>
 
 <section class="card" aria-label="Your invitation card">
@@ -139,7 +139,7 @@ async function makeCard(name) {
   let n = name; g.font = 'italic 300 104px "Cormorant Garamond"'; while (g.measureText(n).width > W - 220 && n.length > 3) n = n.slice(0, -2).trim() + '…';
   g.fillStyle = '#f3ebe4'; g.fillText(n, W / 2, 1250);
   g.font = 'italic 300 56px "Cormorant Garamond"'; g.fillStyle = '#c9bcb3'; g.fillText('is invited.', W / 2, 1345);
-  spaced('NOVEMBER  ·  BARCELONA', 1500, '300 28px Jost', '#a3958d', 11);
+  spaced('21 NOVEMBER  ·  BARCELONA', 1500, '300 28px Jost', '#a3958d', 11);
   spaced('@ZAYA.RITUAL', 1760, '300 28px Jost', '#a3958d', 11);
   return c;
 }
