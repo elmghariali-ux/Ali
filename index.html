@@ -207,7 +207,7 @@ async function enter() {
 function setMuted(m) {
   muted = m; snd.classList.toggle('muted', m); snd.setAttribute('aria-pressed', String(!m)); snd.querySelector('span').textContent = m ? 'Sound off' : 'Sound on';
   if (m) { fadeTo(0, .6); setTimeout(() => { if (muted) audio.pause(); }, 650); }
-  else { audio.play().catch(() => {}); fadeTo(.9, 1.2); }
+  else { audio.currentTime = 0; if (gain) gain.gain.value = 0; audio.play().catch(() => {}); fadeTo(.9, 2); }
 }
 document.getElementById('enter').addEventListener('click', enter);
 snd.addEventListener('click', () => setMuted(!muted));
