@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /invited
 
-Sitemap: https://zaya-ritual.vercel.app/sitemap.xml
+Sitemap: https://zayaritual.com/sitemap.xml
