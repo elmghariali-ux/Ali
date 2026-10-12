@@ -139,6 +139,7 @@ footer{padding-top:28px;padding-bottom:36px;border-top:1px solid rgba(233,225,21
 footer div{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;color:#8f817a}
 footer a{padding:12px 0}
 .mail{letter-spacing:.2em;text-transform:none}
+.tz{font-family:"Noto Sans Tifinagh",sans-serif;color:var(--accent);font-size:15px;letter-spacing:0;margin-right:14px;vertical-align:-1px}
 
 /* phone first: most visits come from Instagram on a phone */
 @media (max-width:560px){
@@ -169,7 +170,7 @@ footer a{padding:12px 0}
     <p class="tag in2">The ritual returns.</p>
     <p class="cap hint in3" id="hint">Tap the pulse to enter</p>
   </div>
-  <div class="bar cap in3"><span>Edition IV</span><span>123 BPM</span><span>XI · MMXXVI</span></div>
+  <div class="bar cap in3"><span>Edition III</span><span>123 BPM</span><span>XI · MMXXVI</span></div>
 </section>
 
 <section class="line wrap">
@@ -181,31 +182,23 @@ footer a{padding:12px 0}
   <div class="dark"></div>
   <div class="glow"></div>
   <div class="flame"></div>
-  <div class="cap cap-top"><span>Edition III</span><span>Hotel El Palace</span></div>
+  <div class="cap cap-top"><span>Editions I–II</span><span>Hotel El Palace</span></div>
   <p class="cap ask" id="ask">Move your light</p>
   <div class="cap cap-bot" style="justify-content:center"><span>Members of the night only</span></div>
 </section>
 
 <section class="wrap after-candle">
-  <div class="three">
-    <div class="rv"><p class="cap">I · Sound</p><p class="serif">Organic Afro House.<br>Nothing else, all night.</p></div>
-    <div class="rv"><p class="cap">II · Ceremony</p><p class="serif">Live musicians.<br>Henna. Heritage.</p></div>
-    <div class="rv"><p class="cap">III · Crowd</p><p class="serif">Curated capacity.<br>Never the hype.</p></div>
-  </div>
-</section>
-
-<section class="wrap">
   <div class="record rv">
-    <p class="cap" style="color:var(--mute)">Hotel El Palace · Editions I–III</p>
-    <p class="serif" style="font-size:clamp(30px,3.4vw,46px);line-height:1.3">Three rooms. Three sold out.<br>No advertising. Ever.</p>
+    <p class="cap" style="color:var(--mute)">Hotel El Palace · Editions I–II</p>
+    <p class="serif" style="font-size:clamp(30px,3.4vw,46px);line-height:1.3">Two nights. Both sold out.<br>No advertising. Ever.</p>
     <div class="rule"></div>
     <p class="serif" style="font-style:italic;font-size:22px;color:#c9bcb3">The next room is larger, older, and not yet named.</p>
   </div>
 </section>
 
-<section class="wrap" aria-label="Film from Edition III">
+<section class="wrap" aria-label="Film from the Palace nights">
   <div class="films">
-    <p class="cap t rv">Edition III · As it happened</p>
+    <p class="cap t rv">Hotel El Palace · As it happened</p>
     <div class="reel rv">
       <figure><video muted playsinline loop preload="none" poster="/video/night-22.jpg" data-src="/video/night-22.mp4" aria-label="The room, full"></video><figcaption class="cap">I · The room</figcaption></figure>
       <figure><video muted playsinline loop preload="none" poster="/video/night-11.jpg" data-src="/video/night-11.mp4" aria-label="On the floor"></video><figcaption class="cap">II · The floor</figcaption></figure>
@@ -218,7 +211,7 @@ footer a{padding:12px 0}
   <div class="signal">
     <div class="head rv">
       <p class="cap" style="margin:0;color:var(--hot)">The Signal</p>
-      <h2 class="serif">Edition IV is coming into focus.</h2>
+      <h2 class="serif">Edition III is coming into focus.</h2>
       <p style="margin:0;font-size:15px;line-height:1.8;color:var(--mute)">Four signals. Each one is released here first.</p>
     </div>
     <ol class="rv">
@@ -233,7 +226,7 @@ footer a{padding:12px 0}
 <section class="wrap" id="request">
   <div class="req rv" id="req">
     <div style="display:flex;flex-direction:column;gap:18px;align-items:center">
-      <p class="cap" style="margin:0;color:var(--hot)">Edition IV · November<br>Barcelona</p>
+      <p class="cap" style="margin:0;color:var(--hot)">Edition III · November<br>Barcelona</p>
       <h2 class="serif">Request an invitation.</h2>
       <p style="margin:0;font-size:15px;line-height:1.8;color:var(--mute)">The location is shared with guests 48 hours before.<br>Every request is read by hand.</p>
     </div>
@@ -252,7 +245,7 @@ footer a{padding:12px 0}
       <img class="card-img" id="cardImg" alt="Your ZAYA card">
       <div class="card-actions">
         <button type="button" class="solid cap" id="shareCard">Share to your story</button>
-        <a class="ghost cap" id="saveCard" download="ZAYA-Edition-IV.png">Save the card</a>
+        <a class="ghost cap" id="saveCard" download="ZAYA-Edition-III.png">Save the card</a>
       </div>
     </div>
   </div>
@@ -262,9 +255,9 @@ footer a{padding:12px 0}
 
 <footer class="wrap">
   <div class="cap">
-    <span>ZAYA · The Ritual</span>
+    <span><span class="tz" aria-hidden="true">ⵣ</span>ZAYA · The Ritual</span>
     <a href="https://www.instagram.com/zaya.ritual/" target="_blank" rel="noopener">@zaya.ritual</a>
-    <a class="mail" href="mailto:contact@zayacollective.com">contact@zayacollective.com</a>
+    <a class="mail" href="mailto:zaya.ritual@gmail.com">zaya.ritual@gmail.com</a>
   </div>
 </footer>
 
@@ -272,7 +265,7 @@ footer a{padding:12px 0}
 /* Where invitation requests go. Paste a Formspree (or similar) form URL here.
    Left empty, the form opens a pre-filled email to CONTACT instead. */
 const FORM_ENDPOINT = "";
-const CONTACT = "contact@zayacollective.com";
+const CONTACT = "zaya.ritual@gmail.com";
 
 // sound: the pulse is the door
 const audio = new Audio('/audio/ritual.mp3'); audio.loop = true; audio.preload = 'none';
@@ -344,7 +337,7 @@ async function makeCard(name) {
   g.strokeStyle = 'rgba(201,52,32,.45)'; g.lineWidth = 2; g.strokeRect(54, 54, W - 108, H - 108);
   const spaced = (txt, y, font, color, sp) => { g.font = font; g.fillStyle = color; const ch = [...txt]; const ws = ch.map(x => g.measureText(x).width); const tot = ws.reduce((a, b) => a + b, 0) + sp * (ch.length - 1); let x = (W - tot) / 2; ch.forEach((x2, i) => { g.fillText(x2, x, y); x += ws[i] + sp; }); };
   g.textBaseline = 'alphabetic';
-  spaced('BARCELONA  ·  EDITION IV', 190, '300 28px Jost', '#a3958d', 11);
+  spaced('BARCELONA  ·  EDITION III', 190, '300 28px Jost', '#a3958d', 11);
   g.save(); g.shadowColor = '#B3261E'; g.shadowBlur = 60; g.font = '150px "Noto Sans Tifinagh"'; g.fillStyle = '#d0372b'; g.textAlign = 'center'; g.fillText('\u2D63', W / 2, 620); g.restore();
   spaced('ZAYA', 900, '300 150px "Cormorant Garamond"', '#f3ebe4', 80);
   g.textAlign = 'center'; g.font = 'italic 300 52px "Cormorant Garamond"'; g.fillStyle = '#c9bcb3'; g.fillText('The ritual returns.', W / 2, 1000);
@@ -360,7 +353,7 @@ async function showCard(name) {
   document.getElementById('cardImg').src = url; const save = document.getElementById('saveCard'); save.href = url;
   const share = document.getElementById('shareCard');
   c.toBlob(b => {
-    const file = new File([b], 'ZAYA-Edition-IV.png', { type: 'image/png' });
+    const file = new File([b], 'ZAYA-Edition-III.png', { type: 'image/png' });
     if (navigator.canShare && navigator.canShare({ files: [file] })) share.onclick = () => navigator.share({ files: [file] }).catch(() => {});
     else share.style.display = 'none';
   }, 'image/png');
@@ -376,7 +369,7 @@ document.getElementById('form').addEventListener('submit', async e => {
     try { await fetch(FORM_ENDPOINT, { method: 'POST', body: d, headers: { Accept: 'application/json' } }); } catch (_) {}
   } else {
     const body = `Name: ${d.get('name')}\nEmail: ${d.get('email')}\nInstagram: ${d.get('instagram') || '-'}\n\nWhat do you hear when the music stops?\n${d.get('answer') || '-'}`;
-    location.href = `mailto:${CONTACT}?subject=${encodeURIComponent('Invitation request — ZAYA Edition IV')}&body=${encodeURIComponent(body)}`;
+    location.href = `mailto:${CONTACT}?subject=${encodeURIComponent('Invitation request — ZAYA Edition III')}&body=${encodeURIComponent(body)}`;
   }
   document.getElementById('req').classList.add('sent');
   showCard(d.get('name'));
