@@ -10,11 +10,5 @@
         }
       ]
     }
-  ],
-  "rewrites": [
-    {
-      "source": "/(nights|signal|request)",
-      "destination": "/"
-    }
   ]
 }
