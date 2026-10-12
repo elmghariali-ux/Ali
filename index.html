@@ -63,11 +63,11 @@ h1{margin:0;padding-left:.6em;font-size:clamp(44px,6vw,84px);letter-spacing:.6em
 .line em{color:var(--hot)}
 
 /* III the candle */
-.candle{position:relative;height:100vh;height:100svh;min-height:560px;overflow:hidden;background:#030101;cursor:none;touch-action:pan-y;-webkit-user-select:none;user-select:none;--x:50%;--y:50%;--r:160px;--img:url(/img/candle-wide.jpg)}
-@media (max-aspect-ratio:4/5){.candle{--img:url(/img/candle-tall.jpg);--r:130px}}
-.candle .layer{position:absolute;inset:-2%;background:var(--img) center/cover no-repeat}
-.candle .base{filter:brightness(.035) saturate(1.3)}
-.candle .lit{-webkit-mask-image:radial-gradient(circle var(--r) at var(--x) var(--y),#000 0%,rgba(0,0,0,.92) 30%,rgba(0,0,0,.35) 65%,transparent 100%);mask-image:radial-gradient(circle var(--r) at var(--x) var(--y),#000 0%,rgba(0,0,0,.92) 30%,rgba(0,0,0,.35) 65%,transparent 100%);filter:saturate(1.15) contrast(1.05)}
+.candle{position:relative;height:100vh;height:100svh;min-height:560px;overflow:hidden;background:#030101;cursor:none;touch-action:pan-y;-webkit-user-select:none;user-select:none;--x:50%;--y:50%;--r:170px}
+.candle .stage{position:absolute;inset:0;display:flex}
+.candle video{flex:1 1 0;min-width:0;height:100%;object-fit:cover;filter:saturate(1.12) contrast(1.04);background:#030101}
+@media (max-aspect-ratio:1/1){.candle video:not(:first-child){display:none}}
+.candle .dark{position:absolute;inset:0;background:#030101;opacity:.975;-webkit-mask-image:radial-gradient(circle var(--r) at var(--x) var(--y),transparent 0%,rgba(0,0,0,.1) 30%,rgba(0,0,0,.7) 66%,#000 100%);mask-image:radial-gradient(circle var(--r) at var(--x) var(--y),transparent 0%,rgba(0,0,0,.1) 30%,rgba(0,0,0,.7) 66%,#000 100%)}
 .candle .glow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle calc(var(--r) * 1.9) at var(--x) var(--y),rgba(255,96,48,.16),transparent 70%);mix-blend-mode:screen}
 .candle .flame{position:absolute;left:var(--x);top:var(--y);width:6px;height:6px;margin:-3px;border-radius:50%;background:#ffd2a6;box-shadow:0 0 18px 6px rgba(255,140,80,.55);pointer-events:none;opacity:.9}
 .candle .cap-top,.candle .cap-bot{position:absolute;left:0;right:0;display:flex;justify-content:space-between;gap:16px;padding:0 5vw;color:#8f817a;pointer-events:none;z-index:2}
@@ -151,9 +151,13 @@ footer a{padding:12px 0}
   <p class="serif rv">Many nights in this city promise Afro House.<br><em>One of them keeps the promise.</em></p>
 </section>
 
-<section class="candle" id="candle" role="img" aria-label="A ZAYA night at Hotel El Palace, revealed by a moving pool of candlelight">
-  <div class="layer base"></div>
-  <div class="layer lit"></div>
+<section class="candle" id="candle" role="img" aria-label="Film of a ZAYA night at Hotel El Palace, revealed by a moving pool of candlelight">
+  <div class="stage" id="stage">
+    <video muted playsinline preload="none" poster="/video/night-22.jpg" aria-hidden="true"></video>
+    <video muted playsinline preload="none" poster="/video/night-23.jpg" aria-hidden="true"></video>
+    <video muted playsinline preload="none" poster="/video/night-11.jpg" aria-hidden="true"></video>
+  </div>
+  <div class="dark"></div>
   <div class="glow"></div>
   <div class="flame"></div>
   <div class="cap cap-top"><span>Edition III</span><span>Hotel El Palace</span></div>
@@ -275,7 +279,21 @@ const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 function sizeC() { const r = cdl.getBoundingClientRect(); return [r.width, r.height]; }
 function aim(e) { const r = cdl.getBoundingClientRect(); tx = e.clientX - r.left; ty = e.clientY - r.top; lastInput = performance.now(); cdl.classList.add('moved'); }
 cdl.addEventListener('pointermove', aim); cdl.addEventListener('pointerdown', aim);
-new IntersectionObserver(es => { inView = es[0].isIntersecting; if (inView) requestAnimationFrame(flick); }, { threshold: 0 }).observe(cdl);
+const vids = [...document.querySelectorAll('#stage video')], narrow = matchMedia('(max-aspect-ratio: 1/1)');
+const reel = ['22', '23', '11', '18', '14'], panes = ['22', '23', '11'];
+let reelAt = 0, filmSet = false;
+function setFilm() {
+  filmSet = true;
+  if (narrow.matches) { const v = vids[0]; v.loop = false; v.src = '/video/night-' + reel[reelAt] + '.mp4'; v.onended = () => { reelAt = (reelAt + 1) % reel.length; v.src = '/video/night-' + reel[reelAt] + '.mp4'; v.play().catch(() => {}); }; }
+  else vids.forEach((v, i) => { v.onended = null; v.loop = true; v.src = '/video/night-' + panes[i] + '.mp4'; });
+}
+const visible = () => vids.filter(v => getComputedStyle(v).display !== 'none');
+narrow.addEventListener('change', () => { if (!filmSet) return; vids.forEach(v => v.pause()); setFilm(); if (inView) visible().forEach(v => v.play().catch(() => {})); });
+new IntersectionObserver(es => {
+  inView = es[0].isIntersecting;
+  if (inView) { if (!filmSet) setFilm(); visible().forEach(v => v.play().catch(() => {})); requestAnimationFrame(flick); }
+  else vids.forEach(v => v.pause());
+}, { rootMargin: '200px 0px' }).observe(cdl);
 (() => { const [w, h] = sizeC(); cx = tx = w * .5; cy = ty = h * .55; })();
 function flick(now) {
   if (!inView) return;
