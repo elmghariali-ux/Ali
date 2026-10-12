@@ -14,7 +14,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23070404'/%3E%3Ccircle cx='16' cy='16' r='5' fill='%23B3261E'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@300;400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@300;400&family=Noto+Sans+Tifinagh&display=swap">
 <style>
 :root{--bg:#070404;--ink:#f3ebe4;--soft:#d6cac1;--mute:#a3958d;--hot:#ff6b4d;--accent:#B3261E;--serif:'Cormorant Garamond',Georgia,serif;--sans:'Jost',system-ui,sans-serif}
 *{box-sizing:border-box}
@@ -62,15 +62,43 @@ h1{margin:0;padding-left:.6em;font-size:clamp(44px,6vw,84px);letter-spacing:.6em
 .line p{margin:0 auto;max-width:1040px;text-align:center;font-size:clamp(32px,4.4vw,64px);line-height:1.18}
 .line em{color:var(--hot)}
 
-/* III hold */
-.hold{padding-bottom:28vh;display:flex;flex-direction:column;align-items:center;gap:36px}
-.frame{position:relative;width:100%;max-width:460px;aspect-ratio:3/4;overflow:hidden;background:#0f0707}
-.frame img{width:100%;height:100%;object-fit:cover;filter:blur(26px) brightness(.35) saturate(1.4);transform:scale(1.12);transition:filter 1.4s ease,transform 4s ease}
-.frame .veil{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;transition:opacity .8s}
-.frame.open img{filter:none;transform:scale(1)}
-.frame.open .veil{opacity:0}
-.count{margin:-12px 0 0;color:#6f625b;letter-spacing:.5em}
-.btn-line{min-height:52px;padding:0 30px;background:transparent;border:1px solid rgba(233,225,218,.35);color:var(--ink);font-family:var(--sans);cursor:pointer;user-select:none;-webkit-user-select:none;touch-action:none;-webkit-touch-callout:none}
+/* III the candle */
+.candle{position:relative;height:100vh;height:100svh;min-height:560px;overflow:hidden;background:#030101;cursor:none;touch-action:pan-y;-webkit-user-select:none;user-select:none;--x:50%;--y:50%;--r:160px;--img:url(/img/candle-wide.jpg)}
+@media (max-aspect-ratio:4/5){.candle{--img:url(/img/candle-tall.jpg);--r:130px}}
+.candle .layer{position:absolute;inset:-2%;background:var(--img) center/cover no-repeat}
+.candle .base{filter:brightness(.035) saturate(1.3)}
+.candle .lit{-webkit-mask-image:radial-gradient(circle var(--r) at var(--x) var(--y),#000 0%,rgba(0,0,0,.92) 30%,rgba(0,0,0,.35) 65%,transparent 100%);mask-image:radial-gradient(circle var(--r) at var(--x) var(--y),#000 0%,rgba(0,0,0,.92) 30%,rgba(0,0,0,.35) 65%,transparent 100%);filter:saturate(1.15) contrast(1.05)}
+.candle .glow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle calc(var(--r) * 1.9) at var(--x) var(--y),rgba(255,96,48,.16),transparent 70%);mix-blend-mode:screen}
+.candle .flame{position:absolute;left:var(--x);top:var(--y);width:6px;height:6px;margin:-3px;border-radius:50%;background:#ffd2a6;box-shadow:0 0 18px 6px rgba(255,140,80,.55);pointer-events:none;opacity:.9}
+.candle .cap-top,.candle .cap-bot{position:absolute;left:0;right:0;display:flex;justify-content:space-between;gap:16px;padding:0 5vw;color:#8f817a;pointer-events:none;z-index:2}
+.candle .cap-top{top:28px}.candle .cap-bot{bottom:28px}
+.candle .ask{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);color:#c9bcb3;pointer-events:none;transition:opacity 1.6s;white-space:nowrap}
+.candle.moved .ask{opacity:0}
+.after-candle{padding-top:24vh}
+
+/* VI the signal */
+.signal{padding-bottom:26vh;max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:44px}
+.signal .head{display:flex;flex-direction:column;gap:18px;align-items:center;text-align:center}
+.signal h2{margin:0;font-size:clamp(36px,4vw,54px);line-height:1.1}
+.signal ol{list-style:none;margin:0;padding:0;border-top:1px solid rgba(233,225,218,.12)}
+.signal li{display:flex;align-items:center;gap:20px;padding:22px 0;border-bottom:1px solid rgba(233,225,218,.12)}
+.signal .n{width:44px;flex:none;color:#8f817a}
+.signal .what{flex:1;font-family:var(--serif);font-size:clamp(22px,2.4vw,28px)}
+.signal .st{flex:none;text-align:right;color:#8f817a}
+.signal li.sealed .what{color:#6f625b}
+.signal li.sealed .what span{filter:blur(5px)}
+.signal li.open .st{color:var(--hot)}
+@media (max-width:560px){.signal li{flex-wrap:wrap;gap:6px 20px}.signal .st{flex-basis:100%;text-align:left;padding-left:64px}}
+.signal .st button{background:none;border:0;padding:12px 0;color:var(--hot);font:inherit;letter-spacing:inherit;text-transform:inherit;cursor:pointer}
+
+/* card */
+textarea{min-height:84px;padding:10px 0;background:transparent;border:0;border-bottom:1px solid rgba(233,225,218,.3);border-radius:0;color:var(--ink);font-family:var(--serif);font-style:italic;font-size:21px;letter-spacing:0;text-transform:none;resize:vertical}
+textarea::placeholder{color:#8f817a}
+textarea:focus{outline:none;border-bottom-color:var(--hot)}
+.card-img{width:100%;max-width:260px;aspect-ratio:9/16;border:1px solid rgba(201,52,32,.4);box-shadow:0 30px 80px rgba(179,38,30,.18)}
+.card-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
+.ghost{display:inline-flex;align-items:center;min-height:50px;padding:0 26px;border:1px solid rgba(233,225,218,.35);background:none;color:var(--ink);font-family:var(--sans);cursor:pointer}
+.solid{display:inline-flex;align-items:center;min-height:50px;padding:0 26px;border:0;background:var(--accent);color:#fff;font-family:var(--sans);cursor:pointer}
 
 /* IV */
 .three{padding-bottom:28vh;max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;gap:64px 40px;text-align:center}
@@ -123,16 +151,17 @@ footer a{padding:12px 0}
   <p class="serif rv">Many nights in this city promise Afro House.<br><em>One of them keeps the promise.</em></p>
 </section>
 
-<section class="hold wrap">
-  <div class="frame rv" id="frame">
-    <img id="moment" src="/img/moment-1.jpg" alt="Inside a ZAYA night" draggable="false">
-    <div class="veil cap">Members of the night only</div>
-  </div>
-  <button type="button" class="btn-line cap" id="holdBtn">Press and hold to look inside</button>
-  <p class="cap count" id="count" aria-live="polite">I / V</p>
+<section class="candle" id="candle" role="img" aria-label="A ZAYA night at Hotel El Palace, revealed by a moving pool of candlelight">
+  <div class="layer base"></div>
+  <div class="layer lit"></div>
+  <div class="glow"></div>
+  <div class="flame"></div>
+  <div class="cap cap-top"><span>Edition III</span><span>Hotel El Palace</span></div>
+  <p class="cap ask" id="ask">Move your light</p>
+  <div class="cap cap-bot" style="justify-content:center"><span>Members of the night only</span></div>
 </section>
 
-<section class="wrap">
+<section class="wrap after-candle">
   <div class="three">
     <div class="rv"><p class="cap">I · Sound</p><p class="serif">Organic Afro House.<br>Nothing else, all night.</p></div>
     <div class="rv"><p class="cap">II · Ceremony</p><p class="serif">Live musicians.<br>Henna. Heritage.</p></div>
@@ -149,6 +178,22 @@ footer a{padding:12px 0}
   </div>
 </section>
 
+<section class="wrap" id="signal">
+  <div class="signal">
+    <div class="head rv">
+      <p class="cap" style="margin:0;color:var(--hot)">The Signal</p>
+      <h2 class="serif">Edition IV is coming into focus.</h2>
+      <p style="margin:0;font-size:15px;line-height:1.8;color:var(--mute)">Four signals. Each one is released here first.</p>
+    </div>
+    <ol class="rv">
+      <li class="open"><span class="cap n">I</span><span class="what">The sound</span><span class="cap st"><button type="button" id="listen">Received · Listen</button></span></li>
+      <li class="sealed"><span class="cap n">II</span><span class="what"><span>The colour</span></span><span class="cap st">Sealed</span></li>
+      <li class="sealed"><span class="cap n">III</span><span class="what"><span>The room</span></span><span class="cap st">Sealed</span></li>
+      <li class="sealed"><span class="cap n">IV</span><span class="what"><span>The address</span></span><span class="cap st">Guests · 48h before</span></li>
+    </ol>
+  </div>
+</section>
+
 <section class="wrap" id="request">
   <div class="req rv" id="req">
     <div style="display:flex;flex-direction:column;gap:18px;align-items:center">
@@ -160,13 +205,19 @@ footer a{padding:12px 0}
       <label>Name<input type="text" name="name" placeholder="Your name" autocomplete="name" required></label>
       <label>Email<input type="email" name="email" placeholder="you@domain.com" autocomplete="email" required></label>
       <label>Instagram<input type="text" name="instagram" placeholder="@"></label>
+      <label>What do you hear when the music stops?<textarea name="answer" placeholder="One line is enough."></textarea></label>
       <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
       <button type="submit" class="send cap">Send request</button>
     </form>
     <div class="done" role="status">
       <span class="d" aria-hidden="true"></span>
       <p class="serif" style="margin:0;font-style:italic;font-size:28px">Received.</p>
-      <p style="margin:0;font-size:15px;line-height:1.8;color:var(--mute)">If there is a place for you, you will hear from us.</p>
+      <p style="margin:0;font-size:15px;line-height:1.8;color:var(--mute)">If there is a place for you, you will hear from us.<br>Until then, this is yours.</p>
+      <img class="card-img" id="cardImg" alt="Your ZAYA card">
+      <div class="card-actions">
+        <button type="button" class="solid cap" id="shareCard">Share to your story</button>
+        <a class="ghost cap" id="saveCard" download="ZAYA-Edition-IV.png">Save the card</a>
+      </div>
     </div>
   </div>
 </section>
@@ -217,33 +268,60 @@ document.addEventListener('visibilitychange', () => { if (!hero.classList.contai
 const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } }), { threshold: .2 });
 document.querySelectorAll('.rv').forEach(el => io.observe(el));
 
-// hold to look inside
-const frame = document.getElementById('frame'), btn = document.getElementById('holdBtn');
-// a different moment of the night behind every hold
-const moments = [
-  { src: '/img/moment-1.jpg', alt: 'A musician playing qraqeb in the red salon' },
-  { src: '/img/moment-2.jpg', alt: 'The decks at 107 BPM, the crowd beyond' },
-  { src: '/img/moment-3.jpg', alt: 'A single lamp glowing in the empty salon' },
-  { src: '/img/moment-4.jpg', alt: 'The DJ at work in the wood-panelled room' },
-  { src: '/img/moment-5.jpg', alt: 'The red-lit staircase' }
-];
-const roman = ['I','II','III','IV','V'];
-const img = document.getElementById('moment'), count = document.getElementById('count');
-moments.forEach(m => { const p = new Image(); p.src = m.src; });
-let idx = 0, seen = false;
-const show = i => { img.src = moments[i].src; img.alt = 'Inside a ZAYA night: ' + moments[i].alt; count.textContent = roman[i] + ' / V'; };
-show(0);
-const open = e => { e.preventDefault(); seen = true; frame.classList.add('open'); btn.textContent = 'Keep holding'; if (navigator.vibrate) navigator.vibrate(12); };
-const close = () => {
-  if (!frame.classList.contains('open')) return;
-  frame.classList.remove('open'); btn.textContent = 'Hold again';
-  if (seen) { idx = (idx + 1) % moments.length; setTimeout(() => show(idx), 1400); }
-};
-btn.addEventListener('pointerdown', open);
-['pointerup','pointerleave','pointercancel'].forEach(t => btn.addEventListener(t, close));
-btn.addEventListener('keydown', e => { if ((e.key === ' ' || e.key === 'Enter') && !e.repeat) open(e); });
-btn.addEventListener('keyup', e => { if (e.key === ' ' || e.key === 'Enter') close(); });
-btn.addEventListener('contextmenu', e => e.preventDefault());
+// the candle: a pool of light you move through the dark room
+const cdl = document.getElementById('candle');
+let cx = 0, cy = 0, tx = 0, ty = 0, lastInput = -1e9, inView = false, t0 = performance.now();
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+function sizeC() { const r = cdl.getBoundingClientRect(); return [r.width, r.height]; }
+function aim(e) { const r = cdl.getBoundingClientRect(); tx = e.clientX - r.left; ty = e.clientY - r.top; lastInput = performance.now(); cdl.classList.add('moved'); }
+cdl.addEventListener('pointermove', aim); cdl.addEventListener('pointerdown', aim);
+new IntersectionObserver(es => { inView = es[0].isIntersecting; if (inView) requestAnimationFrame(flick); }, { threshold: 0 }).observe(cdl);
+(() => { const [w, h] = sizeC(); cx = tx = w * .5; cy = ty = h * .55; })();
+function flick(now) {
+  if (!inView) return;
+  const [w, h] = sizeC(), t = (now - t0) / 1000;
+  if (now - lastInput > 2600) { tx = w * (.5 + .32 * Math.sin(t * .23)); ty = h * (.52 + .22 * Math.sin(t * .31 + 1.3)); }
+  const k = reduce ? 1 : .085; cx += (tx - cx) * k; cy += (ty - cy) * k;
+  const base = parseFloat(getComputedStyle(cdl).getPropertyValue('--r0')) || (w < 700 ? 130 : 170);
+  const r = base * (1 + (reduce ? 0 : .045 * Math.sin(t * 7.1) + .03 * Math.sin(t * 12.7 + 2)));
+  cdl.style.setProperty('--x', cx.toFixed(1) + 'px'); cdl.style.setProperty('--y', cy.toFixed(1) + 'px'); cdl.style.setProperty('--r', r.toFixed(1) + 'px');
+  requestAnimationFrame(flick);
+}
+if (matchMedia('(hover: none)').matches) document.getElementById('ask').textContent = 'Touch the dark';
+
+// signal I: the sound
+document.getElementById('listen').addEventListener('click', () => { if (!hero.classList.contains('live')) enter(); else if (muted) setMuted(false); });
+
+// the card: generated for each request, made for stories
+async function makeCard(name) {
+  try { await Promise.all([document.fonts.load('300 140px "Cormorant Garamond"'), document.fonts.load('italic 300 90px "Cormorant Garamond"'), document.fonts.load('300 30px Jost'), document.fonts.load('120px "Noto Sans Tifinagh"', '\u2D63')]); } catch (_) {}
+  const W = 1080, H = 1920, c = document.createElement('canvas'); c.width = W; c.height = H; const g = c.getContext('2d');
+  g.fillStyle = '#070404'; g.fillRect(0, 0, W, H);
+  let gr = g.createRadialGradient(W / 2, 560, 0, W / 2, 560, 760); gr.addColorStop(0, 'rgba(179,38,30,.42)'); gr.addColorStop(1, 'rgba(7,4,4,0)'); g.fillStyle = gr; g.fillRect(0, 0, W, H);
+  g.strokeStyle = 'rgba(201,52,32,.45)'; g.lineWidth = 2; g.strokeRect(54, 54, W - 108, H - 108);
+  const spaced = (txt, y, font, color, sp) => { g.font = font; g.fillStyle = color; const ch = [...txt]; const ws = ch.map(x => g.measureText(x).width); const tot = ws.reduce((a, b) => a + b, 0) + sp * (ch.length - 1); let x = (W - tot) / 2; ch.forEach((x2, i) => { g.fillText(x2, x, y); x += ws[i] + sp; }); };
+  g.textBaseline = 'alphabetic';
+  spaced('BARCELONA  ·  EDITION IV', 190, '300 28px Jost', '#a3958d', 11);
+  g.save(); g.shadowColor = '#B3261E'; g.shadowBlur = 60; g.font = '150px "Noto Sans Tifinagh"'; g.fillStyle = '#d0372b'; g.textAlign = 'center'; g.fillText('\u2D63', W / 2, 620); g.restore();
+  spaced('ZAYA', 900, '300 150px "Cormorant Garamond"', '#f3ebe4', 80);
+  g.textAlign = 'center'; g.font = 'italic 300 52px "Cormorant Garamond"'; g.fillStyle = '#c9bcb3'; g.fillText('The ritual returns.', W / 2, 1000);
+  g.fillStyle = 'rgba(255,107,77,.8)'; g.fillRect(W / 2 - 1, 1090, 2, 90);
+  let n = name.trim(); g.font = 'italic 300 96px "Cormorant Garamond"'; while (g.measureText(n).width > W - 220 && n.length > 3) n = n.slice(0, -2).trim() + '…';
+  g.fillStyle = '#f3ebe4'; g.fillText(n, W / 2, 1330);
+  g.font = 'italic 300 50px "Cormorant Garamond"'; g.fillStyle = '#c9bcb3'; g.fillText('has asked to enter.', W / 2, 1420);
+  spaced('@ZAYA.RITUAL', 1760, '300 28px Jost', '#a3958d', 11);
+  return c;
+}
+async function showCard(name) {
+  const c = await makeCard(name), url = c.toDataURL('image/png');
+  document.getElementById('cardImg').src = url; const save = document.getElementById('saveCard'); save.href = url;
+  const share = document.getElementById('shareCard');
+  c.toBlob(b => {
+    const file = new File([b], 'ZAYA-Edition-IV.png', { type: 'image/png' });
+    if (navigator.canShare && navigator.canShare({ files: [file] })) share.onclick = () => navigator.share({ files: [file] }).catch(() => {});
+    else share.style.display = 'none';
+  }, 'image/png');
+}
 
 // request an invitation
 document.getElementById('form').addEventListener('submit', async e => {
@@ -254,10 +332,11 @@ document.getElementById('form').addEventListener('submit', async e => {
   if (FORM_ENDPOINT) {
     try { await fetch(FORM_ENDPOINT, { method: 'POST', body: d, headers: { Accept: 'application/json' } }); } catch (_) {}
   } else {
-    const body = `Name: ${d.get('name')}\nEmail: ${d.get('email')}\nInstagram: ${d.get('instagram') || '-'}`;
+    const body = `Name: ${d.get('name')}\nEmail: ${d.get('email')}\nInstagram: ${d.get('instagram') || '-'}\n\nWhat do you hear when the music stops?\n${d.get('answer') || '-'}`;
     location.href = `mailto:${CONTACT}?subject=${encodeURIComponent('Invitation request — ZAYA Edition IV')}&body=${encodeURIComponent(body)}`;
   }
   document.getElementById('req').classList.add('sent');
+  showCard(d.get('name'));
 });
 </script>
 </body>
