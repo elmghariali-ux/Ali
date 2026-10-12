@@ -140,6 +140,22 @@ footer div{display:flex;flex-wrap:wrap;justify-content:space-between;align-items
 footer a{padding:12px 0}
 .mail{letter-spacing:.2em;text-transform:none}
 
+/* phone first: most visits come from Instagram on a phone */
+@media (max-width:560px){
+  .cap{letter-spacing:.3em}
+  .hero .bar{flex-wrap:nowrap;font-size:10px;gap:12px}
+  .hero .bar a{white-space:nowrap}
+  .line{padding-top:18vh;padding-bottom:20vh}
+  .after-candle{padding-top:16vh}
+  .three{padding-bottom:18vh;gap:48px}
+  .record,.films,.signal{padding-bottom:18vh}
+  .req{padding-bottom:16vh}
+  .record .cap{font-size:10px}
+  label{letter-spacing:.24em;line-height:1.6}
+  .candle .ask{top:72%}
+}
+.bar a,.signal .st button,footer a{min-height:44px;display:inline-flex;align-items:center}
+
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.in1,.in2,.in3,.rv{opacity:1;transform:none}}
 </style>
 </head>
@@ -180,7 +196,7 @@ footer a{padding:12px 0}
 
 <section class="wrap">
   <div class="record rv">
-    <p class="cap" style="color:var(--mute)">Hotel El Palace · Editions I — III</p>
+    <p class="cap" style="color:var(--mute)">Hotel El Palace · Editions I–III</p>
     <p class="serif" style="font-size:clamp(30px,3.4vw,46px);line-height:1.3">Three rooms. Three sold out.<br>No advertising. Ever.</p>
     <div class="rule"></div>
     <p class="serif" style="font-style:italic;font-size:22px;color:#c9bcb3">The next room is larger, older, and not yet named.</p>
@@ -217,7 +233,7 @@ footer a{padding:12px 0}
 <section class="wrap" id="request">
   <div class="req rv" id="req">
     <div style="display:flex;flex-direction:column;gap:18px;align-items:center">
-      <p class="cap" style="margin:0;color:var(--hot)">Edition IV · November · Barcelona</p>
+      <p class="cap" style="margin:0;color:var(--hot)">Edition IV · November<br>Barcelona</p>
       <h2 class="serif">Request an invitation.</h2>
       <p style="margin:0;font-size:15px;line-height:1.8;color:var(--mute)">The location is shared with guests 48 hours before.<br>Every request is read by hand.</p>
     </div>
