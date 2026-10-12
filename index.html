@@ -62,6 +62,7 @@ h1{margin:0;padding-left:.6em;font-size:clamp(44px,6vw,84px);letter-spacing:.6em
 .frame .veil{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;transition:opacity .8s}
 .frame.open img{filter:none;transform:scale(1)}
 .frame.open .veil{opacity:0}
+.count{margin:-12px 0 0;color:#6f625b;letter-spacing:.5em}
 .btn-line{min-height:52px;padding:0 30px;background:transparent;border:1px solid rgba(233,225,218,.35);color:var(--ink);font-family:var(--sans);cursor:pointer;user-select:none;-webkit-user-select:none;touch-action:none;-webkit-touch-callout:none}
 
 /* IV */
@@ -116,10 +117,11 @@ footer a{padding:12px 0}
 
 <section class="hold wrap">
   <div class="frame rv" id="frame">
-    <img src="/img/inside.jpg" alt="Inside a ZAYA night: the red-lit staircase" draggable="false">
+    <img id="moment" src="/img/moment-1.jpg" alt="Inside a ZAYA night" draggable="false">
     <div class="veil cap">Members of the night only</div>
   </div>
   <button type="button" class="btn-line cap" id="holdBtn">Press and hold to look inside</button>
+  <p class="cap count" id="count" aria-live="polite">I / V</p>
 </section>
 
 <section class="wrap">
@@ -181,8 +183,26 @@ document.querySelectorAll('.rv').forEach(el => io.observe(el));
 
 // hold to look inside
 const frame = document.getElementById('frame'), btn = document.getElementById('holdBtn');
-const open = e => { e.preventDefault(); frame.classList.add('open'); btn.textContent = 'Keep holding'; if (navigator.vibrate) navigator.vibrate(12); };
-const close = () => { frame.classList.remove('open'); btn.textContent = 'Press and hold to look inside'; };
+// a different moment of the night behind every hold
+const moments = [
+  { src: '/img/moment-1.jpg', alt: 'A musician playing qraqeb in the red salon' },
+  { src: '/img/moment-2.jpg', alt: 'The decks at 107 BPM, the crowd beyond' },
+  { src: '/img/moment-3.jpg', alt: 'A single lamp glowing in the empty salon' },
+  { src: '/img/moment-4.jpg', alt: 'The DJ at work in the wood-panelled room' },
+  { src: '/img/moment-5.jpg', alt: 'The red-lit staircase' }
+];
+const roman = ['I','II','III','IV','V'];
+const img = document.getElementById('moment'), count = document.getElementById('count');
+moments.forEach(m => { const p = new Image(); p.src = m.src; });
+let idx = 0, seen = false;
+const show = i => { img.src = moments[i].src; img.alt = 'Inside a ZAYA night: ' + moments[i].alt; count.textContent = roman[i] + ' / V'; };
+show(0);
+const open = e => { e.preventDefault(); seen = true; frame.classList.add('open'); btn.textContent = 'Keep holding'; if (navigator.vibrate) navigator.vibrate(12); };
+const close = () => {
+  if (!frame.classList.contains('open')) return;
+  frame.classList.remove('open'); btn.textContent = 'Hold again';
+  if (seen) { idx = (idx + 1) % moments.length; setTimeout(() => show(idx), 1400); }
+};
 btn.addEventListener('pointerdown', open);
 ['pointerup','pointerleave','pointercancel'].forEach(t => btn.addEventListener(t, close));
 btn.addEventListener('keydown', e => { if ((e.key === ' ' || e.key === 'Enter') && !e.repeat) open(e); });
