@@ -64,8 +64,9 @@ h1{margin:0;padding-left:.6em;font-size:clamp(44px,6vw,84px);letter-spacing:.6em
 
 /* III the candle */
 .candle{position:relative;height:100vh;height:100svh;min-height:560px;overflow:hidden;background:#030101;cursor:none;touch-action:pan-y;-webkit-user-select:none;user-select:none;--x:50%;--y:50%;--r:170px}
-.candle video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 64%;filter:saturate(1.12) contrast(1.04);background:#030101}
-@media (max-aspect-ratio:1/1){.candle video{object-position:50% 50%}}
+.candle .photo{position:absolute;inset:-3%;background:url(/img/candle-wide.jpg) 50% 45%/cover no-repeat;filter:saturate(1.08) contrast(1.04);animation:drift 38s ease-in-out infinite alternate}
+@media (max-aspect-ratio:1/1){.candle .photo{background-image:url(/img/candle-tall.jpg);background-position:50% 50%}}
+@keyframes drift{from{transform:scale(1) translate(0,0)}to{transform:scale(1.08) translate(-1.5%,-1%)}}
 
 /* the films: proof, not a gallery */
 .films{padding-bottom:26vh;max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:36px}
@@ -159,8 +160,8 @@ footer a{padding:12px 0}
   <p class="serif rv">Many nights in this city promise Afro House.<br><em>One of them keeps the promise.</em></p>
 </section>
 
-<section class="candle" id="candle" role="img" aria-label="Film of a ZAYA night at Hotel El Palace, revealed by a moving pool of candlelight">
-  <video id="candleFilm" muted playsinline loop preload="none" poster="/video/candle.jpg" aria-hidden="true"></video>
+<section class="candle" id="candle" role="img" aria-label="The disco ball in the gilded mirror at Hotel El Palace, revealed by a moving pool of candlelight">
+  <div class="photo"></div>
   <div class="dark"></div>
   <div class="glow"></div>
   <div class="flame"></div>
@@ -294,12 +295,7 @@ const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 function sizeC() { const r = cdl.getBoundingClientRect(); return [r.width, r.height]; }
 function aim(e) { const r = cdl.getBoundingClientRect(); tx = e.clientX - r.left; ty = e.clientY - r.top; lastInput = performance.now(); cdl.classList.add('moved'); }
 cdl.addEventListener('pointermove', aim); cdl.addEventListener('pointerdown', aim);
-const film = document.getElementById('candleFilm');
-new IntersectionObserver(es => {
-  inView = es[0].isIntersecting;
-  if (inView) { if (!film.src) film.src = '/video/candle.mp4'; film.play().catch(() => {}); requestAnimationFrame(flick); }
-  else film.pause();
-}, { rootMargin: '200px 0px' }).observe(cdl);
+new IntersectionObserver(es => { inView = es[0].isIntersecting; if (inView) requestAnimationFrame(flick); }, { rootMargin: '200px 0px' }).observe(cdl);
 
 // the films: each plays only while on screen
 const fio = new IntersectionObserver(es => es.forEach(e => {
