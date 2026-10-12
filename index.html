@@ -112,9 +112,10 @@ h1{margin:0;padding-left:.6em;font-size:clamp(44px,6vw,84px);letter-spacing:.6em
 .sound{position:relative;height:100vh;height:100svh;min-height:560px;overflow:hidden;background:#030101;margin-bottom:16vh}
 .sound img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:46% 40%}
 .sound::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#070404 0%,rgba(7,4,4,0) 22%,rgba(7,4,4,0) 55%,rgba(7,4,4,.92) 88%,#070404 100%)}
-.sound p{position:absolute;left:0;right:0;bottom:12vh;z-index:1;margin:0;padding:0 5vw;text-align:center;font-size:clamp(40px,6vw,84px);line-height:1.05;color:#f6ede5}
-.sound em{color:var(--hot)}
-@media (min-aspect-ratio:4/3){.sound img{object-position:50% 34%}}
+.sound .tagline{position:absolute;left:0;right:0;bottom:11vh;z-index:1;margin:0;padding:0 5vw;display:flex;flex-direction:column;align-items:center;gap:18px;font-family:var(--sans);font-weight:300;font-size:clamp(13px,1.3vw,17px);letter-spacing:.62em;text-transform:uppercase;color:#f3ebe4}
+.sound .tagline span{padding-left:.62em}
+.sound .tagline i{display:block;width:1px;height:34px;background:var(--hot)}
+@media (min-aspect-ratio:4/3){.sound img{object-position:50% 46%}}
 
 /* card */
 textarea{min-height:84px;padding:10px 0;background:transparent;border:0;border-bottom:1px solid rgba(233,225,218,.3);border-radius:0;color:var(--ink);font-family:var(--serif);font-style:italic;font-size:21px;letter-spacing:0;text-transform:none;resize:vertical}
@@ -242,7 +243,7 @@ footer a{padding:12px 0}
 
 <section class="sound" aria-label="Behind the decks at Hotel El Palace">
   <img src="/img/streak-sound.jpg" alt="The DJ at the Palace, lights streaking past" loading="lazy">
-  <p class="serif rv">Less noise.<br><em>More vision.</em></p>
+  <p class="tagline rv"><span>Less noise.</span><i aria-hidden="true"></i><span>More vision.</span></p>
 </section>
 
 <section class="wrap" id="request">
