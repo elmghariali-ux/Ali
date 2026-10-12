@@ -304,6 +304,23 @@ async function enter() {
   } catch (_) { ctx = null; gain = null; audio.volume = 0; }
   try { await audio.play(); } catch (_) {}
   fadeTo(0.9, 3); if (!gain) { let v = 0; const f = setInterval(() => { v = Math.min(.9, v + .05); audio.volume = v; if (v >= .9) clearInterval(f); }, 160); }
+  setTimeout(walkIn, 2000);
+}
+// entering: after a breath, the page glides down into the first line on its own
+function walkIn() {
+  const el = document.querySelector('.line p.serif'); if (!el) return;
+  const from = scrollY, to = el.getBoundingClientRect().top + scrollY - innerHeight * .42;
+  if (to <= from + 4) return;
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) { scrollTo(0, to); return; }
+  let stop = false; const quit = () => { stop = true; };
+  ['wheel', 'touchstart', 'keydown'].forEach(t => addEventListener(t, quit, { once: true, passive: true }));
+  document.documentElement.style.scrollBehavior = 'auto';
+  const dur = 2600, t0 = performance.now(), ease = x => x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+  (function step(now) {
+    if (stop) { document.documentElement.style.scrollBehavior = ''; return; }
+    const k = Math.min(1, (now - t0) / dur); scrollTo(0, from + (to - from) * ease(k));
+    if (k < 1) requestAnimationFrame(step); else document.documentElement.style.scrollBehavior = '';
+  })(t0);
 }
 function setMuted(m) {
   muted = m; snd.classList.toggle('muted', m); snd.setAttribute('aria-pressed', String(!m)); snd.querySelector('span').textContent = m ? 'Sound off' : 'Sound on';
