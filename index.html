@@ -196,7 +196,7 @@ footer a{padding:12px 0}
   <p class="cap rv place">Barcelona</p>
 </section>
 
-<section class="candle" id="candle" role="img" aria-label="A musician playing qraqeb in the red salon at Hotel El Palace, revealed by a moving pool of candlelight">
+<section class="candle" id="candle" data-fx=".5" data-fy=".42" data-fxw=".5" data-fyw=".42" role="img" aria-label="A musician playing qraqeb in the red salon at Hotel El Palace, revealed by a moving pool of candlelight">
   <div class="photo"></div>
   <div class="dark"></div>
   <div class="glow"></div>
@@ -350,13 +350,15 @@ const fio = new IntersectionObserver(es => es.forEach(e => {
   if (e.isIntersecting) { if (!v.src) v.src = v.dataset.src; v.play().catch(() => {}); } else v.pause();
 }), { threshold: .35 });
 document.querySelectorAll('.reel video').forEach(v => fio.observe(v));
-(() => { const [w, h] = sizeC(); cx = tx = w * .5; cy = ty = h * .55; })();
+// where the subject sits in the photo (fractions of width/height), per layout
+const focus = () => { const wide = !matchMedia('(max-aspect-ratio: 1/1)').matches, d = cdl.dataset; return wide ? [+d.fxw || .5, +d.fyw || .45] : [+d.fx || .5, +d.fy || .45]; };
+(() => { const [w, h] = sizeC(), [fx, fy] = focus(); cx = tx = w * fx; cy = ty = h * fy; })();
 function flick(now) {
   if (!inView) return;
   const [w, h] = sizeC(), t = (now - t0) / 1000;
-  if (now - lastInput > 2600) { tx = w * (.5 + .32 * Math.sin(t * .23)); ty = h * (.52 + .22 * Math.sin(t * .31 + 1.3)); }
+  if (now - lastInput > 2600) { const [fx, fy] = focus(); tx = w * (fx + .11 * Math.sin(t * .42) + .05 * Math.sin(t * 1.07)); ty = h * (fy + .13 * Math.sin(t * .33 + 1.1) + .04 * Math.sin(t * .9)); }
   const k = reduce ? 1 : .085; cx += (tx - cx) * k; cy += (ty - cy) * k;
-  const base = parseFloat(getComputedStyle(cdl).getPropertyValue('--r0')) || (w < 700 ? 130 : 170);
+  const base = parseFloat(getComputedStyle(cdl).getPropertyValue('--r0')) || (w < 700 ? 150 : 190);
   const r = base * (1 + (reduce ? 0 : .045 * Math.sin(t * 7.1) + .03 * Math.sin(t * 12.7 + 2)));
   cdl.style.setProperty('--x', cx.toFixed(1) + 'px'); cdl.style.setProperty('--y', cy.toFixed(1) + 'px'); cdl.style.setProperty('--r', r.toFixed(1) + 'px');
   requestAnimationFrame(flick);
