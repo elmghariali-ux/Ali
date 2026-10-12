@@ -92,8 +92,8 @@ h1{margin:0;padding-left:.6em;font-size:clamp(44px,6vw,84px);letter-spacing:.6em
 .signal{padding-bottom:26vh;max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:44px}
 .signal .head{display:flex;flex-direction:column;gap:18px;align-items:center;text-align:center}
 .signal h2{margin:0;font-size:clamp(36px,4vw,54px);line-height:1.1}
-.bigdate{font-variant-numeric:lining-nums;font-feature-settings:"lnum" 1;margin:6px 0 -6px;font-size:clamp(96px,17vw,190px);line-height:.9;letter-spacing:.02em;color:var(--ink)}
-.bigdate span{color:var(--accent)}
+.bigdate{margin:10px 0 -2px;padding-left:.18em;font-size:clamp(64px,12vw,148px);line-height:1;letter-spacing:.18em;color:var(--ink)}
+.bigdate span{color:var(--accent);margin:0 .06em}
 .tix{margin:8px 0 6px;font-style:italic;font-size:clamp(22px,2.4vw,28px);color:var(--soft)}
 .signal .head .solid{text-decoration:none}
 .signal .head .solid:hover{color:#fff;filter:brightness(1.15)}
@@ -107,6 +107,14 @@ h1{margin:0;padding-left:.6em;font-size:clamp(44px,6vw,84px);letter-spacing:.6em
 .signal li.open .st{color:var(--hot)}
 @media (max-width:560px){.signal li{flex-wrap:wrap;gap:6px 20px}.signal .st{flex-basis:100%;text-align:left;padding-left:64px}}
 .signal .st button{background:none;border:0;padding:12px 0;color:var(--hot);font:inherit;letter-spacing:inherit;text-transform:inherit;cursor:pointer}
+
+/* the sound: one editorial portrait */
+.sound{position:relative;height:100vh;height:100svh;min-height:560px;overflow:hidden;background:#030101;margin-bottom:16vh}
+.sound img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:46% 40%}
+.sound::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#070404 0%,rgba(7,4,4,0) 22%,rgba(7,4,4,0) 55%,rgba(7,4,4,.92) 88%,#070404 100%)}
+.sound p{position:absolute;left:0;right:0;bottom:12vh;z-index:1;margin:0;padding:0 5vw;text-align:center;font-size:clamp(40px,6vw,84px);line-height:1.05;color:#f6ede5}
+.sound em{color:var(--hot)}
+@media (min-aspect-ratio:4/3){.sound img{object-position:50% 34%}}
 
 /* card */
 textarea{min-height:84px;padding:10px 0;background:transparent;border:0;border-bottom:1px solid rgba(233,225,218,.3);border-radius:0;color:var(--ink);font-family:var(--serif);font-style:italic;font-size:21px;letter-spacing:0;text-transform:none;resize:vertical}
@@ -177,7 +185,7 @@ footer a{padding:12px 0}
     <p class="tag in2">The ritual returns.</p>
     <p class="cap hint in3" id="hint">Tap the pulse to enter</p>
   </div>
-  <div class="bar cap in3"><span>Edition III</span><span>123 BPM</span><span>21 · XI · MMXXVI</span></div>
+  <div class="bar cap in3"><span>Edition III</span><span>123 BPM</span><span>XXI · XI · MMXXVI</span></div>
 </section>
 
 <section class="line wrap">
@@ -191,7 +199,7 @@ footer a{padding:12px 0}
   <div class="flame"></div>
   <div class="cap cap-top"><span>Editions I–II</span><span>Hotel El Palace</span></div>
   <p class="cap ask" id="ask">Move your light</p>
-  <div class="cap cap-bot" style="justify-content:center"><span>Members of the night only</span></div>
+  <div class="cap cap-bot" style="justify-content:center"><span>Seen only from within</span></div>
 </section>
 
 <section class="wrap after-candle">
@@ -218,18 +226,23 @@ footer a{padding:12px 0}
   <div class="signal">
     <div class="head rv">
       <p class="cap" style="margin:0;color:var(--hot)">The Signal · Edition III</p>
-      <p class="bigdate serif">21<span>.</span>11</p>
+      <p class="bigdate serif">XXI<span>·</span>XI</p>
       <p class="cap" style="margin:0;color:var(--soft)">Saturday · November · Barcelona</p>
       <p class="tix serif">Tickets are released to invited guests only.</p>
       <a class="solid cap" href="#request">Request an invitation</a>
     </div>
     <ol class="rv">
       <li class="open"><span class="cap n">I</span><span class="what">The sound</span><span class="cap st"><button type="button" id="listen">Received · Listen</button></span></li>
-      <li class="open"><span class="cap n">II</span><span class="what">The date</span><span class="cap st">Received · 21 November</span></li>
+      <li class="open"><span class="cap n">II</span><span class="what">The date</span><span class="cap st">Received · XXI · XI</span></li>
       <li class="sealed"><span class="cap n">III</span><span class="what"><span>The room</span></span><span class="cap st">Sealed</span></li>
       <li class="sealed"><span class="cap n">IV</span><span class="what"><span>The address</span></span><span class="cap st">Guests · 48h before</span></li>
     </ol>
   </div>
+</section>
+
+<section class="sound" aria-label="Behind the decks at Hotel El Palace">
+  <img src="/img/streak-sound.jpg" alt="The DJ at the Palace, lights streaking past" loading="lazy">
+  <p class="serif rv">Less noise.<br><em>More vision.</em></p>
 </section>
 
 <section class="wrap" id="request">
