@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>You are invited — ZAYA</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="ZAYA · Edition III · Barcelona. You are invited.">
+<meta name="theme-color" content="#070404">
+<meta property="og:title" content="You are invited — ZAYA">
+<meta property="og:description" content="Edition III · November · Barcelona. The address arrives 48 hours before.">
+<meta property="og:image" content="https://zaya-ritual.vercel.app/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://zaya-ritual.vercel.app/invited">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23070404'/%3E%3Ccircle cx='16' cy='16' r='5' fill='%23B3261E'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@300;400&display=swap">
+<style>
+:root{--bg:#070404;--ink:#f3ebe4;--soft:#c9bcb3;--mute:#a3958d;--hot:#ff6b4d;--accent:#B3261E;--serif:'Cormorant Garamond',Georgia,serif;--sans:'Jost',system-ui,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:300;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none;transition:color .3s}a:hover{color:var(--hot)}
+:focus-visible{outline:1px solid var(--hot);outline-offset:4px}
+.cap{font-size:11px;letter-spacing:.42em;text-transform:uppercase}
+.page{min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:space-between;padding:32px 5vw;background:radial-gradient(ellipse at 50% 30%,rgba(179,38,30,.22),rgba(7,4,4,0) 60%)}
+.bar{display:flex;justify-content:space-between;align-items:center;gap:16px;color:var(--mute)}
+.bar a{min-height:44px;display:inline-flex;align-items:center}
+.center{display:flex;flex-direction:column;align-items:center;gap:30px;text-align:center;padding:56px 0}
+.enter{position:relative;width:96px;height:96px;margin:-30px;padding:0;border:0;background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;-webkit-tap-highlight-color:transparent}
+.beat{position:relative;width:10px;height:10px;pointer-events:none}
+.beat span{position:absolute;inset:0;border-radius:50%;background:var(--accent)}
+.beat .dot{box-shadow:0 0 24px var(--accent);animation:beat .9756s cubic-bezier(.45,0,.55,1) infinite}
+.beat .halo{animation:halo 1.9512s cubic-bezier(.2,.6,.35,1) infinite}
+@keyframes beat{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.55);opacity:.7}}
+@keyframes halo{0%{transform:scale(.8);opacity:.45}100%{transform:scale(6);opacity:0}}
+.ed{margin:0;color:var(--hot)}
+.name{margin:0;font-family:var(--serif);font-style:italic;font-weight:300;font-size:clamp(46px,9vw,104px);line-height:1;color:var(--ink);max-width:100%;overflow-wrap:anywhere}
+.inv{margin:-10px 0 0;font-family:var(--serif);font-weight:300;font-size:clamp(26px,3vw,38px);color:var(--soft)}
+.rule{width:1px;height:64px;background:linear-gradient(var(--hot),transparent)}
+.note{margin:0;max-width:440px;font-size:15px;line-height:1.85;color:var(--mute)}
+.card{display:flex;flex-direction:column;align-items:center;gap:20px;padding:12vh 5vw 14vh}
+.card img{width:100%;max-width:260px;aspect-ratio:9/16;border:1px solid rgba(201,52,32,.4);box-shadow:0 30px 80px rgba(179,38,30,.18);background:#0f0707}
+.actions{display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
+.solid,.ghost{display:inline-flex;align-items:center;min-height:50px;padding:0 26px;font-family:var(--sans);cursor:pointer}
+.solid{border:0;background:var(--accent);color:#fff}
+.ghost{border:1px solid rgba(233,225,218,.35);background:none;color:var(--ink)}
+.snd{position:fixed;right:5vw;bottom:24px;z-index:9;display:none;align-items:center;gap:10px;min-height:44px;padding:0 4px;background:none;border:0;color:var(--mute);font-family:var(--sans);cursor:pointer}
+.snd.on{display:flex}
+.snd i{display:block;width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent)}
+.snd.muted i{background:transparent;box-shadow:none;border:1px solid var(--mute)}
+footer{padding:28px 5vw 36px;border-top:1px solid rgba(233,225,218,.08);display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;color:#8f817a}
+footer a{min-height:44px;display:inline-flex;align-items:center}
+.rise{opacity:0;animation:rise 1.6s ease forwards}
+.d1{animation-delay:.3s}.d2{animation-delay:1s}.d3{animation-delay:1.7s}.d4{animation-delay:2.4s}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@media (max-width:560px){.cap{letter-spacing:.3em}.bar{font-size:10px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rise{opacity:1}}
+</style>
+</head>
+<body>
+
+<main>
+<section class="page">
+  <header class="bar cap"><span>Barcelona</span><a href="/">ZAYA</a></header>
+  <div class="center">
+    <button type="button" class="enter rise" id="enter" aria-label="Play the sound"><div class="beat" aria-hidden="true"><span class="halo"></span><span class="dot"></span></div></button>
+    <p class="cap ed rise d1">Edition III · November · Barcelona</p>
+    <h1 class="name rise d2" id="name">Guest</h1>
+    <p class="inv rise d2">You are invited.</p>
+    <div class="rule rise d3"></div>
+    <p class="note rise d4">The address arrives 48 hours before.<br>Until then, keep the night free and the secret close.</p>
+  </div>
+  <div class="bar cap rise d4"><span>Edition III</span><span>123 BPM</span><span>XI · MMXXVI</span></div>
+</section>
+
+<section class="card" aria-label="Your invitation card">
+  <p class="cap" style="margin:0;color:var(--mute)">Your card</p>
+  <img id="cardImg" alt="Your ZAYA invitation card">
+  <div class="actions">
+    <button type="button" class="solid cap" id="shareCard">Share to your story</button>
+    <a class="ghost cap" id="saveCard" download="ZAYA-Invited.png">Save the card</a>
+  </div>
+</section>
+</main>
+
+<button type="button" class="snd cap" id="snd" aria-pressed="true"><i></i><span>Sound on</span></button>
+
+<footer class="cap">
+  <span>ZAYA · The Ritual</span>
+  <a href="https://www.instagram.com/zaya.ritual/" target="_blank" rel="noopener">@zaya.ritual</a>
+</footer>
+
+<script>
+// the guest's name comes from the link: /invited#Leila%20Benali
+const raw = decodeURIComponent((location.hash || '').slice(1)).replace(/[+_]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 40);
+const guest = raw || 'Guest';
+document.getElementById('name').textContent = guest;
+if (raw) document.title = guest + ' — invited to ZAYA';
+
+// sound on the pulse, same as the home page
+const audio = new Audio('/audio/ritual.mp3'); audio.loop = true; audio.preload = 'none';
+const snd = document.getElementById('snd'); let ctx, gain, live = false, muted = false;
+const fadeTo = (v, s) => { if (!gain) { audio.volume = v; return; } const t = ctx.currentTime; gain.gain.cancelScheduledValues(t); gain.gain.setValueAtTime(gain.gain.value, t); gain.gain.linearRampToValueAtTime(v, t + s); };
+async function enter() {
+  if (live) { setMuted(!muted); return; }
+  live = true; snd.classList.add('on');
+  try { const AC = window.AudioContext || window.webkitAudioContext; ctx = new AC(); const src = ctx.createMediaElementSource(audio); gain = ctx.createGain(); gain.gain.value = 0; src.connect(gain); gain.connect(ctx.destination); await ctx.resume(); } catch (_) { ctx = null; gain = null; }
+  try { await audio.play(); } catch (_) {}
+  fadeTo(.9, 3);
+}
+function setMuted(m) {
+  muted = m; snd.classList.toggle('muted', m); snd.setAttribute('aria-pressed', String(!m)); snd.querySelector('span').textContent = m ? 'Sound off' : 'Sound on';
+  if (m) { fadeTo(0, .6); setTimeout(() => { if (muted) audio.pause(); }, 650); }
+  else { audio.currentTime = 0; if (gain) gain.gain.value = 0; audio.play().catch(() => {}); fadeTo(.9, 2); }
+}
+document.getElementById('enter').addEventListener('click', enter);
+snd.addEventListener('click', () => setMuted(!muted));
+document.addEventListener('visibilitychange', () => { if (!live || muted) return; if (document.hidden) audio.pause(); else audio.play().catch(() => {}); });
+
+// the invitation card, made for stories
+async function makeCard(name) {
+  try { await Promise.all([document.fonts.load('300 150px "Cormorant Garamond"'), document.fonts.load('italic 300 96px "Cormorant Garamond"'), document.fonts.load('300 28px Jost')]); } catch (_) {}
+  const W = 1080, H = 1920, c = document.createElement('canvas'); c.width = W; c.height = H; const g = c.getContext('2d');
+  g.fillStyle = '#070404'; g.fillRect(0, 0, W, H);
+  const gr = g.createRadialGradient(W / 2, 580, 0, W / 2, 580, 820); gr.addColorStop(0, 'rgba(179,38,30,.5)'); gr.addColorStop(1, 'rgba(7,4,4,0)'); g.fillStyle = gr; g.fillRect(0, 0, W, H);
+  g.strokeStyle = 'rgba(201,52,32,.6)'; g.lineWidth = 2; g.strokeRect(54, 54, W - 108, H - 108); g.strokeStyle = 'rgba(201,52,32,.25)'; g.strokeRect(70, 70, W - 140, H - 140);
+  const spaced = (txt, y, font, color, sp) => { g.font = font; g.fillStyle = color; const ch = [...txt]; const ws = ch.map(x => g.measureText(x).width); const tot = ws.reduce((a, b) => a + b, 0) + sp * (ch.length - 1); let x = (W - tot) / 2; ch.forEach((x2, i) => { g.fillText(x2, x, y); x += ws[i] + sp; }); };
+  g.textBaseline = 'alphabetic'; g.textAlign = 'left';
+  spaced('INVITATION  ·  EDITION III', 190, '300 28px Jost', '#ff8a6e', 11);
+  g.save(); g.shadowColor = '#B3261E'; g.shadowBlur = 80; g.fillStyle = '#d0352a'; g.beginPath(); g.arc(W / 2, 580, 24, 0, Math.PI * 2); g.fill(); g.shadowBlur = 0;
+  g.strokeStyle = 'rgba(179,38,30,.4)'; g.lineWidth = 2; g.beginPath(); g.arc(W / 2, 580, 72, 0, Math.PI * 2); g.stroke(); g.strokeStyle = 'rgba(179,38,30,.18)'; g.beginPath(); g.arc(W / 2, 580, 130, 0, Math.PI * 2); g.stroke(); g.restore();
+  spaced('ZAYA', 900, '300 150px "Cormorant Garamond"', '#f3ebe4', 80);
+  g.textAlign = 'center';
+  g.fillStyle = 'rgba(255,107,77,.8)'; g.fillRect(W / 2 - 1, 990, 2, 110);
+  let n = name; g.font = 'italic 300 104px "Cormorant Garamond"'; while (g.measureText(n).width > W - 220 && n.length > 3) n = n.slice(0, -2).trim() + '…';
+  g.fillStyle = '#f3ebe4'; g.fillText(n, W / 2, 1250);
+  g.font = 'italic 300 56px "Cormorant Garamond"'; g.fillStyle = '#c9bcb3'; g.fillText('is invited.', W / 2, 1345);
+  spaced('NOVEMBER  ·  BARCELONA', 1500, '300 28px Jost', '#a3958d', 11);
+  spaced('@ZAYA.RITUAL', 1760, '300 28px Jost', '#a3958d', 11);
+  return c;
+}
+(async () => {
+  const c = await makeCard(guest), url = c.toDataURL('image/png');
+  document.getElementById('cardImg').src = url; document.getElementById('saveCard').href = url;
+  const share = document.getElementById('shareCard');
+  c.toBlob(b => {
+    const file = new File([b], 'ZAYA-Invited.png', { type: 'image/png' });
+    if (navigator.canShare && navigator.canShare({ files: [file] })) share.onclick = () => navigator.share({ files: [file] }).catch(() => {});
+    else share.style.display = 'none';
+  }, 'image/png');
+})();
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
