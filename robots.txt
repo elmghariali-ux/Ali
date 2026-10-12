@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /invited
+
+Sitemap: https://zayaritual.com/sitemap.xml
