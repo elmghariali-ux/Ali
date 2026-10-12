@@ -95,6 +95,7 @@ h1{margin:0;padding-left:.6em;font-size:clamp(44px,6vw,84px);letter-spacing:.6em
 .signal h2{margin:0;font-size:clamp(36px,4vw,54px);line-height:1.1}
 .bigdate{margin:10px 0 -2px;padding-left:.18em;font-size:clamp(64px,12vw,148px);line-height:1;letter-spacing:.18em;color:var(--ink)}
 .bigdate span{color:var(--accent);margin:0 .06em}
+.next{margin:18px 0 0;font-style:italic;font-size:19px;color:#8f817a}
 .tix{margin:8px 0 6px;font-style:italic;font-size:clamp(22px,2.4vw,28px);color:var(--soft)}
 .signal .head .solid{text-decoration:none}
 .signal .head .solid:hover{color:#fff;filter:brightness(1.15)}
@@ -233,13 +234,8 @@ footer a{padding:12px 0}
       <p class="cap" style="margin:0;color:var(--soft)">Saturday · November · Barcelona</p>
       <p class="tix serif">Tickets are released to invited guests only.</p>
       <a class="solid cap" href="#request">Request an invitation</a>
+      <p class="next serif">Next, the room. Then the address — for guests only.</p>
     </div>
-    <ol class="rv">
-      <li class="open"><span class="cap n">I</span><span class="what">The sound</span><span class="cap st"><button type="button" id="listen">Received · Listen</button></span></li>
-      <li class="open"><span class="cap n">II</span><span class="what">The date</span><span class="cap st">Received · XXI · XI</span></li>
-      <li class="sealed"><span class="cap n">III</span><span class="what"><span>The room</span></span><span class="cap st">Sealed</span></li>
-      <li class="sealed"><span class="cap n">IV</span><span class="what"><span>The address</span></span><span class="cap st">Guests · 48h before</span></li>
-    </ol>
   </div>
 </section>
 
@@ -350,8 +346,6 @@ function flick(now) {
 }
 if (matchMedia('(hover: none)').matches) document.getElementById('ask').textContent = 'Touch the dark';
 
-// signal I: the sound
-document.getElementById('listen').addEventListener('click', () => { if (!hero.classList.contains('live')) enter(); else if (muted) setMuted(false); });
 
 // the card: generated for each request, made for stories
 async function makeCard(name) {
