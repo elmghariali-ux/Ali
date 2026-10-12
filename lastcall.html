@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Last Call — ZAYA</title>
+<meta name="description" content="Barcelona, after midnight. Follow the pulse through the dark. Three signals, one door, before four.">
+<meta name="theme-color" content="#070404">
+<meta property="og:title" content="Last Call — ZAYA">
+<meta property="og:description" content="Barcelona, after midnight. Follow the pulse through the dark. Reach the door before four.">
+<meta property="og:image" content="https://zaya-ritual.vercel.app/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://zaya-ritual.vercel.app/lastcall">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23070404'/%3E%3Ccircle cx='16' cy='16' r='5' fill='%23B3261E'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@300;400&display=swap">
+<style>
+:root{--ink:#f3ebe4;--soft:#c9bcb3;--mute:#a3958d;--hot:#ff6b4d;--accent:#B3261E;--serif:'Cormorant Garamond',Georgia,serif;--sans:'Jost',system-ui,sans-serif}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;margin:0;background:#030101;overflow:hidden}
+body{color:var(--ink);font-family:var(--sans);font-weight:300;-webkit-font-smoothing:antialiased;touch-action:none;-webkit-user-select:none;user-select:none}
+a{color:inherit;text-decoration:none}
+canvas{position:fixed;inset:0;width:100%;height:100%;display:block}
+.cap{font-size:11px;letter-spacing:.42em;text-transform:uppercase}
+.hud{position:fixed;left:0;right:0;top:0;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:calc(18px + env(safe-area-inset-top)) 5vw 0;color:var(--mute);pointer-events:none;z-index:3}
+.hud .clock{font-family:var(--serif);font-size:30px;letter-spacing:.08em;color:var(--ink);font-variant-numeric:lining-nums;font-feature-settings:"lnum" 1}
+.hud .sig{display:flex;gap:14px}
+.hud .sig span{opacity:.35;transition:opacity .4s,color .4s}
+.hud .sig span.on{opacity:1;color:var(--hot)}
+.toast{position:fixed;left:0;right:0;top:22%;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;pointer-events:none;z-index:3;opacity:0;transition:opacity .6s}
+.toast.on{opacity:1}
+.toast .t{margin:0;font-family:var(--serif);font-weight:300;font-size:clamp(34px,6vw,58px)}
+.toast .s{margin:0;font-family:var(--serif);font-style:italic;font-size:20px;color:var(--soft)}
+.hint{position:fixed;left:0;right:0;bottom:calc(64px + env(safe-area-inset-bottom));text-align:center;color:#8f817a;pointer-events:none;z-index:3;transition:opacity 1s}
+.panel{position:fixed;inset:0;z-index:5;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;padding:32px 6vw;text-align:center;background:radial-gradient(ellipse at 50% 40%,rgba(179,38,30,.18),rgba(3,1,1,.96) 60%)}
+.panel h1{margin:0;font-family:var(--serif);font-weight:300;font-size:clamp(52px,11vw,104px);letter-spacing:.08em;line-height:1}
+.panel p{margin:0}
+.lead{max-width:420px;font-size:15px;line-height:1.85;color:var(--mute)}
+.solid,.ghost{display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:0 34px;font-family:var(--sans);font-size:11px;letter-spacing:.42em;text-transform:uppercase;cursor:pointer}
+.solid{border:0;background:var(--accent);color:#fff}
+.ghost{border:1px solid rgba(233,225,218,.35);background:none;color:var(--ink)}
+.actions{display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
+.hide{display:none!important}
+.back{position:fixed;right:5vw;bottom:calc(14px + env(safe-area-inset-bottom));z-index:6;min-height:44px;display:inline-flex;align-items:center;color:#8f817a}
+:focus-visible{outline:1px solid var(--hot);outline-offset:4px}
+@media (max-width:560px){.cap{letter-spacing:.3em}.hud .clock{font-size:26px}}
+</style>
+</head>
+<body>
+<canvas id="c" aria-label="A night map of Barcelona seen from above"></canvas>
+
+<div class="hud" id="hud">
+  <span class="clock" id="clock">00:00</span>
+  <span class="sig cap" aria-label="Signals found"><span id="s1">I</span><span id="s2">II</span><span id="s3">III</span></span>
+</div>
+<div class="toast" id="toast" role="status"><p class="cap" id="toastCap" style="margin:0;color:var(--hot)"></p><p class="t" id="toastT"></p><p class="s" id="toastS"></p></div>
+<p class="hint cap" id="hint"></p>
+
+<section class="panel" id="intro">
+  <p class="cap" style="color:var(--hot)">A game of the ritual</p>
+  <h1>Last Call</h1>
+  <p class="lead">Barcelona, after midnight. Somewhere in the dark, the pulse.<br>Follow it by ear — louder and clearer as you get close. Find the three signals, then the door. Before four.</p>
+  <button class="solid" id="go" type="button">Drive · sound on</button>
+  <p class="cap" style="color:#8f817a" id="controls"></p>
+</section>
+
+<section class="panel hide" id="end">
+  <p class="cap" id="endCap" style="color:var(--hot)"></p>
+  <h1 id="endT" style="font-size:clamp(40px,8vw,76px)"></h1>
+  <p class="lead" id="endS"></p>
+  <div class="actions" id="endActions"></div>
+  <a class="cap" href="/#request" style="color:var(--mute);min-height:44px;display:inline-flex;align-items:center">Request an invitation</a>
+</section>
+
+<a class="back cap" href="/">ZAYA</a>
+
+<script>
+const PLAYLIST_URL = "https://open.spotify.com/playlist/3G6hmM2jzVmQhhY4bLtMP7";
+
+/* ---------- world: an Eixample grid of cut-corner blocks ---------- */
+const N = 11, B = 240, S = 86, CELL = B + S, W = N * CELL + S, CH = 44;
+let seed = 1;
+const rnd = () => { seed = (seed + 0x6D2B79F5) | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+let blocks = [], lamps = [], taxis = [], targets = [], stage = 0;
+const isect = (i, j) => ({ x: i * CELL + S / 2, y: j * CELL + S / 2 });
+
+function buildWorld() {
+  seed = (Math.random() * 1e9) | 0;
+  blocks = [];
+  for (let i = 0; i < N; i++) for (let j = 0; j < N; j++) {
+    const plaza = rnd() < .08 && !(i === 0 && j === 0);
+    const wins = []; const k = 6 + (rnd() * 10 | 0);
+    for (let w = 0; w < k; w++) { const side = rnd() * 4 | 0, t = .15 + rnd() * .7; wins.push([side, t, rnd() < .3]); }
+    const trees = []; if (plaza) for (let t = 0; t < 7; t++) trees.push([.15 + rnd() * .7, .15 + rnd() * .7, 10 + rnd() * 14]);
+    blocks.push({ x: i * CELL + S, y: j * CELL + S, plaza, wins, trees });
+  }
+  lamps = [];
+  for (let i = 0; i <= N; i++) for (let j = 0; j <= N; j++) if ((i + j) % 2 === 0 && rnd() < .7) lamps.push(isect(i, j));
+  taxis = [];
+  for (let n = 0; n < 14; n++) {
+    const horiz = rnd() < .5, line = 1 + (rnd() * (N - 1) | 0), dir = rnd() < .5 ? 1 : -1;
+    const lane = line * CELL + S / 2 + (horiz ? dir * S * .22 : -dir * S * .22);
+    taxis.push({ horiz, dir, lane, pos: rnd() * W, v: 90 + rnd() * 70 });
+  }
+  // three signals and a door, far apart and far from the start
+  targets = []; const pts = [{ x: S / 2 + CELL * 1, y: S / 2 + CELL * 1 }];
+  const names = [['I', 'The sound.', 'Afro House, at 123 BPM.'], ['II', 'The date.', 'Saturday · XXI · XI'], ['III', 'The room.', 'Revealed soon. Keep driving.'], ['', 'The door.', '']];
+  for (let n = 0; n < 4; n++) {
+    let p, tries = 0;
+    do { p = isect(1 + (rnd() * (N - 1) | 0), 1 + (rnd() * (N - 1) | 0)); tries++; } while (tries < 200 && pts.some(q => Math.hypot(q.x - p.x, q.y - p.y) < 1150));
+    pts.push(p); targets.push({ ...p, label: names[n] });
+  }
+  stage = 0;
+}
+
+/* ---------- the car ---------- */
+const car = { x: 0, y: 0, a: 0, v: 0 };
+const ctl = { up: 0, down: 0, left: 0, right: 0, hand: 0, joy: null };
+const MAXV = 380, REV = 130;
+
+function resetCar() { const p = isect(1, 1); car.x = p.x; car.y = p.y; car.a = -Math.PI / 2; car.v = 0; }
+
+function blockHit(px, py, r) {
+  const i = Math.floor((px - S) / CELL), j = Math.floor((py - S) / CELL);
+  let hit = null;
+  for (let di = -1; di <= 1; di++) for (let dj = -1; dj <= 1; dj++) {
+    const bi = i + di, bj = j + dj; if (bi < 0 || bj < 0 || bi >= N || bj >= N) continue;
+    const b = blocks[bi * N + bj]; if (b.plaza) continue;
+    const cx = Math.max(b.x, Math.min(px, b.x + B)), cy = Math.max(b.y, Math.min(py, b.y + B));
+    const dx = px - cx, dy = py - cy, d = Math.hypot(dx, dy);
+    if (d < r) hit = { nx: d ? dx / d : 0, ny: d ? dy / d : -1, pen: r - d };
+  }
+  return hit;
+}
+
+let shake = 0;
+function updateCar(dt) {
+  let thr = ctl.up - ctl.down, steer = ctl.right - ctl.left;
+  if (ctl.joy && ctl.joy.len > 10) {
+    const want = Math.atan2(ctl.joy.dy, ctl.joy.dx);
+    let d = want - car.a; d = Math.atan2(Math.sin(d), Math.cos(d));
+    if (Math.abs(d) > 2.4 && car.v < 60) { thr = -.6; steer = -Math.sign(d); }
+    else { steer = Math.max(-1, Math.min(1, d * 2.2)); thr = Math.min(1, ctl.joy.len / 70) * (1 - Math.min(.6, Math.abs(d) / 3)); }
+  }
+  if (thr > 0) car.v += 560 * thr * dt; else if (thr < 0) car.v += (car.v > 0 ? 900 : 380) * thr * dt;
+  car.v -= car.v * (ctl.hand ? 2.6 : .7) * dt;
+  car.v = Math.max(-REV, Math.min(MAXV, car.v));
+  const grip = Math.min(1, Math.abs(car.v) / 120);
+  car.a += steer * 2.6 * grip * Math.sign(car.v || 1) * dt;
+  const nx = car.x + Math.cos(car.a) * car.v * dt, ny = car.y + Math.sin(car.a) * car.v * dt;
+  car.x = nx; car.y = ny;
+  const h = blockHit(car.x, car.y, 15);
+  if (h) { car.x += h.nx * h.pen; car.y += h.ny * h.pen; if (Math.abs(car.v) > 140) { shake = Math.min(14, Math.abs(car.v) / 30); bump(); } car.v *= -.25; }
+  car.x = Math.max(16, Math.min(W - 16, car.x)); car.y = Math.max(16, Math.min(W - 16, car.y));
+  for (const t of taxis) {
+    const tx = t.horiz ? t.pos : t.lane, ty = t.horiz ? t.lane : t.pos, d = Math.hypot(car.x - tx, car.y - ty);
+    if (d < 30) { const ux = (car.x - tx) / (d || 1), uy = (car.y - ty) / (d || 1); car.x = tx + ux * 30; car.y = ty + uy * 30; if (Math.abs(car.v) > 90) { shake = 10; bump(); } car.v *= -.35; }
+  }
+}
+
+function updateTaxis(dt) {
+  for (const t of taxis) {
+    t.pos += t.dir * t.v * dt;
+    if (t.pos > W + 60) t.pos = -60; if (t.pos < -60) t.pos = W + 60;
+  }
+}
+
+/* ---------- sound: follow the pulse by ear ---------- */
+let ac, master, wall, pan, nextBeat = 0, eng, engGain;
+const T = 60 / 123;
+function audioStart() {
+  const AC = window.AudioContext || window.webkitAudioContext; ac = new AC(); ac.resume();
+  master = ac.createGain(); master.gain.value = .9; master.connect(ac.destination);
+  pan = ac.createStereoPanner ? ac.createStereoPanner() : ac.createGain();
+  wall = ac.createBiquadFilter(); wall.type = 'lowpass'; wall.Q.value = .9; wall.frequency.value = 300;
+  wall.connect(pan); pan.connect(master);
+  // the room tone: a low drone, always there
+  const pad = ac.createGain(); pad.gain.value = .035; const lp = ac.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 380; lp.connect(pad); pad.connect(master);
+  [55, 55.35, 82.5].forEach((f, i) => { const o = ac.createOscillator(); o.type = i === 2 ? 'triangle' : 'sawtooth'; o.frequency.value = f; o.connect(lp); o.start(); });
+  // the engine
+  eng = ac.createOscillator(); eng.type = 'sawtooth'; eng.frequency.value = 38; engGain = ac.createGain(); engGain.gain.value = 0;
+  const ef = ac.createBiquadFilter(); ef.type = 'lowpass'; ef.frequency.value = 260; eng.connect(ef); ef.connect(engGain); engGain.connect(master); eng.start();
+  nextBeat = ac.currentTime + .2;
+}
+let nb;
+function noise(len) { if (!nb) { nb = ac.createBuffer(1, ac.sampleRate * .1, ac.sampleRate); const d = nb.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / d.length); } return nb; }
+function beat(at, n) {
+  const o = ac.createOscillator(), g = ac.createGain();
+  o.frequency.setValueAtTime(115, at); o.frequency.exponentialRampToValueAtTime(42, at + .17);
+  g.gain.setValueAtTime(0, at); g.gain.linearRampToValueAtTime(.95, at + .004); g.gain.exponentialRampToValueAtTime(.001, at + .34);
+  o.connect(g).connect(wall); o.start(at); o.stop(at + .36);
+  const s = ac.createBufferSource(), f = ac.createBiquadFilter(), sg = ac.createGain(); s.buffer = noise(); f.type = 'highpass'; f.frequency.value = 5500; sg.gain.value = .16;
+  s.connect(f).connect(sg).connect(wall); s.start(at + T / 2);
+  if (n % 4 === 2) { const c = ac.createOscillator(), cg = ac.createGain(); c.type = 'triangle'; c.frequency.value = 330; cg.gain.setValueAtTime(0, at); cg.gain.linearRampToValueAtTime(.08, at + .01); cg.gain.exponentialRampToValueAtTime(.001, at + .25); c.connect(cg).connect(wall); c.start(at); c.stop(at + .3); }
+}
+let beatN = 0;
+function scheduleAudio() {
+  if (!ac) return;
+  while (nextBeat < ac.currentTime + .15) { beat(nextBeat, beatN++); nextBeat += T; }
+  const tg = targets[stage]; if (!tg) return;
+  const dx = tg.x - car.x, dy = tg.y - car.y, d = Math.hypot(dx, dy);
+  const f = 180 + 17000 * Math.exp(-d / 650);
+  wall.frequency.setTargetAtTime(f, ac.currentTime, .15);
+  if (pan.pan) { let rel = Math.atan2(dy, dx) - car.a; pan.pan.setTargetAtTime(Math.sin(rel) * .8 * Math.min(1, d / 300), ac.currentTime, .1); }
+  master.gain.setTargetAtTime(.55 + .45 * Math.exp(-d / 1400), ac.currentTime, .2);
+  eng.frequency.setTargetAtTime(36 + Math.abs(car.v) * .16, ac.currentTime, .05);
+  engGain.gain.setTargetAtTime(.02 + Math.abs(car.v) / MAXV * .05, ac.currentTime, .05);
+}
+function chime() { if (!ac) return; [880, 1318.5, 1760].forEach((f, i) => { const o = ac.createOscillator(), g = ac.createGain(), at = ac.currentTime + i * .09; o.frequency.value = f; g.gain.setValueAtTime(0, at); g.gain.linearRampToValueAtTime(.12, at + .01); g.gain.exponentialRampToValueAtTime(.001, at + 1.4); o.connect(g).connect(ac.destination); o.start(at); o.stop(at + 1.5); }); }
+function bump() { if (!ac) return; const s = ac.createBufferSource(), f = ac.createBiquadFilter(), g = ac.createGain(); s.buffer = noise(); f.type = 'lowpass'; f.frequency.value = 500; g.gain.value = .5; s.connect(f).connect(g).connect(master); s.start(); if (navigator.vibrate) navigator.vibrate(25); }
+
+/* ---------- drawing ---------- */
+const cv = document.getElementById('c'), g = cv.getContext('2d');
+const lc = document.createElement('canvas'), lg = lc.getContext('2d');
+let vw = 0, vh = 0, dpr = 1, zoom = 1, camX = 0, camY = 0;
+function resize() {
+  dpr = Math.min(2, window.devicePixelRatio || 1); vw = innerWidth; vh = innerHeight;
+  cv.width = vw * dpr; cv.height = vh * dpr; lc.width = cv.width; lc.height = cv.height;
+  zoom = Math.max(.62, Math.min(1.1, Math.min(vw, vh) / 720));
+}
+addEventListener('resize', resize); resize();
+
+function oct(ctx, x, y, w, h, c) { ctx.beginPath(); ctx.moveTo(x + c, y); ctx.lineTo(x + w - c, y); ctx.lineTo(x + w, y + c); ctx.lineTo(x + w, y + h - c); ctx.lineTo(x + w - c, y + h); ctx.lineTo(x + c, y + h); ctx.lineTo(x, y + h - c); ctx.lineTo(x, y + c); ctx.closePath(); }
+
+function toScreen(ctx) { ctx.setTransform(dpr * zoom, 0, 0, dpr * zoom, dpr * (vw / 2 - camX * zoom), dpr * (vh / 2 - camY * zoom)); }
+
+function draw(time) {
+  const lead = .32;
+  camX += (car.x + Math.cos(car.a) * car.v * lead - camX) * .08; camY += (car.y + Math.sin(car.a) * car.v * lead - camY) * .08;
+  const sx = shake ? (Math.random() - .5) * shake : 0, sy = shake ? (Math.random() - .5) * shake : 0; shake *= .86; if (shake < .3) shake = 0;
+  g.setTransform(1, 0, 0, 1, 0, 0); g.fillStyle = '#140c0b'; g.fillRect(0, 0, cv.width, cv.height);
+  toScreen(g); g.translate(sx, sy);
+  const x0 = camX - vw / 2 / zoom - CELL, x1 = camX + vw / 2 / zoom + CELL, y0 = camY - vh / 2 / zoom - CELL, y1 = camY + vh / 2 / zoom + CELL;
+  // street markings
+  g.strokeStyle = 'rgba(220,190,160,.22)'; g.lineWidth = 2; g.setLineDash([16, 22]);
+  for (let k = 0; k <= N; k++) { const c = k * CELL + S / 2; if (c > x0 && c < x1) { g.beginPath(); g.moveTo(c, Math.max(0, y0)); g.lineTo(c, Math.min(W, y1)); g.stroke(); } if (c > y0 && c < y1) { g.beginPath(); g.moveTo(Math.max(0, x0), c); g.lineTo(Math.min(W, x1), c); g.stroke(); } }
+  g.setLineDash([]);
+  // blocks
+  for (const b of blocks) {
+    if (b.x > x1 || b.x + B < x0 || b.y > y1 || b.y + B < y0) continue;
+    oct(g, b.x, b.y, B, B, CH);
+    if (b.plaza) { g.fillStyle = '#141a11'; g.fill(); for (const [tx, ty, r] of b.trees) { g.beginPath(); g.arc(b.x + tx * B, b.y + ty * B, r, 0, 7); g.fillStyle = '#1d2a17'; g.fill(); } }
+    else {
+      g.fillStyle = '#2e1914'; g.fill(); g.strokeStyle = '#4a271e'; g.lineWidth = 2; g.stroke();
+      oct(g, b.x + 22, b.y + 22, B - 44, B - 44, CH - 14); g.fillStyle = '#1e100d'; g.fill();
+      for (const [side, t, lit] of b.wins) {
+        const p = CH + t * (B - 2 * CH); let wx, wy;
+        if (side === 0) { wx = b.x + p; wy = b.y + 6; } else if (side === 1) { wx = b.x + B - 10; wy = b.y + p; } else if (side === 2) { wx = b.x + p; wy = b.y + B - 10; } else { wx = b.x + 6; wy = b.y + p; }
+        g.fillStyle = lit ? 'rgba(255,170,90,.75)' : 'rgba(120,70,50,.25)'; g.fillRect(wx, wy, side % 2 ? 4 : 10, side % 2 ? 10 : 4);
+      }
+    }
+  }
+  // taxis (seen only in light)
+  for (const t of taxis) {
+    const tx = t.horiz ? t.pos : t.lane, ty = t.horiz ? t.lane : t.pos; if (tx < x0 || tx > x1 || ty < y0 || ty > y1) continue;
+    g.save(); g.translate(tx, ty); g.rotate(t.horiz ? (t.dir > 0 ? 0 : Math.PI) : (t.dir > 0 ? Math.PI / 2 : -Math.PI / 2));
+    g.fillStyle = '#0c0c0c'; g.fillRect(-17, -9, 34, 18); g.fillStyle = '#e8b62c'; g.fillRect(-17, -9, 9, 18); g.fillRect(8, -9, 9, 18);
+    g.fillStyle = '#2b2b2b'; g.fillRect(-4, -7, 9, 14); g.restore();
+  }
+  // targets on the ground
+  const tg = targets[stage];
+  // darkness with light cut out
+  lg.setTransform(1, 0, 0, 1, 0, 0); lg.globalCompositeOperation = 'source-over'; lg.fillStyle = 'rgba(2,1,1,.9)'; lg.fillRect(0, 0, lc.width, lc.height);
+  toScreen(lg); lg.translate(sx, sy); lg.globalCompositeOperation = 'destination-out';
+  const hole = (x, y, r, a) => { const gr = lg.createRadialGradient(x, y, 0, x, y, r); gr.addColorStop(0, `rgba(0,0,0,${a})`); gr.addColorStop(1, 'rgba(0,0,0,0)'); lg.fillStyle = gr; lg.beginPath(); lg.arc(x, y, r, 0, 7); lg.fill(); };
+  for (const l of lamps) if (l.x > x0 && l.x < x1 && l.y > y0 && l.y < y1) hole(l.x, l.y, 160, .8);
+  for (const t of taxis) { const tx = t.horiz ? t.pos : t.lane, ty = t.horiz ? t.lane : t.pos; if (tx > x0 && tx < x1 && ty > y0 && ty < y1) { const hx = t.horiz ? t.dir : 0, hy = t.horiz ? 0 : t.dir; hole(tx + hx * 40, ty + hy * 40, 70, .7); hole(tx, ty, 34, .6); } }
+  hole(car.x, car.y, 125, .95);
+  // headlight cone
+  lg.save(); lg.translate(car.x, car.y); lg.rotate(car.a);
+  const cone = lg.createRadialGradient(20, 0, 0, 20, 0, 430); cone.addColorStop(0, 'rgba(0,0,0,1)'); cone.addColorStop(.7, 'rgba(0,0,0,.6)'); cone.addColorStop(1, 'rgba(0,0,0,0)');
+  lg.fillStyle = cone; lg.beginPath(); lg.moveTo(14, -8); lg.lineTo(440, -190); lg.quadraticCurveTo(490, 0, 440, 190); lg.lineTo(14, 8); lg.closePath(); lg.fill(); lg.restore();
+  if (tg) hole(tg.x, tg.y, 110 + 20 * Math.exp(-(((time / 1000) % T) / T) * 6), .85);
+  g.setTransform(1, 0, 0, 1, 0, 0); g.drawImage(lc, 0, 0);
+  // colour glows on top of the dark
+  toScreen(g); g.translate(sx, sy); g.globalCompositeOperation = 'lighter';
+  for (const l of lamps) if (l.x > x0 && l.x < x1 && l.y > y0 && l.y < y1) { const gr = g.createRadialGradient(l.x, l.y, 0, l.x, l.y, 110); gr.addColorStop(0, 'rgba(255,140,60,.16)'); gr.addColorStop(1, 'rgba(255,140,60,0)'); g.fillStyle = gr; g.beginPath(); g.arc(l.x, l.y, 110, 0, 7); g.fill(); }
+  if (tg) {
+    const ph = ((time / 1000) % T) / T, p = Math.exp(-ph * 6);
+    const gr = g.createRadialGradient(tg.x, tg.y, 0, tg.x, tg.y, 150); gr.addColorStop(0, `rgba(210,40,30,${.55 + .4 * p})`); gr.addColorStop(1, 'rgba(210,40,30,0)'); g.fillStyle = gr; g.beginPath(); g.arc(tg.x, tg.y, 150, 0, 7); g.fill();
+    g.strokeStyle = `rgba(255,107,77,${.6 * (1 - ph)})`; g.lineWidth = 2; g.beginPath(); g.arc(tg.x, tg.y, 16 + ph * 90, 0, 7); g.stroke();
+    if (stage === 3) { g.strokeStyle = 'rgba(255,220,180,.5)'; g.lineWidth = 2; g.strokeRect(tg.x - 22, tg.y - 30, 44, 60); }
+  }
+  g.globalCompositeOperation = 'source-over';
+  g.beginPath(); g.arc(tg ? tg.x : 0, tg ? tg.y : 0, tg ? 9 + 4 * Math.exp(-(((time / 1000) % T) / T) * 6) : 0, 0, 7); g.fillStyle = '#d0352a'; g.fill();
+  // the car
+  g.save(); g.translate(car.x, car.y); g.rotate(car.a);
+  g.fillStyle = '#050303'; g.fillRect(-19, -10, 38, 20); g.fillStyle = '#1b1414'; g.fillRect(-6, -8, 13, 16);
+  g.fillStyle = '#fff2dc'; g.fillRect(17, -9, 3, 5); g.fillRect(17, 4, 3, 5);
+  g.fillStyle = ctl.down || ctl.hand ? '#ff3b2a' : '#7a1810'; g.fillRect(-20, -9, 2, 5); g.fillRect(-20, 4, 2, 5);
+  g.strokeStyle = 'rgba(255,107,77,.35)'; g.lineWidth = 1; g.strokeRect(-19, -10, 38, 20);
+  g.restore();
+  // edge marker pointing to the pulse
+  if (tg) {
+    const sxp = (tg.x - camX) * zoom + vw / 2, syp = (tg.y - camY) * zoom + vh / 2;
+    if (sxp < 0 || sxp > vw || syp < 0 || syp > vh) {
+      const ang = Math.atan2(syp - vh / 2, sxp - vw / 2), m = 26;
+      const ex = Math.max(m, Math.min(vw - m, vw / 2 + Math.cos(ang) * vw)), ey = Math.max(m + 50, Math.min(vh - m - 40, vh / 2 + Math.sin(ang) * vh));
+      g.setTransform(dpr, 0, 0, dpr, 0, 0); g.globalAlpha = .55; g.beginPath(); g.arc(ex, ey, 5, 0, 7); g.fillStyle = '#d0352a'; g.fill(); g.globalAlpha = 1;
+    }
+  }
+  // joystick ring
+  if (ctl.joy) { g.setTransform(dpr, 0, 0, dpr, 0, 0); g.strokeStyle = 'rgba(243,235,228,.18)'; g.lineWidth = 1; g.beginPath(); g.arc(ctl.joy.ox, ctl.joy.oy, 46, 0, 7); g.stroke(); g.beginPath(); g.arc(ctl.joy.ox + Math.max(-46, Math.min(46, ctl.joy.dx)), ctl.joy.oy + Math.max(-46, Math.min(46, ctl.joy.dy)), 10, 0, 7); g.fillStyle = 'rgba(208,53,42,.6)'; g.fill(); }
+}
+
+/* ---------- game flow ---------- */
+const $ = id => document.getElementById(id);
+const GAME_SECONDS = 210;            // 00:00 → 04:00
+let playing = false, tStart = 0, last = 0, raf;
+function clockText(el) { const m = Math.min(240, el / GAME_SECONDS * 240); const h = Math.floor(m / 60), mm = Math.floor(m % 60); return '0' + h + ':' + String(mm).padStart(2, '0'); }
+let toastTimer;
+function toast(cap, t, s) { $('toastCap').textContent = cap; $('toastT').textContent = t; $('toastS').textContent = s; $('toast').classList.add('on'); clearTimeout(toastTimer); toastTimer = setTimeout(() => $('toast').classList.remove('on'), 2600); }
+
+function frame(now) {
+  raf = requestAnimationFrame(frame);
+  const dt = Math.min(.05, (now - last) / 1000 || 0); last = now;
+  if (playing) {
+    updateCar(dt); updateTaxis(dt); scheduleAudio();
+    const el = (now - tStart) / 1000; $('clock').textContent = clockText(el);
+    const tg = targets[stage];
+    if (tg && Math.hypot(tg.x - car.x, tg.y - car.y) < 60) {
+      chime();
+      if (stage < 3) { $('s' + (stage + 1)).classList.add('on'); toast('Signal ' + tg.label[0], tg.label[1], tg.label[2]); stage++; if (stage === 3) setTimeout(() => { if (playing && stage === 3) toast('', 'Now the door.', 'Follow the pulse one last time.'); }, 2800); }
+      else { finish(true, el); }
+    }
+    if (el >= GAME_SECONDS) finish(false, el);
+    if (el > 9) $('hint').style.opacity = 0;
+  }
+  draw(now);
+}
+
+function begin() {
+  if (!ac) audioStart(); else ac.resume();
+  buildWorld(); resetCar(); camX = car.x; camY = car.y;
+  ['s1', 's2', 's3'].forEach(id => $(id).classList.remove('on'));
+  $('intro').classList.add('hide'); $('end').classList.add('hide');
+  $('hint').textContent = matchMedia('(hover: none)').matches ? 'Drag to drive · follow the sound' : 'Arrows or WASD · space to brake · follow the sound';
+  $('hint').style.opacity = 1;
+  playing = true; tStart = performance.now(); last = tStart;
+  toast('00:00', 'After midnight.', 'Somewhere, the pulse. Find it.');
+}
+
+function finish(won, el) {
+  playing = false; ctl.joy = null; clearTimeout(toastTimer); $('toast').classList.remove('on'); if (master) master.gain.setTargetAtTime(won ? 1 : .25, ac.currentTime, .4);
+  if (won) wall.frequency.setTargetAtTime(20000, ac.currentTime, .3);
+  $('endCap').textContent = won ? 'Arrived · ' + clockText(el) : '04:00';
+  $('endT').textContent = won ? 'You made it inside.' : 'The doors closed.';
+  $('endS').textContent = won ? 'Three signals, one door, before four. The night is yours — and so is the playlist.' : 'Barcelona kept its secret tonight. The pulse is still out there.';
+  const box = $('endActions'); box.innerHTML = '';
+  if (won) { const a = document.createElement('a'); a.className = 'solid'; a.href = PLAYLIST_URL; a.target = '_blank'; a.rel = 'noopener'; a.textContent = 'Open the playlist'; box.appendChild(a); }
+  const again = document.createElement('button'); again.className = won ? 'ghost' : 'solid'; again.type = 'button'; again.textContent = won ? 'Drive again' : 'Try again'; again.onclick = begin; box.appendChild(again);
+  if (won) { const sh = document.createElement('button'); sh.className = 'ghost'; sh.type = 'button'; sh.textContent = 'Challenge a friend'; sh.onclick = () => { const d = { title: 'Last Call — ZAYA', text: 'I reached the door at ' + clockText(el) + '. Your turn.', url: location.origin + '/lastcall' }; if (navigator.share) navigator.share(d).catch(() => {}); else navigator.clipboard?.writeText(d.url).then(() => { sh.textContent = 'Link copied'; }); }; box.appendChild(sh); }
+  $('end').classList.remove('hide');
+}
+
+/* ---------- input ---------- */
+const keymap = { ArrowUp: 'up', KeyW: 'up', ArrowDown: 'down', KeyS: 'down', ArrowLeft: 'left', KeyA: 'left', ArrowRight: 'right', KeyD: 'right', Space: 'hand' };
+addEventListener('keydown', e => { const k = keymap[e.code]; if (k && playing) { ctl[k] = 1; e.preventDefault(); } });
+addEventListener('keyup', e => { const k = keymap[e.code]; if (k) ctl[k] = 0; });
+cv.addEventListener('pointerdown', e => { if (!playing) return; cv.setPointerCapture(e.pointerId); ctl.joy = { ox: e.clientX, oy: e.clientY, dx: 0, dy: 0, len: 0 }; });
+cv.addEventListener('pointermove', e => { if (!ctl.joy) return; ctl.joy.dx = e.clientX - ctl.joy.ox; ctl.joy.dy = e.clientY - ctl.joy.oy; ctl.joy.len = Math.hypot(ctl.joy.dx, ctl.joy.dy); });
+['pointerup', 'pointercancel'].forEach(t => cv.addEventListener(t, () => { ctl.joy = null; }));
+$('go').addEventListener('click', begin);
+$('controls').textContent = matchMedia('(hover: none)').matches ? 'Hold anywhere and drag to steer' : 'Arrows / WASD · space to brake';
+document.addEventListener('visibilitychange', () => { if (!ac) return; if (document.hidden) ac.suspend(); else ac.resume(); });
+
+buildWorld(); resetCar(); camX = car.x; camY = car.y; raf = requestAnimationFrame(frame);
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
