@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Keep the Pulse — ZAYA</title>
+<meta name="description" content="Keep the pulse for sixteen beats. The light goes out halfway. Win the ZAYA playlist.">
+<meta name="theme-color" content="#070404">
+<meta property="og:title" content="Keep the Pulse — ZAYA">
+<meta property="og:description" content="Sixteen beats. The light goes out halfway. Keep it, and the playlist is yours.">
+<meta property="og:image" content="https://zaya-ritual.vercel.app/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://zaya-ritual.vercel.app/pulse">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23070404'/%3E%3Ccircle cx='16' cy='16' r='5' fill='%23B3261E'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@300;400&display=swap">
+<style>
+:root{--bg:#070404;--ink:#f3ebe4;--soft:#c9bcb3;--mute:#a3958d;--hot:#ff6b4d;--accent:#B3261E;--serif:'Cormorant Garamond',Georgia,serif;--sans:'Jost',system-ui,sans-serif}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:300;-webkit-font-smoothing:antialiased;overflow:hidden;touch-action:manipulation;-webkit-user-select:none;user-select:none}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:1px solid var(--hot);outline-offset:4px}
+.cap{font-size:11px;letter-spacing:.42em;text-transform:uppercase}
+.stage{position:fixed;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:28px 5vw calc(28px + env(safe-area-inset-bottom))}
+.bar{display:flex;justify-content:space-between;align-items:center;gap:16px;color:var(--mute)}
+.bar a{min-height:44px;display:inline-flex;align-items:center}
+.mid{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:34px;text-align:center}
+.orb{position:relative;width:200px;height:200px;display:flex;align-items:center;justify-content:center}
+.dot{width:16px;height:16px;border-radius:50%;background:var(--accent);box-shadow:0 0 30px var(--accent);will-change:transform,opacity}
+.ring{position:absolute;left:50%;top:50%;width:16px;height:16px;margin:-8px;border-radius:50%;border:1px solid var(--hot);opacity:0;pointer-events:none}
+.ring.go{animation:ring .7s ease-out forwards}
+.ring.perfect{border-color:#ffd2a6}
+@keyframes ring{from{transform:scale(1);opacity:.9}to{transform:scale(9);opacity:0}}
+h1{margin:0;font-family:var(--serif);font-weight:300;font-size:clamp(40px,8vw,76px);letter-spacing:.06em;line-height:1}
+.lead{margin:0;max-width:380px;font-size:15px;line-height:1.85;color:var(--mute)}
+.count{margin:0;font-family:var(--serif);font-size:clamp(46px,10vw,84px);letter-spacing:.14em;line-height:1;min-height:1em;color:var(--ink);font-weight:300}
+.status{margin:0;min-height:1.6em;font-family:var(--serif);font-style:italic;font-size:22px;color:var(--soft);transition:opacity .4s}
+.solid,.ghost{display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:0 34px;font-family:var(--sans);font-size:11px;letter-spacing:.42em;text-transform:uppercase;cursor:pointer}
+.solid{border:0;background:var(--accent);color:#fff}
+.ghost{border:1px solid rgba(233,225,218,.35);background:none;color:var(--ink)}
+.actions{display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
+.hide{display:none!important}
+.tapzone{position:fixed;inset:0;z-index:1;background:transparent;border:0;cursor:pointer}
+.stage>*{position:relative;z-index:2}
+.playing .stage>.mid{pointer-events:none}
+.flash{position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at 50% 46%,rgba(179,38,30,.25),transparent 55%);opacity:0;transition:opacity .25s}
+.flash.on{opacity:1;transition:none}
+.best{color:#8f817a}
+@media (max-width:560px){.cap{letter-spacing:.3em}.bar{font-size:10px}}
+@media (prefers-reduced-motion:reduce){.ring.go{animation-duration:.01s}}
+</style>
+</head>
+<body>
+<div class="flash" id="flash"></div>
+<button class="tapzone hide" id="tapzone" aria-label="Tap on the beat"></button>
+
+<div class="stage">
+  <header class="bar cap"><a href="/">ZAYA</a><span>123 BPM</span></header>
+
+  <main class="mid">
+    <div class="orb" aria-hidden="true"><span class="ring" id="ring"></span><span class="dot" id="dot"></span></div>
+
+    <!-- intro -->
+    <section id="intro" style="display:flex;flex-direction:column;align-items:center;gap:26px">
+      <p class="cap" style="margin:0;color:var(--hot)">A game of the ritual</p>
+      <h1>Keep the Pulse</h1>
+      <p class="lead">Tap with the beat. Halfway through, the light goes out — keep the pulse anyway.<br>Sixteen in a row and the playlist is yours.</p>
+      <button class="solid" id="start" type="button">Begin · sound on</button>
+      <p class="cap best" id="best"></p>
+    </section>
+
+    <!-- play -->
+    <section id="play" class="hide" style="display:flex;flex-direction:column;align-items:center;gap:18px">
+      <p class="count" id="count" aria-live="polite"></p>
+      <p class="status" id="status"></p>
+      <p class="cap" style="margin:0;color:#8f817a">Tap anywhere · or press space</p>
+    </section>
+
+    <!-- win -->
+    <section id="win" class="hide" style="display:flex;flex-direction:column;align-items:center;gap:24px">
+      <p class="cap" style="margin:0;color:var(--hot)">XVI / XVI</p>
+      <h1>The pulse is yours.</h1>
+      <p class="lead">Sixteen beats, eight of them in the dark. Not one lost.</p>
+      <div class="actions">
+        <a class="solid" id="playlist" href="#" target="_blank" rel="noopener">Open the playlist</a>
+        <button class="ghost" id="share" type="button">Challenge a friend</button>
+      </div>
+      <a class="cap" href="/#request" style="color:var(--mute);min-height:44px;display:inline-flex;align-items:center">Request an invitation</a>
+    </section>
+  </main>
+
+  <footer class="bar cap"><span>ZAYA · The Ritual</span><a href="/">Back</a></footer>
+</div>
+
+<script>
+/* The prize. Paste the playlist link here (Spotify, SoundCloud, Apple Music…). */
+const PLAYLIST_URL = "";
+
+const BPM = 123, T = 60 / BPM, COUNT_IN = 4, GOAL = 16, DARK_AT = 8, WIN = .11, PERFECT = .05;
+const roman = n => { const m = [[10,'X'],[9,'IX'],[5,'V'],[4,'IV'],[1,'I']]; let s = ''; for (const [v, r] of m) while (n >= v) { s += r; n -= v; } return s; };
+const $ = id => document.getElementById(id);
+const dot = $('dot'), ring = $('ring'), flash = $('flash'), tapzone = $('tapzone');
+let ctx, t0 = 0, nextBeat = 0, sched, raf, hits = new Set(), streak = 0, best = 0, running = false, judgedUpTo = COUNT_IN - 1;
+
+try { best = +localStorage.getItem('zaya-pulse-best') || 0; } catch (_) {}
+const showBest = () => { $('best').textContent = best ? 'Your best · ' + roman(best) + ' / XVI' : ''; };
+showBest();
+
+// a deep kick and a soft shaker, made in the browser
+function kick(at, accent) {
+  const o = ctx.createOscillator(), g = ctx.createGain();
+  o.type = 'sine'; o.frequency.setValueAtTime(accent ? 120 : 105, at); o.frequency.exponentialRampToValueAtTime(42, at + .16);
+  g.gain.setValueAtTime(0, at); g.gain.linearRampToValueAtTime(accent ? .95 : .8, at + .004); g.gain.exponentialRampToValueAtTime(.001, at + .32);
+  o.connect(g).connect(ctx.destination); o.start(at); o.stop(at + .35);
+}
+let noiseBuf;
+function shaker(at) {
+  if (!noiseBuf) { noiseBuf = ctx.createBuffer(1, ctx.sampleRate * .08, ctx.sampleRate); const d = noiseBuf.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / d.length); }
+  const s = ctx.createBufferSource(), f = ctx.createBiquadFilter(), g = ctx.createGain();
+  s.buffer = noiseBuf; f.type = 'highpass'; f.frequency.value = 6000; g.gain.value = .12;
+  s.connect(f).connect(g).connect(ctx.destination); s.start(at);
+}
+const beatTime = k => t0 + k * T;
+
+function schedule() {
+  const ahead = ctx.currentTime + .2;
+  while (beatTime(nextBeat) < ahead) {
+    const at = beatTime(nextBeat);
+    kick(at, nextBeat < COUNT_IN || (nextBeat - COUNT_IN) % 4 === 0);
+    shaker(at + T / 2);
+    nextBeat++;
+  }
+  // a beat whose window closed without a tap breaks the streak
+  const heard = audibleNow();
+  while (beatTime(judgedUpTo + 1) + WIN < heard) {
+    judgedUpTo++;
+    if (judgedUpTo >= COUNT_IN && !hits.has(judgedUpTo) && streak > 0) lose('Lost the pulse.');
+  }
+}
+
+// the moment the listener actually hears, accounting for speaker latency
+function audibleNow(evStamp) {
+  if (ctx.getOutputTimestamp) { const ts = ctx.getOutputTimestamp(); if (ts.contextTime) return ts.contextTime + ((evStamp ?? performance.now()) - ts.performanceTime) / 1000; }
+  return ctx.currentTime - (ctx.outputLatency || ctx.baseLatency || 0);
+}
+
+function draw() {
+  const now = audibleNow(), k = (now - t0) / T, phase = k - Math.floor(k), b = Math.floor(k);
+  const dark = streak >= DARK_AT;
+  const p = Math.exp(-phase * 7);                              // sharp on the beat, soft after
+  const vis = b < COUNT_IN ? 1 : dark ? Math.max(0, 1 - (streak - DARK_AT + 1) * .5) * .25 : 1;
+  dot.style.transform = `scale(${1 + p * 1.6 * vis})`;
+  dot.style.opacity = dark ? (.12 + .1 * p * vis).toFixed(3) : (.55 + .45 * p).toFixed(3);
+  if (b >= 0 && b < COUNT_IN) $('count').textContent = ['IV', 'III', 'II', 'I'][b];
+  raf = requestAnimationFrame(draw);
+}
+
+function setCount() { $('count').textContent = streak ? roman(streak) : '—'; }
+function say(t) { $('status').textContent = t; }
+
+function lose(msg) {
+  if (streak > best) { best = streak; try { localStorage.setItem('zaya-pulse-best', best); } catch (_) {} }
+  streak = 0; setCount(); say(msg); flash.classList.add('on'); setTimeout(() => flash.classList.remove('on'), 60);
+  if (navigator.vibrate) navigator.vibrate([30, 40, 30]);
+}
+
+function tap(e) {
+  if (!running) return;
+  if (e.type === 'keydown') { if (e.code !== 'Space' && e.code !== 'Enter') return; e.preventDefault(); if (e.repeat) return; }
+  const t = audibleNow(e.timeStamp), k = Math.round((t - t0) / T);
+  if (k < COUNT_IN) return;
+  const err = t - beatTime(k);
+  if (Math.abs(err) > WIN || hits.has(k)) { lose(err < 0 ? 'Too early.' : 'Too late.'); return; }
+  hits.add(k);
+  if (streak > 0 && !hits.has(k - 1)) streak = 0;
+  streak++; setCount();
+  ring.classList.remove('go', 'perfect'); void ring.offsetWidth; ring.classList.add('go'); if (Math.abs(err) <= PERFECT) ring.classList.add('perfect');
+  say(streak === DARK_AT ? 'The light goes out. Keep it.' : streak > DARK_AT ? '' : Math.abs(err) <= PERFECT ? 'Exact.' : '');
+  if (streak >= GOAL) won();
+}
+
+function start() {
+  const AC = window.AudioContext || window.webkitAudioContext;
+  if (!ctx) ctx = new AC({ latencyHint: 'interactive' });
+  ctx.resume();
+  hits = new Set(); streak = 0; running = true;
+  t0 = ctx.currentTime + .5; nextBeat = 0; judgedUpTo = COUNT_IN - 1;
+  $('intro').classList.add('hide'); $('win').classList.add('hide'); $('play').classList.remove('hide');
+  document.body.classList.add('playing'); tapzone.classList.remove('hide'); tapzone.focus({ preventScroll: true });
+  say('Listen. Then tap.'); $('count').textContent = '';
+  clearInterval(sched); sched = setInterval(schedule, 25); schedule();
+  cancelAnimationFrame(raf); raf = requestAnimationFrame(draw);
+}
+
+function stop() { running = false; clearInterval(sched); document.body.classList.remove('playing'); tapzone.classList.add('hide'); }
+
+function won() {
+  stop(); best = GOAL; try { localStorage.setItem('zaya-pulse-best', best); } catch (_) {}
+  cancelAnimationFrame(raf); dot.style.opacity = 1; dot.style.transform = 'scale(1.6)';
+  $('play').classList.add('hide'); $('win').classList.remove('hide');
+  const pl = $('playlist');
+  if (PLAYLIST_URL) pl.href = PLAYLIST_URL; else { pl.removeAttribute('href'); pl.textContent = 'Playlist arrives soon'; pl.style.opacity = .6; }
+}
+
+$('start').addEventListener('click', start);
+tapzone.addEventListener('pointerdown', tap);
+addEventListener('keydown', tap);
+$('share').addEventListener('click', () => {
+  const data = { title: 'Keep the Pulse — ZAYA', text: 'I kept the pulse. Sixteen beats, half of them in the dark. Your turn.', url: location.origin + '/pulse' };
+  if (navigator.share) navigator.share(data).catch(() => {}); else navigator.clipboard?.writeText(data.url).then(() => { $('share').textContent = 'Link copied'; });
+});
+document.addEventListener('visibilitychange', () => { if (document.hidden && running) { stop(); ctx && ctx.suspend(); $('play').classList.add('hide'); $('intro').classList.remove('hide'); showBest(); } });
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
