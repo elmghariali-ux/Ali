@@ -303,22 +303,8 @@ footer a{padding:12px 0}
 
 <header class="hd cap" id="hd">
   <a class="mark" href="/" aria-label="ZAYA, home">ZAYA</a>
-  <nav aria-label="Main">
-    <button type="button" id="ixBtn" aria-expanded="false" aria-controls="ix"><span class="lbl">Index</span><span class="bars" aria-hidden="true"></span></button>
-  </nav>
 </header>
 
-<div class="ix" id="ix" role="dialog" aria-modal="true" aria-label="Index">
-  <div class="bg" id="ixBg"></div>
-  <ol>
-    <li><a href="/" data-img="/img/candle-tall.jpg" style="--i:0"><span class="n">I</span><span class="t">The Ritual</span></a></li>
-    <li><a href="/nights" data-img="/video/night-22.jpg" style="--i:1"><span class="n">II</span><span class="t">The Nights</span></a></li>
-    <li><a href="/signal" data-img="/img/sound-portrait.jpg" style="--i:2"><span class="n">III</span><span class="t">The Signal</span></a></li>
-    <li><a href="/request" data-img="/img/invited-light.jpg" style="--i:3"><span class="n">IV</span><span class="t">The Invitation</span></a></li>
-    <li class="minor"><a href="/about" data-img="/img/og.jpg" style="--i:4"><span class="n"></span><span class="t">The House — About ZAYA</span></a></li>
-  </ol>
-  <div class="foot cap"><span>Edition III · XXI · XI · MMXXVI · Barcelona</span><a href="https://www.instagram.com/zaya.ritual/" target="_blank" rel="noopener">@zaya.ritual</a></div>
-</div>
 
 <div class="veil" id="veil" aria-hidden="true"></div>
 
@@ -513,7 +499,7 @@ const ROUTES = {
   '/request': { room: 'ritual', at: 'request', title: 'Request an invitation — ZAYA Barcelona' },
   '/about': { room: 'about', at: null, title: 'About ZAYA — Afro House & Afrotech in Barcelona' }
 };
-const hd = document.getElementById('hd'), ix = document.getElementById('ix'), ixBtn = document.getElementById('ixBtn'), ixBg = document.getElementById('ixBg'), veil = document.getElementById('veil');
+const hd = document.getElementById('hd'), veil = document.getElementById('veil');
 const canon = document.querySelector('link[rel=canonical]');
 const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 let cur = null;
@@ -524,7 +510,7 @@ function routeFor(path, hash) {
 }
 function target(at) { if (!at) return 0; const el = document.getElementById(at); if (!el) return 0; return Math.max(0, el.getBoundingClientRect().top + scrollY - (at === 'request' ? 24 : innerHeight * .08)); }
 function jump(y) { const h = document.documentElement; h.style.scrollBehavior = 'auto'; scrollTo(0, y); h.style.scrollBehavior = ''; }
-function markCurrent(path) { ix.querySelectorAll('ol a').forEach(a => { if (a.getAttribute('href') === path) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); }); }
+function markCurrent() {}
 function unhush() { hd.classList.remove('hush'); }
 function wake(el) { const t = el.querySelector(':scope > template'); if (t) { el.appendChild(t.content.cloneNode(true)); t.remove(); } if (!el.dataset.awake) { el.dataset.awake = '1'; hydrate(el); } }
 function land(path) {
@@ -537,9 +523,7 @@ function land(path) {
 }
 function go(path, push = true) {
   const r = ROUTES[path]; if (!r) return;
-  const fromMenu = ix.classList.contains('open');
   const stamp = () => { if (push && location.pathname !== path) history.pushState({}, '', path); };
-  if (fromMenu) { land(path); stamp(); setTimeout(closeIx, 80); return; }
   if (r.room === cur) { stamp(); document.title = r.title; markCurrent(path); unhush(); scrollTo({ top: target(r.at), behavior: reduceMotion ? 'auto' : 'smooth' }); return; }
   if (reduceMotion) { land(path); stamp(); return; }
   veil.classList.add('on');
@@ -552,43 +536,12 @@ document.addEventListener('click', e => {
   e.preventDefault(); go(path);
 });
 addEventListener('popstate', () => {
-  const path = routeFor(location.pathname, location.hash) || '/'; if (ix.classList.contains('open')) closeIx();
+  const path = routeFor(location.pathname, location.hash) || '/';
   if (ROUTES[path].room === cur) { jump(target(ROUTES[path].at)); markCurrent(path); document.title = ROUTES[path].title; return; }
   veil.classList.add('on'); setTimeout(() => { land(path); requestAnimationFrame(() => veil.classList.remove('on')); }, 380);
 });
 
-// the index
-let lastFocus = null;
-function openIx() {
-  lastFocus = document.activeElement; ix.classList.add('open'); document.body.classList.add('menu-open'); document.body.style.overflow = 'hidden';
-  ixBtn.setAttribute('aria-expanded', 'true'); ixBtn.querySelector('.lbl').textContent = 'Close';
-  setTimeout(() => { const a = ix.querySelector('a[aria-current]') || ix.querySelector('ol a'); a && a.focus({ preventScroll: true }); }, 500);
-}
-function closeIx() {
-  ix.classList.remove('open'); document.body.classList.remove('menu-open'); document.body.style.overflow = '';
-  ixBtn.setAttribute('aria-expanded', 'false'); ixBtn.querySelector('.lbl').textContent = 'Index'; ixBg.classList.remove('on');
-  if (lastFocus && document.contains(lastFocus) && lastFocus !== document.body && !lastFocus.closest('.ix')) lastFocus.focus({ preventScroll: true }); else ixBtn.focus({ preventScroll: true });
-}
-ixBtn.addEventListener('click', () => ix.classList.contains('open') ? closeIx() : openIx());
-addEventListener('keydown', e => {
-  if (!ix.classList.contains('open')) return;
-  if (e.key === 'Escape') { closeIx(); return; }
-  if (e.key === 'Tab') { const f = [ixBtn, ...ix.querySelectorAll('a')]; const i = f.indexOf(document.activeElement); if (e.shiftKey && i <= 0) { e.preventDefault(); f[f.length - 1].focus(); } else if (!e.shiftKey && i === f.length - 1) { e.preventDefault(); f[0].focus(); } }
-});
-ix.querySelectorAll('ol a').forEach(a => {
-  const on = () => { ixBg.style.backgroundImage = `url(${a.dataset.img})`; ixBg.classList.add('on'); };
-  a.addEventListener('mouseenter', on); a.addEventListener('focus', on);
-});
-ix.querySelector('ol').addEventListener('mouseleave', () => ixBg.classList.remove('on'));
 
-// the word "Index" appears once you are inside; the menu quietly follows where you are
-addEventListener('scroll', () => {
-  if (cur !== 'ritual') return;
-  if (scrollY > innerHeight * .5) unhush();
-  const y = scrollY + innerHeight * .5; let path = '/';
-  for (const at of ['nights', 'signal', 'request']) { const el = document.getElementById(at); if (el && el.getBoundingClientRect().top + scrollY <= y) path = '/' + at; }
-  markCurrent(path);
-}, { passive: true });
 
 
 // each room wakes up the first time you walk into it
@@ -682,8 +635,7 @@ document.addEventListener('submit', async e => {
 {
   const path = routeFor(location.pathname, location.hash) || '/';
   if (/^#(request|signal|nights)$/.test(location.hash)) history.replaceState({}, '', path + location.search);
-  if (path === '/' && !reduceMotion) hd.classList.add('hush');
-  land(path);
+    land(path);
   if (path !== '/') { muted = true; snd.classList.add('on'); label(); }
   if (ROUTES[path].at) { document.fonts.ready.then(() => jump(target(ROUTES[path].at))); addEventListener('load', () => jump(target(ROUTES[path].at)), { once: true }); }
 }
