@@ -54,9 +54,9 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23070404'/%3E%3Ccircle cx='16' cy='16' r='5' fill='%23B3261E'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;1,6..96,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@300;400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@300;400&display=swap">
 <style>
-:root{--bg:#070404;--ink:#f3ebe4;--soft:#d6cac1;--mute:#a3958d;--hot:#ff6b4d;--accent:#B3261E;--serif:'Cormorant Garamond',Georgia,serif;--didone:'Bodoni Moda','Didot','Bodoni 72',Georgia,serif;--sans:'Jost',system-ui,sans-serif}
+:root{--bg:#070404;--ink:#f3ebe4;--soft:#d6cac1;--mute:#a3958d;--hot:#ff6b4d;--accent:#B3261E;--serif:'Cormorant Garamond',Georgia,serif;--sans:'Jost',system-ui,sans-serif}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:300;-webkit-font-smoothing:antialiased;overflow-x:hidden}
@@ -160,10 +160,11 @@ h1{margin:0;font-weight:inherit;font-size:inherit}
 @media (min-aspect-ratio:4/3){.sound img{object-position:50% 37%}}
 
 /* the header: always one tap from the index */
-.hd{position:fixed;left:0;right:0;top:0;z-index:40;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:10px 5vw;color:var(--soft);background:linear-gradient(rgba(7,4,4,.72),rgba(7,4,4,0));transition:transform .7s cubic-bezier(.7,0,.2,1),opacity 1.4s ease}
+.hd{position:fixed;left:0;right:0;top:0;z-index:40;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:10px 5vw;color:var(--soft);transition:opacity 1.6s ease}
 .hd.away{transform:translateY(-110%)}
-.hd.hush{opacity:0}
-.hd .mark{font-family:var(--serif);font-weight:300;font-size:17px;letter-spacing:.55em;padding-left:.55em;color:var(--ink);transition:opacity .8s}
+.hd.hush{opacity:0;pointer-events:none}
+.hd .mark{font-family:var(--serif);font-weight:300;font-size:17px;letter-spacing:.55em;padding-left:.55em;color:var(--ink);opacity:0;pointer-events:none;transition:opacity .8s}
+.on-about .hd .mark{opacity:1;pointer-events:auto}
 .hd.attop .mark{opacity:0;pointer-events:none}
 .hd nav{display:flex;align-items:center;gap:30px}
 .hd a,.hd button{min-height:44px;display:inline-flex;align-items:center}
@@ -213,7 +214,7 @@ h1{margin:0;font-weight:inherit;font-size:inherit}
 .notes div{display:flex;flex-direction:column;gap:12px;padding:28px 8px}
 .notes div+div{border-left:1px solid rgba(233,225,218,.12)}
 .notes dt{font-size:10px;letter-spacing:.4em;text-transform:uppercase;color:#8f817a;padding-left:.4em}
-.notes dd{margin:0;font-family:var(--didone);font-size:19px;line-height:1.35;color:var(--ink)}
+.notes dd{margin:0;font-family:var(--serif);font-size:21px;line-height:1.35;color:var(--ink)}
 .house .close{display:flex;flex-direction:column;align-items:center;gap:34px;padding-top:12vh}
 .house .close .tl{margin:0;font-size:12px;letter-spacing:.62em;text-transform:uppercase;padding-left:.62em;color:var(--soft)}
 @media (max-width:560px){.notes{grid-template-columns:1fr 1fr}.notes div:nth-child(3){border-left:0}.notes div:nth-child(n+3){border-top:1px solid rgba(233,225,218,.12)}.house .line2{font-size:11px;letter-spacing:.26em}}
@@ -303,7 +304,6 @@ footer a{padding:12px 0}
 <header class="hd cap" id="hd">
   <a class="mark" href="/" aria-label="ZAYA, home">ZAYA</a>
   <nav aria-label="Main">
-    <a class="req-link" href="/request">Request</a>
     <button type="button" id="ixBtn" aria-expanded="false" aria-controls="ix"><span class="lbl">Index</span><span class="bars" aria-hidden="true"></span></button>
   </nav>
 </header>
@@ -323,7 +323,7 @@ footer a{padding:12px 0}
 <div class="veil" id="veil" aria-hidden="true"></div>
 
 <main>
-<div class="room" data-room="ritual" data-path="/" data-title="ZAYA — Afro House Ritual in Barcelona" data-desc="ZAYA is an Afro House ritual in Barcelona. Edition III: Saturday 21 November 2026. Tickets are released to invited guests only — request an invitation.">
+<div class="room" data-room="ritual">
 <section class="hero wrap">
   <div class="bar" aria-hidden="true" style="min-height:44px"></div>
   <div class="center">
@@ -352,27 +352,12 @@ footer a{padding:12px 0}
   <p class="cap" style="margin:0">Seen only from within</p>
 </section>
 
-<div style="height:22vh"></div>
-
-<section class="sound" aria-label="Behind the decks at Hotel El Palace">
-  <img src="/img/sound-portrait.jpg" alt="Behind the decks at the Palace, the light falling in streaks" loading="lazy">
-  <p class="tagline rv"><span>Less noise.</span><i aria-hidden="true"></i><span>More vision.</span></p>
-</section>
-
-  <a class="nextroom" href="/nights">
-    <span class="cap">Next</span>
-    <span class="nm"><i>II</i><span>The Nights</span></span>
-    <span class="ln" aria-hidden="true"></span>
-  </a>
-</div>
-
-<div class="room" data-room="nights" data-path="/nights" data-title="The Nights — ZAYA at Hotel El Palace, Barcelona" data-desc="Editions I and II of ZAYA at Hotel El Palace, Barcelona: two Afro House nights, both sold out, with no advertising. Watch the films." hidden>
-<section class="wrap opening">
+<section class="wrap after-candle" id="nights">
   <div class="record rv">
-    <p class="cap" style="color:var(--hot)">II · The Nights</p>
-    <h1 class="cap" style="color:var(--mute)">Hotel El Palace · Editions I–II</h1>
+    <p class="cap" style="color:var(--mute)">Hotel El Palace · Editions I–II</p>
     <p class="serif" style="font-size:clamp(30px,3.4vw,46px);line-height:1.3">Two nights. Both sold out.<br>No advertising. Ever.</p>
     <div class="rule"></div>
+    <p class="serif" style="font-style:italic;font-size:22px;color:#c9bcb3">The next room is larger, older, and not yet named.</p>
   </div>
 </section>
 
@@ -387,24 +372,10 @@ footer a{padding:12px 0}
   </div>
 </section>
 
-<section class="wrap">
-  <div class="record rv" style="padding-bottom:0">
-    <p class="serif" style="font-style:italic;font-size:clamp(24px,2.6vw,32px);color:#c9bcb3">The next room is larger, older,<br>and not yet named.</p>
-  </div>
-</section>
-
-  <a class="nextroom" href="/signal">
-    <span class="cap">Next</span>
-    <span class="nm"><i>III</i><span>The Signal</span></span>
-    <span class="ln" aria-hidden="true"></span>
-  </a>
-</div>
-
-<div class="room" data-room="signal" data-path="/signal" data-title="Edition III · Saturday 21 November 2026 — ZAYA Barcelona" data-desc="ZAYA Edition III: Saturday 21 November 2026 in Barcelona. Afro House and Afrotech. Tickets for invited guests only; the venue is revealed soon." hidden>
-<section class="wrap opening" id="signal">
+<section class="wrap" id="signal">
   <div class="signal">
     <div class="head rv">
-      <h1 class="cap" style="margin:0;color:var(--hot)">III · The Signal · Edition III</h1>
+      <p class="cap" style="margin:0;color:var(--hot)">The Signal · Edition III</p>
       <p class="bigdate serif">XXI<span>·</span>XI</p>
       <p class="cap" style="margin:0;color:var(--soft)">Saturday · November · Barcelona</p>
       <p class="tix serif">Tickets are released to invited guests only.</p>
@@ -414,19 +385,16 @@ footer a{padding:12px 0}
   </div>
 </section>
 
-  <a class="nextroom" href="/request">
-    <span class="cap">Next</span>
-    <span class="nm"><i>IV</i><span>The Invitation</span></span>
-    <span class="ln" aria-hidden="true"></span>
-  </a>
-</div>
+<section class="sound" aria-label="Behind the decks at Hotel El Palace">
+  <img src="/img/sound-portrait.jpg" alt="Behind the decks at the Palace, the light falling in streaks" loading="lazy">
+  <p class="tagline rv"><span>Less noise.</span><i aria-hidden="true"></i><span>More vision.</span></p>
+</section>
 
-<div class="room" data-room="request" data-path="/request" data-title="Request an invitation — ZAYA Barcelona" data-desc="Request an invitation to ZAYA Edition III, an Afro House night in Barcelona on Saturday 21 November 2026. Every request is read by hand." hidden>
-<section class="wrap opening" id="request">
+<section class="wrap" id="request">
   <div class="req rv" id="req">
     <div style="display:flex;flex-direction:column;gap:18px;align-items:center">
       <p class="cap" style="margin:0;color:var(--hot)">Edition III · Saturday 21 November<br>Barcelona</p>
-      <h1 class="serif" style="font-size:clamp(38px,4vw,56px);line-height:1.1">Request an invitation.</h1>
+      <h2 class="serif">Request an invitation.</h2>
       <p style="margin:0;font-size:15px;line-height:1.8;color:var(--mute)">Tickets are released to invited guests only.<br>The location is shared 48 hours before. Every request is read by hand.</p>
     </div>
     <form id="form" novalidate>
@@ -451,7 +419,7 @@ footer a{padding:12px 0}
 </section>
 </div>
 
-<div class="room" data-room="about" data-path="/about" data-title="About ZAYA — Afro House &amp; Afrotech in Barcelona" data-desc="Barcelona had no true home for Afro House, so we built one. ZAYA is an Afro House and Afrotech ritual curated by Argana. 18+, by invitation." hidden>
+<div class="room" data-room="about" hidden>
 <article class="wrap opening">
   <div class="house">
     <p class="cap kicker rv">The House</p>
@@ -510,7 +478,7 @@ async function startSound() {
 async function enter() {
   const first = !started; const hero = document.querySelector('.hero'); if (hero) hero.classList.add('live');
   if (first) await startSound(); else if (muted) setMuted(false);
-  setTimeout(walkIn, first ? 2000 : 400);
+  setTimeout(walkIn, first ? 2000 : 400); setTimeout(unhush, first ? 2600 : 0);
 }
 // entering: after a breath, the page glides down into the first line on its own
 function walkIn() {
@@ -536,46 +504,58 @@ function setMuted(m) {
 snd.addEventListener('click', () => started ? setMuted(!muted) : startSound());
 document.addEventListener('visibilitychange', () => { if (!started || muted) return; if (document.hidden) audio.pause(); else audio.play().catch(() => {}); });
 
-// rooms: one continuous night, four doors, real addresses
+// one ritual, a few quiet doors: every address lands somewhere in the same night
 const rooms = {}; document.querySelectorAll('.room').forEach(r => rooms[r.dataset.room] = r);
-const paths = { '/': 'ritual', '/nights': 'nights', '/signal': 'signal', '/request': 'request', '/about': 'about' };
+const ROUTES = {
+  '/': { room: 'ritual', at: null, title: 'ZAYA — Afro House Ritual in Barcelona' },
+  '/nights': { room: 'ritual', at: 'nights', title: 'The Nights — ZAYA at Hotel El Palace, Barcelona' },
+  '/signal': { room: 'ritual', at: 'signal', title: 'Edition III · Saturday 21 November 2026 — ZAYA Barcelona' },
+  '/request': { room: 'ritual', at: 'request', title: 'Request an invitation — ZAYA Barcelona' },
+  '/about': { room: 'about', at: null, title: 'About ZAYA — Afro House & Afrotech in Barcelona' }
+};
 const hd = document.getElementById('hd'), ix = document.getElementById('ix'), ixBtn = document.getElementById('ixBtn'), ixBg = document.getElementById('ixBg'), veil = document.getElementById('veil');
 const canon = document.querySelector('link[rel=canonical]');
 const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 let cur = null;
-function roomFor(path, hash) {
+function routeFor(path, hash) {
   path = path.replace(/\/+$/, '') || '/';
-  if (path === '/' && (hash === '#request' || hash === '#signal')) return hash.slice(1);
-  return paths[path] || null;
+  if (path === '/' && /^#(request|signal|nights)$/.test(hash || '')) path = '/' + hash.slice(1);
+  return ROUTES[path] ? path : null;
 }
-function toTop() { const h = document.documentElement; h.style.scrollBehavior = 'auto'; scrollTo(0, 0); h.style.scrollBehavior = ''; }
+function target(at) { if (!at) return 0; const el = document.getElementById(at); if (!el) return 0; return Math.max(0, el.getBoundingClientRect().top + scrollY - (at === 'request' ? 24 : innerHeight * .08)); }
+function jump(y) { const h = document.documentElement; h.style.scrollBehavior = 'auto'; scrollTo(0, y); h.style.scrollBehavior = ''; }
+function markCurrent(path) { ix.querySelectorAll('ol a').forEach(a => { if (a.getAttribute('href') === path) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); }); }
+function unhush() { hd.classList.remove('hush'); }
 function wake(el) { const t = el.querySelector(':scope > template'); if (t) { el.appendChild(t.content.cloneNode(true)); t.remove(); } if (!el.dataset.awake) { el.dataset.awake = '1'; hydrate(el); } }
-function show(name) {
-  wake(rooms[name]);
-  Object.entries(rooms).forEach(([k, el]) => { el.hidden = k !== name; });
-  cur = name; toTop();
-  document.title = rooms[name].dataset.title.replace(/&amp;/g, '&'); const md = document.querySelector('meta[name=description]'); if (md) md.content = rooms[name].dataset.desc || md.content; canon.href = 'https://zayaritual.com' + rooms[name].dataset.path;
-  document.body.classList.toggle('on-request', name === 'request');
-  ix.querySelectorAll('ol a').forEach(a => { if (roomFor(a.getAttribute('href')) === name) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
-  hd.classList.remove('away'); headerState();
+function land(path) {
+  const r = ROUTES[path];
+  if (r.room !== cur) { wake(rooms[r.room]); Object.entries(rooms).forEach(([k, el]) => { el.hidden = k !== r.room; }); cur = r.room; }
+  document.title = r.title; canon.href = 'https://zayaritual.com' + (r.room === 'about' ? '/about' : '/');
+  document.body.classList.toggle('on-about', r.room === 'about');
+  markCurrent(path); jump(target(r.at));
+  if (r.room !== 'ritual' || r.at) unhush();
 }
-function go(name, push = true) {
-  if (!rooms[name]) return;
+function go(path, push = true) {
+  const r = ROUTES[path]; if (!r) return;
   const fromMenu = ix.classList.contains('open');
-  if (name === cur) { if (fromMenu) closeIx(); else scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' }); return; }
-  const swap = () => { show(name); if (push) history.pushState({ room: name }, '', rooms[name].dataset.path); };
-  if (fromMenu) { swap(); setTimeout(closeIx, 80); return; }
-  if (reduceMotion) { swap(); return; }
+  const stamp = () => { if (push && location.pathname !== path) history.pushState({}, '', path); };
+  if (fromMenu) { land(path); stamp(); setTimeout(closeIx, 80); return; }
+  if (r.room === cur) { stamp(); document.title = r.title; markCurrent(path); unhush(); scrollTo({ top: target(r.at), behavior: reduceMotion ? 'auto' : 'smooth' }); return; }
+  if (reduceMotion) { land(path); stamp(); return; }
   veil.classList.add('on');
-  setTimeout(() => { swap(); requestAnimationFrame(() => requestAnimationFrame(() => veil.classList.remove('on'))); }, 520);
+  setTimeout(() => { land(path); stamp(); requestAnimationFrame(() => requestAnimationFrame(() => veil.classList.remove('on'))); }, 520);
 }
 document.addEventListener('click', e => {
   const a = e.target.closest('a[href]'); if (!a || e.metaKey || e.ctrlKey || e.shiftKey || a.target === '_blank') return;
   const u = new URL(a.href, location.href); if (u.origin !== location.origin) return;
-  const name = roomFor(u.pathname, u.hash); if (!name) return;
-  e.preventDefault(); go(name);
+  const path = routeFor(u.pathname, u.hash); if (!path) return;
+  e.preventDefault(); go(path);
 });
-addEventListener('popstate', () => { const n = roomFor(location.pathname, location.hash) || 'ritual'; if (ix.classList.contains('open')) closeIx(); if (n !== cur) { veil.classList.add('on'); setTimeout(() => { show(n); requestAnimationFrame(() => veil.classList.remove('on')); }, 380); } });
+addEventListener('popstate', () => {
+  const path = routeFor(location.pathname, location.hash) || '/'; if (ix.classList.contains('open')) closeIx();
+  if (ROUTES[path].room === cur) { jump(target(ROUTES[path].at)); markCurrent(path); document.title = ROUTES[path].title; return; }
+  veil.classList.add('on'); setTimeout(() => { land(path); requestAnimationFrame(() => veil.classList.remove('on')); }, 380);
+});
 
 // the index
 let lastFocus = null;
@@ -587,8 +567,7 @@ function openIx() {
 function closeIx() {
   ix.classList.remove('open'); document.body.classList.remove('menu-open'); document.body.style.overflow = '';
   ixBtn.setAttribute('aria-expanded', 'false'); ixBtn.querySelector('.lbl').textContent = 'Index'; ixBg.classList.remove('on');
-  if (lastFocus && document.contains(lastFocus) && lastFocus !== document.body) lastFocus.focus({ preventScroll: true }); else ixBtn.focus({ preventScroll: true });
-  headerState();
+  if (lastFocus && document.contains(lastFocus) && lastFocus !== document.body && !lastFocus.closest('.ix')) lastFocus.focus({ preventScroll: true }); else ixBtn.focus({ preventScroll: true });
 }
 ixBtn.addEventListener('click', () => ix.classList.contains('open') ? closeIx() : openIx());
 addEventListener('keydown', e => {
@@ -597,20 +576,19 @@ addEventListener('keydown', e => {
   if (e.key === 'Tab') { const f = [ixBtn, ...ix.querySelectorAll('a')]; const i = f.indexOf(document.activeElement); if (e.shiftKey && i <= 0) { e.preventDefault(); f[f.length - 1].focus(); } else if (!e.shiftKey && i === f.length - 1) { e.preventDefault(); f[0].focus(); } }
 });
 ix.querySelectorAll('ol a').forEach(a => {
-  a.addEventListener('mouseenter', () => { ixBg.style.backgroundImage = `url(${a.dataset.img})`; ixBg.classList.add('on'); });
-  a.addEventListener('focus', () => { ixBg.style.backgroundImage = `url(${a.dataset.img})`; ixBg.classList.add('on'); });
+  const on = () => { ixBg.style.backgroundImage = `url(${a.dataset.img})`; ixBg.classList.add('on'); };
+  a.addEventListener('mouseenter', on); a.addEventListener('focus', on);
 });
 ix.querySelector('ol').addEventListener('mouseleave', () => ixBg.classList.remove('on'));
 
-// the header steps aside while you read, returns when you look up
-let lastY = scrollY;
-function headerState() {
-  const y = scrollY;
-  hd.classList.toggle('attop', cur === 'ritual' && y < innerHeight * .6 && !ix.classList.contains('open'));
-  if (!ix.classList.contains('open')) { if (y > lastY + 6 && y > 140) hd.classList.add('away'); else if (y < lastY - 6 || y < 140) hd.classList.remove('away'); }
-  lastY = y;
-}
-addEventListener('scroll', headerState, { passive: true });
+// the word "Index" appears once you are inside; the menu quietly follows where you are
+addEventListener('scroll', () => {
+  if (cur !== 'ritual') return;
+  if (scrollY > innerHeight * .5) unhush();
+  const y = scrollY + innerHeight * .5; let path = '/';
+  for (const at of ['nights', 'signal', 'request']) { const el = document.getElementById(at); if (el && el.getBoundingClientRect().top + scrollY <= y) path = '/' + at; }
+  markCurrent(path);
+}, { passive: true });
 
 
 // each room wakes up the first time you walk into it
@@ -702,11 +680,12 @@ document.addEventListener('submit', async e => {
 
 // arrive
 {
-  const start = roomFor(location.pathname, location.hash) || 'ritual';
-  if (location.hash === '#request' || location.hash === '#signal') history.replaceState({ room: start }, '', rooms[start].dataset.path + location.search);
-  show(start);
-  if (start === 'ritual' && !reduceMotion) { hd.classList.add('hush'); setTimeout(() => hd.classList.remove('hush'), 2600); }
-  if (start !== 'ritual') { muted = true; snd.classList.add('on'); label(); }
+  const path = routeFor(location.pathname, location.hash) || '/';
+  if (/^#(request|signal|nights)$/.test(location.hash)) history.replaceState({}, '', path + location.search);
+  if (path === '/' && !reduceMotion) hd.classList.add('hush');
+  land(path);
+  if (path !== '/') { muted = true; snd.classList.add('on'); label(); }
+  if (ROUTES[path].at) { document.fonts.ready.then(() => jump(target(ROUTES[path].at))); addEventListener('load', () => jump(target(ROUTES[path].at)), { once: true }); }
 }
 </script>
 <script defer src="/_vercel/insights/script.js"></script>
