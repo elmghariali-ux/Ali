@@ -54,9 +54,9 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23070404'/%3E%3Ccircle cx='16' cy='16' r='5' fill='%23B3261E'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@300;400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;1,6..96,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@300;400&display=swap">
 <style>
-:root{--bg:#070404;--ink:#f3ebe4;--soft:#d6cac1;--mute:#a3958d;--hot:#ff6b4d;--accent:#B3261E;--serif:'Cormorant Garamond',Georgia,serif;--sans:'Jost',system-ui,sans-serif}
+:root{--bg:#070404;--ink:#f3ebe4;--soft:#d6cac1;--mute:#a3958d;--hot:#ff6b4d;--accent:#B3261E;--serif:'Cormorant Garamond',Georgia,serif;--didone:'Bodoni Moda','Didot','Bodoni 72',Georgia,serif;--sans:'Jost',system-ui,sans-serif}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:300;-webkit-font-smoothing:antialiased;overflow-x:hidden}
@@ -203,19 +203,20 @@ h1{margin:0;font-weight:inherit;font-size:inherit}
 .veil.on{opacity:1;pointer-events:auto}
 
 /* the house */
-.house{max-width:660px;margin:0 auto;padding-bottom:8vh}
-.house .kicker{margin:0 0 30px;text-align:center;color:var(--hot)}
-.house h1{margin:0 0 44px;text-align:center;font-family:var(--serif);font-weight:300;font-size:clamp(40px,5.4vw,72px);line-height:1.08}
-.house .lead{margin:0 0 48px;text-align:center;font-family:var(--serif);font-style:italic;font-size:clamp(23px,2.4vw,30px);line-height:1.45;color:var(--soft)}
-.house .body p{margin:0 0 1.35em;font-family:var(--serif);font-weight:400;font-size:clamp(19px,1.6vw,21px);line-height:1.75;color:#cfc2b9}
-.house .rule{margin:56px auto}
-.notes{margin:0;padding:0;border-top:1px solid rgba(233,225,218,.12)}
-.notes div{display:flex;gap:24px;padding:22px 0;border-bottom:1px solid rgba(233,225,218,.12)}
-.notes dt{flex:none;width:118px;padding-top:.45em;font-size:11px;letter-spacing:.36em;text-transform:uppercase;color:var(--hot)}
-.notes dd{margin:0;font-family:var(--serif);font-size:21px;line-height:1.55;color:var(--soft)}
-.house .close{display:flex;flex-direction:column;align-items:center;gap:34px;padding-top:12vh;text-align:center}
-.house .close .tl{margin:0;font-size:12px;letter-spacing:.62em;text-transform:uppercase;padding-left:.62em}
-@media (max-width:560px){.notes div{flex-direction:column;gap:8px}.notes dt{width:auto;padding:0}}
+.house{max-width:760px;margin:0 auto;padding-bottom:6vh;text-align:center}
+.house .kicker{margin:0 0 9vh;color:var(--hot)}
+.house h1{margin:0 auto;max-width:13em;text-wrap:balance;font-family:var(--didone);font-weight:400;font-optical-sizing:auto;font-size:clamp(38px,5.6vw,80px);line-height:1.06;letter-spacing:-.01em;color:var(--ink)}
+.house .answer{margin:.5em 0 0;font-family:var(--didone);font-style:italic;font-weight:400;font-size:clamp(28px,3.6vw,50px);line-height:1.1;color:var(--hot)}
+.house .rule{margin:9vh auto}
+.house .line2{margin:0 auto;max-width:440px;font-size:12px;line-height:2.4;letter-spacing:.32em;text-transform:uppercase;color:var(--soft)}
+.notes{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin:11vh 0 0;padding:0;border-top:1px solid rgba(233,225,218,.12);border-bottom:1px solid rgba(233,225,218,.12)}
+.notes div{display:flex;flex-direction:column;gap:12px;padding:28px 8px}
+.notes div+div{border-left:1px solid rgba(233,225,218,.12)}
+.notes dt{font-size:10px;letter-spacing:.4em;text-transform:uppercase;color:#8f817a;padding-left:.4em}
+.notes dd{margin:0;font-family:var(--didone);font-size:19px;line-height:1.35;color:var(--ink)}
+.house .close{display:flex;flex-direction:column;align-items:center;gap:34px;padding-top:12vh}
+.house .close .tl{margin:0;font-size:12px;letter-spacing:.62em;text-transform:uppercase;padding-left:.62em;color:var(--soft)}
+@media (max-width:560px){.notes{grid-template-columns:1fr 1fr}.notes div:nth-child(3){border-left:0}.notes div:nth-child(n+3){border-top:1px solid rgba(233,225,218,.12)}.house .line2{font-size:11px;letter-spacing:.26em}}
 .ix li.minor{margin-top:clamp(14px,3vh,30px)}
 .ix li.minor a{font-family:var(--sans);font-size:11px;letter-spacing:.42em;text-transform:uppercase;color:var(--soft)}
 .ix li.minor a .n{transform:none}
@@ -450,25 +451,19 @@ footer a{padding:12px 0}
 </section>
 </template></div>
 
-<div class="room" data-room="about" data-path="/about" data-title="About ZAYA — Afro House &amp; Afrotech in Barcelona" data-desc="ZAYA is an Afro House ritual in Barcelona, curated by its founder and resident DJ Argana: Afro House, Afrotech and Gqom. 18+, invitation only." hidden><template>
+<div class="room" data-room="about" data-path="/about" data-title="About ZAYA — Afro House &amp; Afrotech in Barcelona" data-desc="Barcelona had no true home for Afro House, so we built one. ZAYA is an Afro House and Afrotech ritual curated by Argana. 18+, by invitation." hidden><template>
 <article class="wrap opening">
   <div class="house">
     <p class="cap kicker rv">The House</p>
-    <h1 class="rv">Afro House is the heartbeat.</h1>
-    <p class="lead rv">ZAYA is an Afro House ritual in Barcelona — a night where deep, tribal rhythm meets ancestral North African heritage, and sound, culture and community become one thing.</p>
-    <div class="body rv">
-      <p>It is built around a single sound: Afro House and Afrotech, with Gqom when the night calls for it. Hypnotic, percussive, heavy, and never in the background. Every edition is curated from the opening note to the last beat by Argana, ZAYA’s founder and resident DJ, with live musicians as part of the ritual.</p>
-      <p>The first two editions took place at Hotel El Palace, one of Barcelona’s grand hotels. Both sold out with no advertising — only the people who came, and the people they told.</p>
-      <p>Capacity is kept small on purpose, and every invitation is read by hand. Not to keep people out, but to keep the room right: a crowd that dresses well, listens deeply, and comes for the experience rather than the hype.</p>
-      <p>Edition III takes place on Saturday 21 November 2026, in a larger, older room that is revealed shortly before the night. The ambition is simple: a ritual that travels.</p>
-    </div>
+    <h1 class="rv">Barcelona had no true home for Afro House.</h1>
+    <p class="answer rv">So we built one.</p>
     <div class="rule"></div>
+    <p class="line2 rv">An Afro House &amp; Afrotech ritual,<br>curated by Argana.<br>Two nights at Hotel El Palace.<br>Both sold out.</p>
     <dl class="notes rv">
-      <div><dt>Sound</dt><dd>Afro House and Afrotech. Sometimes Gqom.</dd></div>
-      <div><dt>Age</dt><dd>18 and over.</dd></div>
-      <div><dt>Dress</dt><dd>Curated and fashion-forward. Come dressed with intention.</dd></div>
-      <div><dt>Tickets</dt><dd>For invited guests only. The price depends on the room and is announced before the venue.</dd></div>
-      <div><dt>Address</dt><dd>Sent to guests 48 hours before.</dd></div>
+      <div><dt>Sound</dt><dd>Afro House<br>Afrotech · Gqom</dd></div>
+      <div><dt>Dress</dt><dd>Curated</dd></div>
+      <div><dt>Age</dt><dd>18+</dd></div>
+      <div><dt>Entry</dt><dd>By invitation</dd></div>
     </dl>
     <div class="close rv">
       <p class="tl">Less noise. More vision.</p>
