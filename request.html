@@ -261,6 +261,16 @@ textarea:focus{outline:none;border-bottom-color:var(--hot)}
 .req h2{margin:0;font-size:clamp(38px,4vw,56px);line-height:1.1}
 form{width:100%;display:flex;flex-direction:column;gap:22px}
 label{display:flex;flex-direction:column;gap:8px;text-align:left;font-size:10px;letter-spacing:.4em;text-transform:uppercase;color:var(--mute)}
+.consent{display:flex;flex-direction:column;gap:14px;margin-top:6px}
+label.chk{flex-direction:row;align-items:flex-start;gap:14px;font-size:13px;letter-spacing:.02em;text-transform:none;line-height:1.6;color:var(--soft);cursor:pointer}
+label.chk input{appearance:none;-webkit-appearance:none;flex:none;width:18px;height:18px;min-height:0;margin:2px 0 0;border:1px solid rgba(233,225,218,.45);border-radius:0;background:transparent;cursor:pointer;transition:background .25s,border-color .25s}
+label.chk input:checked{background:var(--accent);border-color:var(--accent);box-shadow:inset 0 0 0 3px var(--bg)}
+label.chk input:focus-visible{outline:1px solid var(--hot);outline-offset:3px}
+label.chk a{border-bottom:1px solid rgba(255,107,77,.5)}
+label.chk em{font-style:normal;color:#8f817a}
+label.chk.err span{color:var(--hot)}label.chk.err input{border-color:var(--hot)}
+.layer{margin:4px 0 0;font-size:11px;line-height:1.75;letter-spacing:.02em;color:#8f817a;text-align:left}
+.layer a{border-bottom:1px solid rgba(143,129,122,.6)}
 input{min-height:48px;padding:0;background:transparent;border:0;border-bottom:1px solid rgba(233,225,218,.3);border-radius:0;color:var(--ink);font-family:var(--serif);font-size:22px;letter-spacing:0;text-transform:none}
 input::placeholder{color:#8f817a}
 input:focus{outline:none;border-bottom-color:var(--hot)}
@@ -275,6 +285,8 @@ footer{padding-top:28px;padding-bottom:36px;border-top:1px solid rgba(233,225,21
 footer div{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;color:#8f817a}
 footer a{padding:12px 0}
 .mail{letter-spacing:.2em;text-transform:none}
+footer .legal{display:flex;flex-wrap:wrap;gap:4px 26px;margin-top:6px;font-size:10px;color:#6f625b}
+footer .legal a{min-height:40px;display:inline-flex;align-items:center}
 
 /* phone first: most visits come from Instagram on a phone */
 @media (max-width:560px){
@@ -389,7 +401,12 @@ footer a{padding:12px 0}
       <label>Instagram<input type="text" name="instagram" placeholder="@"></label>
       <label>What do you hear when the music stops?<textarea name="answer" placeholder="One line is enough."></textarea></label>
       <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <div class="consent">
+        <label class="chk" id="chkPrivacy"><input type="checkbox" name="privacy" value="accepted" required><span>I am 18 or over and I accept the <a href="/privacy" target="_blank" rel="noopener">privacy policy</a>.</span></label>
+        <label class="chk"><input type="checkbox" name="news" value="yes"><span>Keep me informed about future ZAYA nights. <em>Optional.</em></span></label>
+      </div>
       <button type="submit" class="send cap">Send request</button>
+      <p class="layer">ZAYA uses your details only to consider your request and contact you about it. They are handled by our providers (Formspree, Google, Vercel), some in the USA under legal safeguards. You can access, correct or delete them at any time — <a href="/privacy" target="_blank" rel="noopener">privacy policy</a>.</p>
     </form>
     <div class="done" role="status">
       <span class="d" aria-hidden="true"></span>
@@ -436,6 +453,7 @@ footer a{padding:12px 0}
     <a href="https://www.instagram.com/zaya.ritual/" target="_blank" rel="noopener">@zaya.ritual</a>
     <a class="mail" href="mailto:zaya.ritual@gmail.com">zaya.ritual@gmail.com</a>
   </div>
+  <nav class="legal cap" aria-label="Legal"><a href="/legal">Legal notice</a><a href="/privacy">Privacy</a><a href="/cookies">Cookies</a></nav>
 </footer>
 
 <script>
@@ -621,6 +639,11 @@ document.addEventListener('submit', async e => {
   const f = e.target, d = new FormData(f);
   if (d.get('_gotcha')) return;
   if (!f.name.value.trim() || !f.email.checkValidity()) { (f.name.value.trim() ? f.email : f.name).focus(); return; }
+  const chk = document.getElementById('chkPrivacy');
+  if (!f.privacy.checked) { chk.classList.add('err'); f.privacy.focus(); f.privacy.addEventListener('change', () => chk.classList.remove('err'), { once: true }); return; }
+  d.set('news', f.news.checked ? 'yes' : 'no');
+  d.set('consent_at', new Date().toISOString());
+  d.set('privacy_policy', 'zayaritual.com/privacy (20 October 2026)');
   if (FORM_ENDPOINT) {
     try { await fetch(FORM_ENDPOINT, { method: 'POST', body: d, headers: { Accept: 'application/json' } }); } catch (_) {}
   } else {
