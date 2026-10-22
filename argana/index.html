@@ -67,7 +67,7 @@ section{position:relative}
 .hero{min-height:100svh;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);align-items:end;gap:5vw;padding-top:120px;padding-bottom:7vh}
 .hero-txt{display:flex;flex-direction:column;gap:30px;padding-bottom:2vh;min-width:0}
 .hero .kick{color:var(--oil)}
-.name{font-family:var(--display);font-weight:800;font-size:clamp(64px,9.2vw,160px);line-height:.8;letter-spacing:-.02em;margin:0;display:flex}
+.name{font-family:var(--display);font-weight:800;font-size:clamp(48px,6.4vw,118px);white-space:nowrap;line-height:.8;letter-spacing:-.02em;margin:0;display:flex}
 .name span{display:inline-block}
 .js .name span{opacity:0;transform:translateY(.25em);animation:rise 1.2s cubic-bezier(.2,.7,.2,1) forwards}
 .name span:nth-child(1){animation-delay:.15s}.name span:nth-child(2){animation-delay:.25s}.name span:nth-child(3){animation-delay:.35s}
@@ -85,7 +85,7 @@ section{position:relative}
 .snd.on i{background:var(--ember);border-color:var(--ember);box-shadow:0 0 12px var(--ember);animation:beat .9756s ease-in-out infinite}
 @keyframes beat{0%,100%{transform:scale(1)}50%{transform:scale(1.5)}}
 @media (max-width:860px){
-  .name{font-size:clamp(60px,19vw,140px)}
+  .name{font-size:11vw}
   .hero{grid-template-columns:1fr;align-items:start;gap:44px;padding-top:96px}
   .arch-col{order:2}.arch{width:min(100%,380px)}
 }
@@ -458,8 +458,11 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
     draw(); addEventListener('resize', draw);
   });
 
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(build); else build();
-  addEventListener('load', build);
+  /* fit the name to its column once the real font is in */
+  function fitName(){ var n=document.querySelector('.name'), box=n.parentElement; n.style.fontSize=''; var w=n.scrollWidth, max=box.clientWidth; if(w>max){ var fs=parseFloat(getComputedStyle(n).fontSize); n.style.fontSize=(fs*max/w*0.98)+'px'; } }
+  addEventListener('resize', fitName);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function(){ fitName(); build(); }); else { fitName(); build(); }
+  addEventListener('load', function(){ fitName(); build(); });
   onScroll();
 })();
 </script>
