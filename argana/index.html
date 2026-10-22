@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ARGANA · Afro House & Afrotech · Barcelona</title>
+<meta name="description" content="ARGANA is a Moroccan DJ based in Barcelona playing deep, hypnotic Afro House and Afrotech. Founder and resident of ZAYA: two nights at Hotel El Palace, both sold out. Press kit and booking.">
+<meta name="theme-color" content="#0B0705">
+<meta property="og:title" content="ARGANA · Afro House & Afrotech · Barcelona">
+<meta property="og:description" content="Moroccan DJ in Barcelona. Founder and resident of ZAYA. Press kit, films, photos and booking.">
+<meta property="og:image" content="/media/og.jpg">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230B0705'/%3E%3Cpath d='M9 26V14a7 7 0 0 1 14 0v12' fill='none' stroke='%23D9A441' stroke-width='2.4'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@600;800&family=Cormorant+Garamond:ital,wght@0,300;1,300;1,400&family=Jost:wght@300;400;500&display=swap">
+<style>
+/* ARGANA — one warm room. The arch is the window, argan oil is the light, roots grow as you read. */
+:root{
+  --bg:#0B0705;      /* argan wood, burnt */
+  --bg2:#140D09;     /* raised */
+  --line:#2E211A;
+  --ink:#F2E8DB;
+  --soft:#D3C4B2;
+  --mute:#9C8B7A;
+  --oil:#D9A441;     /* argan oil gold: the accent */
+  --ember:#C8432B;   /* live dot only */
+  --display:"Syne","Arial Black",system-ui,sans-serif;
+  --serif:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+  --sans:"Jost",system-ui,-apple-system,"Segoe UI",sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:300;font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img,video,canvas{display:block;max-width:100%}
+a{color:inherit;text-decoration:none;transition:color .3s}
+a:hover{color:var(--oil)}
+::selection{background:var(--oil);color:var(--bg)}
+:focus-visible{outline:1px solid var(--oil);outline-offset:4px}
+.wrap{max-width:1320px;margin:0 auto;padding-left:max(6vw,20px,env(safe-area-inset-left));padding-right:max(6vw,20px,env(safe-area-inset-right))}
+.cap{font-size:11px;letter-spacing:.38em;text-transform:uppercase;font-weight:400}
+.serif{font-family:var(--serif);font-weight:300;font-style:italic}
+h2{font-family:var(--display);font-weight:800;font-size:clamp(40px,6.4vw,96px);line-height:.92;letter-spacing:-.015em;margin:0;text-wrap:balance}
+section{position:relative}
+.rv{opacity:1;transform:none;transition:opacity 1.4s ease,transform 1.4s ease}
+.js .rv{opacity:0;transform:translateY(26px)}
+.js .rv.on{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.js .rv{opacity:1;transform:none;transition:none}}
+
+/* top bar */
+.bar{position:fixed;inset:0 0 auto;z-index:20;padding-top:env(safe-area-inset-top)}
+.bar .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-top:22px;padding-bottom:22px;max-width:none}
+.bar .mk{font-family:var(--display);font-weight:800;letter-spacing:.34em;font-size:13px}
+.bar nav{display:flex;gap:28px;color:var(--soft)}
+.bar nav a{padding:8px 0}
+.bar .bk{border:1px solid rgba(217,164,65,.6);padding:9px 16px;color:var(--ink)}
+.bar .bk:hover{background:var(--oil);color:var(--bg)}
+.bar.solid{background:rgba(11,7,5,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+@media (max-width:860px){.bar nav .opt{display:none}.bar nav{gap:18px}}
+
+/* I. hero */
+.hero{min-height:100svh;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);align-items:end;gap:5vw;padding-top:120px;padding-bottom:7vh}
+.hero-txt{display:flex;flex-direction:column;gap:30px;padding-bottom:2vh;min-width:0}
+.hero .kick{color:var(--oil)}
+.name{font-family:var(--display);font-weight:800;font-size:clamp(64px,9.2vw,160px);line-height:.8;letter-spacing:-.02em;margin:0;display:flex}
+.name span{display:inline-block}
+.js .name span{opacity:0;transform:translateY(.25em);animation:rise 1.2s cubic-bezier(.2,.7,.2,1) forwards}
+.name span:nth-child(1){animation-delay:.15s}.name span:nth-child(2){animation-delay:.25s}.name span:nth-child(3){animation-delay:.35s}
+.name span:nth-child(4){animation-delay:.45s}.name span:nth-child(5){animation-delay:.55s}.name span:nth-child(6){animation-delay:.65s}
+@keyframes rise{to{opacity:1;transform:none}}
+.lede{font-family:var(--serif);font-style:italic;font-weight:300;font-size:clamp(24px,2.5vw,36px);line-height:1.2;color:var(--soft);margin:0;max-width:22ch}
+.facts{display:flex;flex-wrap:wrap;gap:10px 28px;color:var(--mute)}
+.facts b{color:var(--ink);font-weight:400}
+.arch-col{display:flex;flex-direction:column;align-items:center;gap:16px;min-width:0}
+.arch{position:relative;width:min(100%,440px);aspect-ratio:9/15;border-radius:999px 999px 0 0;overflow:hidden;background:var(--bg2);box-shadow:0 0 0 1px rgba(217,164,65,.35),0 0 0 10px var(--bg),0 0 0 11px rgba(217,164,65,.18),0 40px 120px -30px rgba(200,67,43,.45)}
+.arch video{width:100%;height:100%;object-fit:cover}
+.arch::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(11,7,5,.55));pointer-events:none}
+.snd{display:flex;align-items:center;gap:10px;background:none;border:0;color:var(--soft);font:inherit;cursor:pointer;padding:10px 4px;min-height:44px}
+.snd i{width:7px;height:7px;border-radius:50%;border:1px solid var(--mute)}
+.snd.on i{background:var(--ember);border-color:var(--ember);box-shadow:0 0 12px var(--ember);animation:beat .9756s ease-in-out infinite}
+@keyframes beat{0%,100%{transform:scale(1)}50%{transform:scale(1.5)}}
+@media (max-width:860px){
+  .name{font-size:clamp(60px,19vw,140px)}
+  .hero{grid-template-columns:1fr;align-items:start;gap:44px;padding-top:96px}
+  .arch-col{order:2}.arch{width:min(100%,380px)}
+}
+
+/* II. statement + roots */
+.roots{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.9}
+.statement{padding-top:22vh;padding-bottom:18vh;overflow:hidden}
+.statement p{position:relative;margin:0 auto;max-width:1100px;text-align:center;font-family:var(--serif);font-weight:300;font-size:clamp(30px,4.3vw,62px);line-height:1.16}
+.statement em{color:var(--oil)}
+.lat{position:relative;margin:13vh auto 0;max-width:900px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--line)}
+.lat div{padding:20px 12px 0 0;display:flex;flex-direction:column;gap:4px;min-width:0}
+.lat .deg{font-family:var(--display);font-weight:600;font-size:clamp(22px,3vw,36px);font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.lat .cap{color:var(--mute)}
+
+/* III. proof */
+.proof{padding-top:16vh;padding-bottom:16vh;border-top:1px solid var(--line)}
+.proof-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:6vw;align-items:start}
+.proof .cap{color:var(--oil)}
+.proof h2{margin-top:22px}
+.proof p{color:var(--soft);max-width:52ch;margin:26px 0 0}
+.nums{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-top:1px solid var(--line);margin-top:8px}
+.nums div{padding:26px 16px 26px 0;display:flex;flex-direction:column;gap:10px;border-bottom:1px solid var(--line);min-width:0}
+.nums b{font-family:var(--display);font-weight:800;font-size:clamp(56px,7vw,104px);line-height:.85;color:var(--ink)}
+.nums span{color:var(--mute);font-size:15px;line-height:1.4}
+.stages{margin-top:44px;display:flex;flex-direction:column}
+.stage{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px;padding:18px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.stage b{font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(22px,2.2vw,30px)}
+.stage span{color:var(--mute);font-size:14px;text-align:right}
+.next{margin-top:30px;display:flex;align-items:center;gap:14px;color:var(--soft)}
+.next i{width:8px;height:8px;border-radius:50%;background:var(--ember);box-shadow:0 0 14px var(--ember);flex:0 0 auto;animation:beat .9756s ease-in-out infinite}
+@media (max-width:860px){.proof-grid{grid-template-columns:1fr}}
+
+/* IV. films */
+.films{padding-top:14vh;padding-bottom:14vh;border-top:1px solid var(--line)}
+.films-head{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;margin-bottom:48px}
+.films-head p{margin:0;color:var(--mute);max-width:38ch}
+.wide{position:relative;border:1px solid var(--line);overflow:hidden}
+.wide video{width:100%;aspect-ratio:16/9;object-fit:cover}
+.wide .lab{position:absolute;left:20px;bottom:18px;display:flex;flex-direction:column;gap:4px;text-shadow:0 2px 20px #000}
+.wide .lab b{font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(22px,2.4vw,32px)}
+.strip{display:flex;gap:16px;margin-top:16px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:thin;scrollbar-color:var(--line) transparent;padding-bottom:12px}
+.strip figure{flex:0 0 calc((100% - 48px)/4);min-width:220px;margin:0;scroll-snap-align:start;display:flex;flex-direction:column;gap:12px}
+.strip video{width:100%;aspect-ratio:9/16;object-fit:cover;background:var(--bg2);border:1px solid var(--line)}
+.strip .h169{aspect-ratio:9/16}
+.strip figcaption{display:flex;justify-content:space-between;gap:10px;color:var(--mute);font-size:14px}
+.strip figcaption b{color:var(--ink);font-weight:400}
+@media (max-width:700px){.strip figure{flex:0 0 72%}}
+
+/* V. story */
+.story{padding-top:14vh;padding-bottom:14vh;border-top:1px solid var(--line)}
+.story-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:6vw;align-items:start}
+.story-img{position:sticky;top:110px}
+.story-img img{width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:999px 999px 0 0}
+.story .cap{color:var(--oil)}
+.story h2{margin:22px 0 34px}
+.story p{color:var(--soft);margin:0 0 1.15em;max-width:60ch}
+.story p.big{font-family:var(--serif);font-style:italic;font-size:clamp(24px,2.4vw,32px);line-height:1.3;color:var(--ink)}
+.tree{margin-top:40px;padding:26px 0 0;border-top:1px solid var(--line);display:grid;grid-template-columns:auto minmax(0,1fr);gap:20px}
+.tree svg{width:54px;height:54px}
+.tree p{margin:0;color:var(--mute);font-size:16px}
+.short{margin-top:40px;background:var(--bg2);border:1px solid var(--line);padding:24px;display:flex;flex-direction:column;gap:14px}
+.short-h{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.short p{margin:0;font-size:16px;color:var(--soft)}
+.btn{font:inherit;font-size:11px;letter-spacing:.3em;text-transform:uppercase;background:none;border:1px solid var(--line);color:var(--ink);padding:10px 14px;cursor:pointer;min-height:40px}
+.btn:hover{border-color:var(--oil);color:var(--oil)}
+@media (max-width:860px){.story-grid{grid-template-columns:1fr}.story-img{position:relative;top:0;max-width:420px}}
+
+/* VI. sound */
+.sound{padding-top:14vh;padding-bottom:14vh;border-top:1px solid var(--line)}
+.sound-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:48px}
+.mix{position:relative;display:flex;flex-direction:column;justify-content:space-between;gap:60px;padding:28px;border:1px solid var(--line);background:var(--bg2);min-height:260px;overflow:hidden;transition:border-color .4s}
+.mix:hover{border-color:var(--oil);color:var(--ink)}
+.mix .wave{position:absolute;left:0;right:0;bottom:0;height:70px;opacity:.5}
+.mix .cap{color:var(--oil)}
+.mix h3{font-family:var(--display);font-weight:800;font-size:clamp(24px,2.4vw,34px);line-height:1;margin:14px 0 0}
+.mix .go{position:relative;font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--soft)}
+.tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.tags span{border:1px solid var(--line);border-radius:999px;padding:7px 14px;color:var(--soft);font-size:14px}
+@media (max-width:860px){.sound-grid{grid-template-columns:1fr}.mix{min-height:200px}}
+
+/* VII. photos */
+.photos{padding-top:14vh;padding-bottom:14vh;border-top:1px solid var(--line)}
+.gal{columns:3 280px;column-gap:16px;margin-top:48px}
+.gal button{display:block;width:100%;margin:0 0 16px;padding:0;border:0;background:none;cursor:zoom-in;break-inside:avoid;position:relative;overflow:hidden}
+.gal img{width:100%;height:auto;transition:transform 1.2s ease,filter .6s}
+.gal button:hover img{transform:scale(1.04);filter:brightness(1.08)}
+.photos .note{margin-top:20px;color:var(--mute);font-size:14px}
+.lb{position:fixed;inset:0;z-index:50;background:rgba(6,4,3,.96);display:flex;align-items:center;justify-content:center;padding:max(20px,env(safe-area-inset-top)) max(20px,env(safe-area-inset-right)) max(20px,env(safe-area-inset-bottom)) max(20px,env(safe-area-inset-left))}
+.lb img{max-height:86vh;max-width:100%;width:auto;object-fit:contain}
+.lb .x{position:absolute;top:max(16px,env(safe-area-inset-top));right:max(16px,env(safe-area-inset-right))}
+.lb .dl{position:absolute;bottom:max(16px,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%)}
+
+/* VIII. rider */
+.rider{padding-top:14vh;padding-bottom:14vh;border-top:1px solid var(--line)}
+.rid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:48px;border-top:1px solid var(--line)}
+.rid div{padding:24px 24px 24px 0;border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:8px;min-width:0}
+.rid .cap{color:var(--oil)}
+.rid p{margin:0;color:var(--ink)}
+@media (max-width:860px){.rid{grid-template-columns:1fr}}
+
+/* IX. booking */
+.book{padding-top:18vh;padding-bottom:12vh;border-top:1px solid var(--line);overflow:hidden}
+.book .big{font-family:var(--display);font-weight:800;font-size:clamp(48px,10vw,170px);line-height:.86;letter-spacing:-.02em;margin:22px 0 56px}
+.book .big em{font-family:var(--serif);font-style:italic;font-weight:300;color:var(--oil);letter-spacing:0}
+.chan{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.ch{border:1px solid var(--line);padding:24px;display:flex;flex-direction:column;gap:10px;min-width:0;background:var(--bg2)}
+.ch .cap{color:var(--mute)}
+.ch .v{font-size:clamp(18px,1.7vw,22px);word-break:break-word}
+.ch .row{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+@media (max-width:860px){.chan{grid-template-columns:1fr}}
+footer{border-top:1px solid var(--line);padding-top:28px;padding-bottom:max(28px,env(safe-area-inset-bottom));color:var(--mute);font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add('js')</script>
+
+<header class="bar" id="bar">
+  <div class="wrap">
+    <a class="mk" href="#top">ARGANA</a>
+    <nav aria-label="Sections">
+      <a class="opt" href="#films">Films</a>
+      <a class="opt" href="#story">Story</a>
+      <a class="opt" href="#sound">Sound</a>
+      <a class="opt" href="#photos">Press</a>
+      <a class="bk" href="#booking">Booking</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="hero wrap" id="top">
+  <div class="hero-txt">
+    <span class="cap kick">Afro House · Afrotech · Barcelona</span>
+    <h1 class="name" aria-label="ARGANA"><span>A</span><span>R</span><span>G</span><span>A</span><span>N</span><span>A</span></h1>
+    <p class="lede">Moroccan roots. Barcelona nights. Grooves that take their time.</p>
+    <div class="facts cap"><span><b>Founder</b> · ZAYA</span><span><b>Resident</b> · ZAYA I–II, Hotel El Palace</span></div>
+  </div>
+  <div class="arch-col">
+    <div class="arch">
+      <video id="hv" src="/media/red-room-1.mp4" poster="/media/red-room-1.jpg" autoplay muted loop playsinline preload="auto" aria-label="ARGANA playing at ZAYA, Hotel El Palace"></video>
+    </div>
+    <button class="snd cap" id="snd" type="button" aria-pressed="false"><i></i><span>Sound on</span></button>
+  </div>
+</section>
+
+<section class="statement" id="roots-sec">
+  <canvas class="roots" id="roots" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <p class="rv">The argan tree grows almost nowhere but southern Morocco. It survives the drought by reaching <em>deep</em>, drops its leaves in the dry season, and comes back green.</p>
+    <div class="lat rv">
+      <div><span class="deg">41.39° N</span><span class="cap">Barcelona · home</span></div>
+      <div><span class="deg">33.57° N</span><span class="cap">Casablanca · roots</span></div>
+      <div><span class="deg">30.42° N</span><span class="cap">Agadir · roots</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="proof" id="proof">
+  <div class="wrap proof-grid">
+    <div class="rv">
+      <span class="cap">ZAYA · founded by ARGANA</span>
+      <h2>He built the room he wanted to play in.</h2>
+      <p>Barcelona had no true home for Afro House, so ARGANA created one. ZAYA is an Afro House and Afrotech ritual, curated by ARGANA and played by him as resident. Entry is by invitation.</p>
+      <div class="next"><i aria-hidden="true"></i><span>Edition III · Saturday 21 November 2026 · Barcelona</span></div>
+    </div>
+    <div class="rv">
+      <div class="nums">
+        <div><b>2</b><span>editions at Hotel El Palace</span></div>
+        <div><b>2</b><span>sold out</span></div>
+        <div><b>0</b><span>spent on advertising</span></div>
+      </div>
+      <div class="stages">
+        <div class="stage"><b>Hotel El Palace</b><span>ZAYA I &amp; II · resident</span></div>
+        <div class="stage"><b>City Hall</b><span>Barcelona · club stage</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="films" id="films">
+  <div class="wrap">
+    <div class="films-head rv">
+      <div><span class="cap" style="color:var(--oil)">Films · unedited rooms</span><h2 style="margin-top:18px">In the room.</h2></div>
+      <p>Filmed and cut by ARGANA. Tap any film for sound.</p>
+    </div>
+    <div class="wide rv">
+      <video src="/media/cityhall.mp4" poster="/media/cityhall.jpg" muted loop playsinline preload="metadata" data-v controls></video>
+      <div class="lab"><span class="cap">Live</span><b>City Hall, Barcelona</b></div>
+    </div>
+    <div class="strip rv" tabindex="0" aria-label="More films, scroll sideways">
+      <figure><video src="/media/red-room-2.mp4" poster="/media/red-room-2.jpg" muted loop playsinline preload="metadata" data-v controls></video><figcaption><b>The decks</b><span>ZAYA · El Palace</span></figcaption></figure>
+      <figure><video src="/media/red-room-3.mp4" poster="/media/red-room-3.jpg" muted loop playsinline preload="metadata" data-v controls></video><figcaption><b>The mirror</b><span>ZAYA · El Palace</span></figcaption></figure>
+      <figure><video src="/media/red-room-4.mp4" poster="/media/red-room-4.jpg" muted loop playsinline preload="metadata" data-v controls></video><figcaption><b>The floor</b><span>ZAYA · El Palace</span></figcaption></figure>
+      <figure><video src="/media/dj-pov-2.mp4" poster="/media/dj-pov-2.jpg" muted loop playsinline preload="metadata" data-v controls style="object-position:30% 50%"></video><figcaption><b>From the booth</b><span>Peak time</span></figcaption></figure>
+      <figure><video src="/media/dj-pov-1.mp4" poster="/media/dj-pov-1.jpg" muted loop playsinline preload="metadata" data-v controls style="object-position:40% 50%"></video><figcaption><b>From the booth</b><span>Hands up</span></figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="story" id="story">
+  <div class="wrap story-grid">
+    <div class="story-img rv"><img src="/media/photo4.jpg" alt="ARGANA at the decks in front of a round mirror framed with lights" loading="lazy"></div>
+    <div>
+      <span class="cap rv">Biography</span>
+      <h2 class="rv">Deep roots, slow fire.</h2>
+      <p class="big rv">ARGANA is a Moroccan DJ based in Barcelona, with roots in Agadir and Casablanca.</p>
+      <p class="rv">He plays the deeper, more hypnotic end of Afro House and Afrotech: rolling percussion, long tension, grooves that build patiently instead of chasing the drop. North African heritage runs through the sets without being worn as a costume. Moroccan rhythms, Arabic vocal phrases and desert textures appear only where they belong.</p>
+      <p class="rv">He founded ZAYA, an Afro House ritual in Barcelona built around atmosphere, curation and invitation-only rooms. Its first two editions at Hotel El Palace sold out without a single paid ad. ARGANA is its resident.</p>
+      <p class="rv">A filmmaker as well as a DJ, he shoots and cuts his own visual world, and he is now moving into original production so the ARGANA sound can have records of its own.</p>
+      <div class="tree rv">
+        <svg viewBox="0 0 54 54" aria-hidden="true"><path d="M27 52V30M27 30c-3-6-10-8-15-6M27 30c3-6 10-8 15-6M27 36c-4-2-8-1-11 2M27 36c4-2 8-1 11 2M27 30c0-8-3-14-6-18M27 30c0-8 3-14 6-18" fill="none" stroke="#D9A441" stroke-width="1.4" stroke-linecap="round"/></svg>
+        <p><span class="serif" style="color:var(--ink);font-size:19px">Why ARGANA.</span> Named after the argan tree of southern Morocco, which stays alive through the dry season with roots that reach deep. Roots, resilience, return.</p>
+      </div>
+      <div class="short rv">
+        <div class="short-h"><span class="cap" style="color:var(--oil)">Short bio · for flyers &amp; listings</span><button class="btn" type="button" data-copy="sb">Copy</button></div>
+        <p id="sb">ARGANA is a Moroccan DJ based in Barcelona, with roots in Agadir and Casablanca. He plays deep, hypnotic Afro House and Afrotech threaded with subtle North African textures. He is the founder and resident of ZAYA, whose first two editions at Hotel El Palace sold out.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sound" id="sound">
+  <div class="wrap">
+    <div class="rv"><span class="cap" style="color:var(--oil)">Sound</span><h2 style="margin-top:18px">Listen.</h2></div>
+    <div class="sound-grid">
+      <a class="mix rv" href="https://soundcloud.com/arganamusic" target="_blank" rel="noopener"><canvas class="wave" aria-hidden="true"></canvas><div><span class="cap">Afro House · Mix</span><h3>THE RITUAL</h3></div><span class="go">Play on SoundCloud →</span></a>
+      <a class="mix rv" href="https://soundcloud.com/arganamusic" target="_blank" rel="noopener"><canvas class="wave" aria-hidden="true"></canvas><div><span class="cap">Afrotech · Mix</span><h3>Afro Tech Session 001</h3></div><span class="go">Play on SoundCloud →</span></a>
+      <a class="mix rv" href="https://soundcloud.com/arganamusic" target="_blank" rel="noopener"><canvas class="wave" aria-hidden="true"></canvas><div><span class="cap">All mixes</span><h3>@arganamusic</h3></div><span class="go">Open SoundCloud →</span></a>
+    </div>
+    <div class="tags rv"><span>Afro House</span><span>Afrotech</span><span>Three-step</span><span>Gqom</span><span>Deep &amp; hypnotic</span><span>Moroccan &amp; Arabic textures</span></div>
+  </div>
+</section>
+
+<section class="photos" id="photos">
+  <div class="wrap">
+    <div class="rv"><span class="cap" style="color:var(--oil)">Press photos · free to use with credit</span><h2 style="margin-top:18px">Press.</h2></div>
+    <div class="gal" id="gal">
+      <button type="button" data-full="/media/photo8.jpg"><img src="/media/photo8.jpg" alt="View from above over the crowd toward ARGANA at the decks" loading="lazy" width="1333" height="2000"></button>
+      <button type="button" data-full="/media/photo7.jpg"><img src="/media/photo7.jpg" alt="ARGANA in profile with streaks of amber light" loading="lazy" width="1333" height="2000"></button>
+      <button type="button" data-full="/media/photo1.jpg"><img src="/media/photo1.jpg" alt="Panelled ballroom full of dancers under a chandelier" loading="lazy" width="1800" height="1200"></button>
+      <button type="button" data-full="/media/photo5.jpg"><img src="/media/photo5.jpg" alt="Low angle of ARGANA at the decks beneath an ornate ceiling" loading="lazy" width="1333" height="2000"></button>
+      <button type="button" data-full="/media/photo3.jpg"><img src="/media/photo3.jpg" alt="Packed, smiling crowd in a red-lit room" loading="lazy" width="1800" height="1200"></button>
+      <button type="button" data-full="/media/photo6.jpg"><img src="/media/photo6.jpg" alt="ARGANA through layered reflections of warm light" loading="lazy" width="1333" height="2000"></button>
+      <button type="button" data-full="/media/photo4.jpg"><img src="/media/photo4.jpg" alt="ARGANA DJing in front of a round mirror framed with lights" loading="lazy" width="1333" height="2000"></button>
+      <button type="button" data-full="/media/photo2.jpg"><img src="/media/photo2.jpg" alt="Booth framed by red diamond panels and a mirror ball" loading="lazy" width="1800" height="1200"></button>
+    </div>
+    <p class="note">ZAYA at Hotel El Palace, Barcelona. Tap a photo to open it full size.</p>
+  </div>
+</section>
+
+<section class="rider" id="rider">
+  <div class="wrap">
+    <div class="rv"><span class="cap" style="color:var(--oil)">Technical rider</span><h2 style="margin-top:18px">The booth.</h2></div>
+    <div class="rid rv">
+      <div><span class="cap">Players</span><p>2× Pioneer CDJ-3000, linked. CDJ-2000NXS2 accepted.</p></div>
+      <div><span class="cap">Mixer</span><p>Pioneer DJM-A9 or DJM-V10. DJM-900NXS2 accepted.</p></div>
+      <div><span class="cap">Monitors</span><p>Two booth monitors with their own level.</p></div>
+      <div><span class="cap">Media</span><p>USB, rekordbox. Artist brings headphones.</p></div>
+      <div><span class="cap">Sets</span><p>Warm-up, peak or closing. 1.5 to 3 hours preferred.</p></div>
+      <div><span class="cap">Travel</span><p>From Barcelona. Spain, Europe and Morocco.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="book" id="booking">
+  <div class="wrap">
+    <span class="cap" style="color:var(--oil)">Booking</span>
+    <p class="big">Bring the <em>ritual</em> to your room.</p>
+    <div class="chan">
+      <div class="ch"><span class="cap">Booking email</span><div class="row"><span class="v" id="em">zaya.ritual@gmail.com</span><button class="btn" type="button" data-copy="em">Copy</button></div><a class="cap" href="mailto:zaya.ritual@gmail.com?subject=Booking%20ARGANA" style="color:var(--oil)">Write an email →</a></div>
+      <div class="ch"><span class="cap">Instagram</span><a class="v" href="https://www.instagram.com/arganamusic/" target="_blank" rel="noopener">@arganamusic</a><a class="cap" href="https://www.instagram.com/zaya.ritual/" target="_blank" rel="noopener" style="color:var(--mute)">ZAYA · @zaya.ritual</a></div>
+      <div class="ch"><span class="cap">SoundCloud</span><a class="v" href="https://soundcloud.com/arganamusic" target="_blank" rel="noopener">soundcloud.com/arganamusic</a><a class="cap" href="https://zayaritual.com" target="_blank" rel="noopener" style="color:var(--mute)">zayaritual.com</a></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap"><span>ARGANA · Barcelona · Agadir · Casablanca</span><span>Afro House · Afrotech</span></div></footer>
+
+<div class="lb" id="lb" hidden><button class="btn x" type="button" id="lbx">Close</button><img id="lbi" alt=""><a class="btn dl" id="lbd" href="#" target="_blank" rel="noopener">Open full size</a></div>
+
+<script>
+(function(){
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* bar */
+  var bar = document.getElementById('bar');
+  function onScroll(){ bar.classList.toggle('solid', scrollY > 40); drawRoots(); }
+  addEventListener('scroll', onScroll, {passive:true});
+
+  /* reveals */
+  var rvs = document.querySelectorAll('.rv');
+  if ('IntersectionObserver' in window && !reduce) {
+    var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target); } }); }, {threshold:.12, rootMargin:'0px 0px -6% 0px'});
+    rvs.forEach(function(el){ io.observe(el); });
+  } else rvs.forEach(function(el){ el.classList.add('on'); });
+
+  /* hero sound */
+  var hv = document.getElementById('hv'), snd = document.getElementById('snd');
+  snd.addEventListener('click', function(){
+    var on = hv.muted;
+    document.querySelectorAll('video').forEach(function(v){ if (v !== hv) v.muted = true; });
+    hv.muted = !on ? true : false;
+    if (on) { hv.currentTime = 0; hv.play().catch(function(){}); }
+    snd.classList.toggle('on', on);
+    snd.setAttribute('aria-pressed', on);
+    snd.querySelector('span').textContent = on ? 'Sound off' : 'Sound on';
+  });
+
+  /* films: play when visible, sound for one at a time */
+  var vids = document.querySelectorAll('video[data-v]');
+  if ('IntersectionObserver' in window) {
+    var vo = new IntersectionObserver(function(es){ es.forEach(function(e){ var v=e.target; if(e.isIntersecting && !reduce){ v.play().catch(function(){}); } else if (!e.isIntersecting) { v.pause(); } }); }, {threshold:.5});
+    vids.forEach(function(v){ vo.observe(v); });
+  }
+  vids.forEach(function(v){ v.addEventListener('volumechange', function(){ if(!v.muted){ document.querySelectorAll('video').forEach(function(o){ if(o!==v && !o.muted){ o.muted = true; if(o===hv){ snd.classList.remove('on'); snd.querySelector('span').textContent='Sound on'; } } }); } }); });
+
+  /* copy */
+  document.querySelectorAll('[data-copy]').forEach(function(b){
+    b.addEventListener('click', function(){
+      var el = document.getElementById(b.dataset.copy), t = el.textContent.trim();
+      function sel(){ var r=document.createRange(); r.selectNodeContents(el); var s=getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent='Selected'; }
+      try { navigator.clipboard.writeText(t).then(function(){ b.textContent='Copied'; setTimeout(function(){ b.textContent='Copy'; },1800); }, sel); } catch(e){ sel(); }
+    });
+  });
+
+  /* lightbox */
+  var lb=document.getElementById('lb'), lbi=document.getElementById('lbi'), lbd=document.getElementById('lbd'), last;
+  document.querySelectorAll('#gal button').forEach(function(b){ b.addEventListener('click', function(){ last=b; lbi.src=b.dataset.full; lbi.alt=b.querySelector('img').alt; lbd.href=b.dataset.full; lb.hidden=false; document.getElementById('lbx').focus(); }); });
+  function closeLb(){ lb.hidden=true; lbi.src=''; if(last) last.focus(); }
+  document.getElementById('lbx').addEventListener('click', closeLb);
+  lb.addEventListener('click', function(e){ if(e.target===lb) closeLb(); });
+  addEventListener('keydown', function(e){ if(e.key==='Escape' && !lb.hidden) closeLb(); });
+
+  /* roots: grow with scroll through the statement */
+  var sec=document.getElementById('roots-sec'), cv=document.getElementById('roots'), cx=cv.getContext('2d'), segs=[], maxT=1, W=0, H=0, dpr=1;
+  function rnd(s){ return function(){ s=(s*16807)%2147483647; return (s-1)/2147483646; }; }
+  function build(){
+    var r=sec.getBoundingClientRect(); dpr=Math.min(devicePixelRatio||1,2); W=r.width; H=r.height;
+    cv.width=W*dpr; cv.height=H*dpr; cx.setTransform(dpr,0,0,dpr,0,0);
+    segs=[]; maxT=1; var R=rnd(20260321);
+    function grow(x,y,a,len,w,t,d){
+      if(d>9||len<6) return;
+      var x2=x+Math.cos(a)*len, y2=y+Math.sin(a)*len, t2=t+len;
+      segs.push([x,y,x2,y2,w,t,t2]); if(t2>maxT) maxT=t2;
+      var n = d<2 ? 2 : (R()<.62 ? 2 : 1);
+      for(var i=0;i<n;i++){ var na=a+(R()-.5)*1.1 + (n===2?(i?.38:-.38):0); na=Math.max(.15,Math.min(Math.PI-.15,na)); grow(x2,y2,na,len*(.72+R()*.2),w*.72,t2,d+1); }
+    }
+    var trunks = W<700 ? [.5] : [.18,.5,.82];
+    trunks.forEach(function(f,i){ grow(W*f, 0, Math.PI/2+(R()-.5)*.3, H*(W<700?.16:.13), W<700?2.2:2.6, i*40, 0); });
+    drawRoots();
+  }
+  function drawRoots(){
+    if(!W) return;
+    var r=sec.getBoundingClientRect(), p = reduce ? 1 : Math.max(0,Math.min(1,(innerHeight - r.top)/(r.height*.95)));
+    var lim = p*maxT; cx.clearRect(0,0,W,H); cx.lineCap='round';
+    for(var i=0;i<segs.length;i++){ var s=segs[i]; if(s[5]>lim) continue;
+      var k=Math.min(1,(lim-s[5])/(s[6]-s[5]));
+      cx.strokeStyle='rgba(217,164,65,'+(0.10+0.32*Math.min(1,s[4]/2))+')'; cx.lineWidth=Math.max(.5,s[4]);
+      cx.beginPath(); cx.moveTo(s[0],s[1]); cx.lineTo(s[0]+(s[2]-s[0])*k, s[1]+(s[3]-s[1])*k); cx.stroke(); }
+  }
+  addEventListener('resize', function(){ clearTimeout(build.t); build.t=setTimeout(build,200); });
+
+  /* mix cards: quiet waveform from the title */
+  document.querySelectorAll('.mix').forEach(function(m,j){
+    var c=m.querySelector('.wave'), g=c.getContext('2d'), R=rnd(1000+j*77);
+    function draw(){ var w=c.clientWidth, h=c.clientHeight, d=Math.min(devicePixelRatio||1,2); c.width=w*d; c.height=h*d; g.setTransform(d,0,0,d,0,0); g.fillStyle='rgba(217,164,65,.55)';
+      var n=Math.floor(w/5), R2=rnd(1000+j*77); for(var i=0;i<n;i++){ var env=Math.sin(Math.PI*i/n)*.7+.3, v=(.25+R2()*.75)*env*h*.9; g.fillRect(i*5,h-v,2,v); } }
+    draw(); addEventListener('resize', draw);
+  });
+
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(build); else build();
+  addEventListener('load', build);
+  onScroll();
+})();
+</script>
+</body>
+</html>
