@@ -10,5 +10,17 @@
         }
       ]
     }
+  ],
+  "redirects": [
+    {
+      "source": "/argana",
+      "destination": "https://arganamusic.com/",
+      "permanent": true
+    },
+    {
+      "source": "/argana/:path*",
+      "destination": "https://arganamusic.com/:path*",
+      "permanent": true
+    }
   ]
 }
