@@ -1,0 +1,580 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ARGANA · The Root System</title>
+<meta name="description" content="An immersive journey through ARGANA's world: Moroccan roots, Barcelona nights, ZAYA at Hotel El Palace. Afro House and Afrotech. Booking and press kit.">
+<meta name="theme-color" content="#050302">
+<meta property="og:title" content="ARGANA · The Root System">
+<meta property="og:description" content="An immersive journey through ARGANA's world. Afro House & Afrotech from Barcelona, rooted in southern Morocco.">
+<meta property="og:image" content="https://arganamusic.com/media/og.jpg">
+<meta property="og:url" content="https://arganamusic.com/experience">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://arganamusic.com/experience">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23050302'/%3E%3Cpath d='M9 26V14a7 7 0 0 1 14 0v12' fill='none' stroke='%23D9A441' stroke-width='2.4'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@600;800&family=Cormorant+Garamond:ital,wght@1,300;1,400&family=IBM+Plex+Mono:wght@400;500&family=Jost:wght@300;400&display=swap">
+<style>
+/* The Root System: one fixed WebGL field of argan-oil light behind seven scrolling movements. */
+:root{
+  --void:#050302; --ink:#F4EADC; --soft:#CDBDA9; --mute:#8E7D6C;
+  --oil:#D9A441; --ember:#C8432B; --line:rgba(217,164,65,.22);
+  --display:"Syne","Arial Black",system-ui,sans-serif;
+  --serif:"Cormorant Garamond",Georgia,serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --sans:"Jost",system-ui,-apple-system,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0;background:var(--void);color:var(--ink)}
+body{font-family:var(--sans);font-weight:300;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body.locked{overflow:hidden;height:100%}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:1px solid var(--oil);outline-offset:4px}
+#gl{position:fixed;inset:0;width:100%;height:100%;display:block;z-index:0}
+.grain{position:fixed;inset:-50%;z-index:2;pointer-events:none;opacity:.07;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");animation:grain 1.2s steps(6) infinite}
+@keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-3%,2%)}40%{transform:translate(2%,-3%)}60%{transform:translate(-2%,-1%)}80%{transform:translate(3%,3%)}100%{transform:translate(0,0)}}
+.vig{position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse at 50% 50%,transparent 45%,rgba(0,0,0,.75) 100%)}
+@media (prefers-reduced-motion:reduce){.grain{animation:none}}
+
+/* HUD */
+.hud{position:fixed;z-index:20;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);pointer-events:none}
+.hud a,.hud button{pointer-events:auto}
+.hud.tl{top:calc(18px + env(safe-area-inset-top));left:max(20px,env(safe-area-inset-left))}
+.hud.tr{top:calc(18px + env(safe-area-inset-top));right:max(20px,env(safe-area-inset-right));text-align:right}
+.hud.bl{bottom:calc(18px + env(safe-area-inset-bottom));left:max(20px,env(safe-area-inset-left))}
+.hud.br{bottom:calc(14px + env(safe-area-inset-bottom));right:max(20px,env(safe-area-inset-right));display:flex;align-items:center;gap:16px}
+.hud .mk{font-family:var(--display);font-weight:800;letter-spacing:.32em;font-size:13px;color:var(--ink)}
+.hud .dim{color:var(--mute)}
+.hud .ch b{color:var(--oil);font-weight:500}
+.prog{position:fixed;z-index:20;left:0;top:0;height:2px;background:var(--oil);width:0;box-shadow:0 0 12px var(--oil)}
+.snd{display:flex;align-items:center;gap:8px;background:none;border:1px solid var(--line);color:var(--ink);font:inherit;letter-spacing:inherit;text-transform:inherit;padding:9px 12px;cursor:pointer;min-height:40px}
+.snd i{width:7px;height:7px;border-radius:50%;border:1px solid var(--mute)}
+.snd.on i{background:var(--ember);border-color:var(--ember);box-shadow:0 0 10px var(--ember)}
+.beat{width:6px;height:6px;border-radius:50%;background:var(--oil);box-shadow:0 0 10px var(--oil);display:inline-block;margin-right:8px;vertical-align:middle}
+.hud .back{border-bottom:1px solid var(--line);padding-bottom:2px}
+@media (max-width:640px){.hud .hide-s{display:none}}
+
+/* gate */
+.gate{position:fixed;inset:0;z-index:40;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:34px;text-align:center;padding:24px;background:radial-gradient(ellipse at center,rgba(5,3,2,.2),rgba(5,3,2,.85) 70%);transition:opacity 1.4s ease}
+.gate.out{opacity:0;pointer-events:none}
+.gate .t{font-family:var(--mono);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--oil)}
+.gate h1{margin:0;font-family:var(--display);font-weight:800;font-size:clamp(44px,9vw,128px);letter-spacing:.08em;line-height:.9}
+.gate p{margin:0;font-family:var(--serif);font-style:italic;font-size:clamp(20px,2.2vw,28px);color:var(--soft);max-width:30ch}
+.gate .row{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+.gbtn{font-family:var(--mono);font-size:12px;letter-spacing:.24em;text-transform:uppercase;padding:16px 22px;min-height:48px;cursor:pointer;border:1px solid var(--oil);background:var(--oil);color:var(--void)}
+.gbtn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.gbtn:hover{filter:brightness(1.1)}
+.gate .hp{font-family:var(--mono);font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--mute)}
+
+/* movements */
+main{position:relative;z-index:10;transition:opacity 1.2s}
+body.locked main{opacity:0}
+.mv{position:relative;height:150vh}
+.mv:first-child{height:130vh}
+.mv:last-child{height:140vh}
+.card{position:sticky;top:0;height:100vh;height:100svh;display:flex;flex-direction:column;justify-content:center;padding:max(80px,12vh) max(6vw,20px) max(90px,12vh)}
+.card.left{align-items:flex-start;text-align:left}
+.card.right{align-items:flex-end;text-align:right}
+.card.center{align-items:center;text-align:center}
+.card.bottom{justify-content:flex-end}
+.card.top{justify-content:flex-start}
+.txt{max-width:520px;display:flex;flex-direction:column;gap:18px;opacity:0;transform:translateY(20px);transition:opacity 1s ease,transform 1s ease}
+.mv.on .txt{opacity:1;transform:none}
+.num{font-family:var(--mono);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--oil)}
+.h{margin:0;font-family:var(--display);font-weight:800;font-size:clamp(38px,5.6vw,84px);line-height:.92;letter-spacing:-.01em;text-wrap:balance;text-shadow:0 4px 40px rgba(0,0,0,.8)}
+.h em{font-family:var(--serif);font-style:italic;font-weight:300;color:var(--oil);letter-spacing:0}
+.p{margin:0;font-size:17px;line-height:1.65;color:var(--soft);text-shadow:0 2px 20px rgba(0,0,0,.9)}
+.stats{display:flex;gap:28px;margin-top:6px}
+.stats div{display:flex;flex-direction:column;gap:6px}
+.stats b{font-family:var(--display);font-weight:800;font-size:clamp(44px,5vw,72px);line-height:.85}
+.stats span{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--mute);max-width:12ch}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips span{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;border:1px solid var(--line);padding:7px 11px;color:var(--soft);background:rgba(5,3,2,.4);backdrop-filter:blur(4px)}
+.card.right .chips,.card.right .stats{justify-content:flex-end}
+
+/* projected labels (movement 3) */
+.lbl{position:fixed;z-index:12;left:0;top:0;pointer-events:none;font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);opacity:0;transition:opacity .6s;white-space:nowrap;transform:translate(-50%,-50%)}
+.lbl b{display:block;font-family:var(--display);font-weight:800;font-size:clamp(18px,2vw,26px);letter-spacing:.02em;text-transform:none}
+.lbl i{font-style:normal;color:var(--oil)}
+.lbl::before{content:"";position:absolute;left:50%;top:-14px;width:1px;height:10px;background:var(--oil)}
+
+/* arch video (movement 4) */
+.archv{position:fixed;z-index:11;left:0;top:0;overflow:hidden;border-radius:999px 999px 0 0;opacity:0;transition:opacity .8s;pointer-events:none;box-shadow:0 0 80px rgba(200,67,43,.35)}
+.archv video{width:100%;height:100%;object-fit:cover;display:block}
+
+/* films (movement 6) */
+.reel{display:flex;gap:14px;width:min(1100px,100%);overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px;scrollbar-width:none;pointer-events:auto}
+.reel::-webkit-scrollbar{display:none}
+.reel figure{margin:0;flex:0 0 calc((100% - 42px)/4);min-width:180px;scroll-snap-align:start;display:flex;flex-direction:column;gap:8px}
+.reel video{width:100%;aspect-ratio:9/16;object-fit:cover;border:1px solid var(--line);background:#120a07}
+.reel figcaption{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--mute)}
+@media (max-width:640px){.reel figure{flex:0 0 62%}}
+@media (max-aspect-ratio:1/1){
+  .mv[data-i="3"] .card{justify-content:flex-end}
+  .mv[data-i="3"] .txt,.mv[data-i="2"] .txt{background:linear-gradient(180deg,transparent,rgba(5,3,2,.85) 30%);padding:28px 0 0;margin:0 -6vw;padding-left:6vw;padding-right:6vw;max-width:none}
+  .mv[data-i="3"] .p{display:none}
+}
+
+/* final */
+.final{pointer-events:auto}
+.cta{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.cta a,.cta button{font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;padding:15px 20px;min-height:48px;border:1px solid var(--line);background:rgba(5,3,2,.55);color:var(--ink);cursor:pointer;backdrop-filter:blur(6px)}
+.cta .main{background:var(--oil);border-color:var(--oil);color:var(--void)}
+.cta a:hover,.cta button:hover{border-color:var(--oil)}
+.mail{font-family:var(--mono);font-size:13px;letter-spacing:.08em;color:var(--soft);user-select:all}
+.nogl{position:fixed;inset:0;z-index:0;background:url(/media/photo8.jpg) center/cover;filter:brightness(.35)}
+</style>
+</head>
+<body class="locked">
+<canvas id="gl" aria-hidden="true"></canvas>
+<div class="vig"></div>
+<div class="grain"></div>
+<div class="prog" id="prog"></div>
+
+<div class="hud tl"><a class="mk" href="/">ARGANA</a><div class="dim" style="margin-top:6px">The Root System</div></div>
+<div class="hud tr"><div class="ch" id="ch"><b>01</b> / 07</div><div class="dim hide-s" id="chn" style="margin-top:6px">Arrival</div></div>
+<div class="hud bl"><div id="coord">30.42° N · 9.60° W</div><div class="dim hide-s" style="margin-top:6px" id="place">Souss · argan forest</div></div>
+<div class="hud br"><span class="hide-s"><span class="beat" id="beat"></span><span class="dim">Pulse</span> 123 BPM</span><button class="snd" id="snd" type="button" aria-pressed="false"><i></i><span>Sound</span></button></div>
+
+<div class="gate" id="gate">
+  <span class="t">An experience in seven movements</span>
+  <h1>ARGANA</h1>
+  <p>Moroccan roots. Barcelona nights. Scroll slowly.</p>
+  <div class="row">
+    <button class="gbtn" id="go-sound" type="button">Enter with sound</button>
+    <button class="gbtn ghost" id="go-silent" type="button">Enter in silence</button>
+  </div>
+  <span class="hp">Headphones recommended · <a href="/" style="border-bottom:1px solid var(--line)">Classic press kit</a></span>
+</div>
+
+<div class="lbl" id="l-bcn"><b>Barcelona</b><i>41.39° N</i> · home</div>
+<div class="lbl" id="l-cas"><b>Casablanca</b><i>33.57° N</i> · roots</div>
+<div class="lbl" id="l-aga"><b>Agadir</b><i>30.42° N</i> · roots</div>
+<div class="archv" id="archv"><video id="av" src="/media/red-room-1.mp4" poster="/media/red-room-1.jpg" muted loop playsinline preload="none"></video></div>
+
+<main id="main">
+  <section class="mv" data-i="0"><div class="card left bottom"><div class="txt">
+    <span class="num">01 · Arrival</span>
+    <h2 class="h">From the south of <em>Morocco.</em></h2>
+    <p class="p">Afro House and Afrotech, played deep and slow-burning. A Moroccan DJ based in Barcelona.</p>
+  </div></div></section>
+
+  <section class="mv" data-i="1"><div class="card right"><div class="txt">
+    <span class="num">02 · Rooted</span>
+    <h2 class="h">Roots <em>first.</em></h2>
+    <p class="p">The argan tree grows almost nowhere but southern Morocco. It survives the drought by reaching deep, drops its leaves in the dry season, and comes back green. ARGANA plays the same way: patient, rooted, hypnotic.</p>
+  </div></div></section>
+
+  <section class="mv" data-i="2"><div class="card center bottom"><div class="txt">
+    <span class="num">03 · Two shores</span>
+    <h2 class="h">Between two <em>shores.</em></h2>
+    <p class="p">Raised between Agadir and Casablanca. Built in Barcelona. European club culture and North African heritage in one set, without the costume.</p>
+  </div></div></section>
+
+  <section class="mv" data-i="3"><div class="card left"><div class="txt">
+    <span class="num">04 · The ritual</span>
+    <h2 class="h">He built his own <em>room.</em></h2>
+    <p class="p">Barcelona had no true home for Afro House, so ARGANA founded ZAYA and plays it as resident. Two editions at Hotel El Palace.</p>
+    <div class="stats"><div><b>2</b><span>editions at El Palace</span></div><div><b>2</b><span>sold out</span></div><div><b>0</b><span>paid ads</span></div></div>
+    <div class="chips"><span>Edition III · 21.11.2026</span></div>
+  </div></div></section>
+
+  <section class="mv" data-i="4"><div class="card right bottom"><div class="txt">
+    <span class="num">05 · The sound</span>
+    <h2 class="h">Built for the <em>long</em> build.</h2>
+    <p class="p">Rolling percussion, long tension, grooves that take their time. Moroccan rhythms and Arabic phrases only where they belong. With sound on, this ring is moving to his set.</p>
+    <div class="chips"><span>Afro House</span><span>Afrotech</span><span>Three-step</span><span>Gqom</span></div>
+  </div></div></section>
+
+  <section class="mv" data-i="5"><div class="card center"><div class="txt" style="max-width:1100px;width:100%;align-items:center">
+    <span class="num">06 · In the room</span>
+    <h2 class="h">Filmed from <em>inside.</em></h2>
+    <div class="reel" id="reel">
+      <figure><video data-r src="/media/red-room-2.mp4" poster="/media/red-room-2.jpg" muted loop playsinline preload="none"></video><figcaption>The decks · El Palace</figcaption></figure>
+      <figure><video data-r src="/media/red-room-3.mp4" poster="/media/red-room-3.jpg" muted loop playsinline preload="none"></video><figcaption>The mirror · El Palace</figcaption></figure>
+      <figure><video data-r src="/media/red-room-4.mp4" poster="/media/red-room-4.jpg" muted loop playsinline preload="none"></video><figcaption>The floor · El Palace</figcaption></figure>
+      <figure><video data-r src="/media/red-room-1.mp4" poster="/media/red-room-1.jpg" muted loop playsinline preload="none"></video><figcaption>The ritual · ZAYA</figcaption></figure>
+    </div>
+    <p class="p" style="font-size:15px">Shot and cut by ARGANA. He brings his own camera eye to every night he plays.</p>
+  </div></div></section>
+
+  <section class="mv" data-i="6"><div class="card center bottom final"><div class="txt" style="align-items:center;max-width:720px">
+    <span class="num">07 · Next stage</span>
+    <h2 class="h">Next stage: <em>yours.</em></h2>
+    <p class="p">Clubs, festivals, heritage venues and premium rooms across Spain, Europe and Morocco.</p>
+    <div class="cta">
+      <a class="main" href="mailto:zaya.ritual@gmail.com?subject=Booking%20ARGANA">Book ARGANA</a>
+      <a href="/">Press kit</a>
+      <a href="https://soundcloud.com/arganamusic" target="_blank" rel="noopener">Listen</a>
+      <a href="https://www.instagram.com/arganamusic/" target="_blank" rel="noopener">Instagram</a>
+    </div>
+    <span class="mail">zaya.ritual@gmail.com</span>
+  </div></div></section>
+</main>
+
+<audio id="aud" src="/media/set.mp3" loop preload="none"></audio>
+
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"}}</script>
+<script type="module">
+import * as THREE from 'three';
+
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const small = Math.min(innerWidth, innerHeight) < 700;
+const N = small ? 26000 : 64000;
+const STAGES = 7;
+const $ = id => document.getElementById(id);
+
+/* ---------- seeded random ---------- */
+let seed = 20260321;
+const R = () => (seed = (seed * 16807) % 2147483647, (seed - 1) / 2147483646);
+const G = () => { let u = R() || 1e-6, v = R(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(6.2831853 * v); };
+
+/* ---------- renderer ---------- */
+const canvas = $('gl');
+let renderer;
+try {
+  renderer = new THREE.WebGLRenderer({ canvas, antialias: false, alpha: false, powerPreference: 'high-performance' });
+} catch (e) { renderer = null; }
+if (!renderer) { const d = document.createElement('div'); d.className = 'nogl'; document.body.prepend(d); }
+
+const rand = new Float32Array(N * 4);
+for (let i = 0; i < N * 4; i++) rand[i] = R();
+
+/* ---------- shapes ---------- */
+function dunes() {
+  const a = new Float32Array(N * 3);
+  for (let i = 0; i < N; i++) {
+    const x = (R() - .5) * 60, z = -R() * 46 + 8;
+    const y = -3.2 + .9 * Math.sin(x * .28 + z * .07) * Math.cos(z * .22) + .45 * Math.sin(x * .9 + z * .5) + G() * .05;
+    a.set([x, y, z], i * 3);
+  }
+  return a;
+}
+function tree() {
+  const segs = [];
+  function grow(x, y, z, dx, dy, dz, len, w, d, up) {
+    if (d > (up ? 6 : 7) || len < .12) return;
+    const x2 = x + dx * len, y2 = y + dy * len, z2 = z + dz * len;
+    segs.push([x, y, z, x2, y2, z2, w, up]);
+    const n = d < 1 ? 3 : (R() < .6 ? 2 : 1);
+    for (let k = 0; k < n; k++) {
+      const th = R() * 6.283, sp = up ? (.45 + R() * .5) : (.5 + R() * .6);
+      let ndx = dx + Math.cos(th) * sp, ndy = dy + (up ? .05 : -.05), ndz = dz + Math.sin(th) * sp;
+      if (up) ndy = Math.max(.15, ndy * .8 + .2); else ndy = Math.min(-.12, ndy);
+      const m = Math.hypot(ndx, ndy, ndz);
+      grow(x2, y2, z2, ndx / m, ndy / m, ndz / m, len * (.72 + R() * .14), w * .68, d + 1, up);
+    }
+  }
+  grow(0, -.3, 0, 0, 1, 0, 2.2, .32, 0, 1);
+  grow(0, -.3, 0, 0, -1, 0, 1.0, .3, 0, 0);
+  for (let k = 0; k < 4; k++) { const th = k * 1.57 + R(); grow(0, -.4, 0, Math.cos(th) * .7, -.7, Math.sin(th) * .7, 1.4, .2, 1, 0); }
+  const lens = segs.map(s => Math.hypot(s[3] - s[0], s[4] - s[1], s[5] - s[2]) * (s[6] * 2 + .3));
+  const tot = lens.reduce((p, c) => p + c, 0);
+  const cum = []; let acc = 0; for (const l of lens) { acc += l / tot; cum.push(acc); }
+  const a = new Float32Array(N * 3);
+  for (let i = 0; i < N; i++) {
+    let x, y, z;
+    if (R() < .38) { // canopy: wide flat dome, the argan silhouette
+      const th = R() * 6.283, r = Math.sqrt(R()) * 5.6;
+      x = Math.cos(th) * r; z = Math.sin(th) * r * .8;
+      y = 3.6 + (1 - (r / 5.6) ** 2) * 1.5 + G() * .35 - (r > 4.6 ? (r - 4.6) * .6 : 0);
+    } else {
+      const q = R(); let j = cum.findIndex(c => c >= q); if (j < 0) j = segs.length - 1;
+      const s = segs[j], t = R(), w = s[6] * .55;
+      x = s[0] + (s[3] - s[0]) * t + G() * w; y = s[1] + (s[4] - s[1]) * t + G() * w; z = s[2] + (s[5] - s[2]) * t + G() * w;
+    }
+    a.set([x, y - .6, z], i * 3);
+  }
+  return a;
+}
+function shores() {
+  const a = new Float32Array(N * 3);
+  const B = [-7, 1.6, 0], C = [5.4, -.2, 0], A = [6.6, -2.4, .4];
+  for (let i = 0; i < N; i++) {
+    const q = R(); let p;
+    if (q < .30) p = [B[0] + G() * 1.1, B[1] + G() * .9, B[2] + G() * 1.1];
+    else if (q < .46) p = [C[0] + G() * .75, C[1] + G() * .6, C[2] + G() * .75];
+    else if (q < .62) p = [A[0] + G() * .75, A[1] + G() * .6, A[2] + G() * .75];
+    else if (q < .84) { // the bridge arc
+      const t = R(), mx = (1 - t) * (1 - t), my = 2 * (1 - t) * t, mz = t * t;
+      const T = R() < .5 ? C : A;
+      p = [B[0] * mx + 0 * my + T[0] * mz + G() * .08, B[1] * mx + 5.4 * my + T[1] * mz + G() * .08, G() * .08];
+    } else p = [(R() - .5) * 30, -4.6 + G() * .05 + Math.sin(R() * 30) * .05, (R() - .5) * 14]; // the sea
+    a.set(p, i * 3);
+  }
+  return a;
+}
+const ARCH = { cy: 1.0, r: 3.0, jaw: 0.72 }; // horseshoe: arc continues below centre
+function arch() {
+  const a = new Float32Array(N * 3);
+  const start = -Math.asin(ARCH.jaw * .55), end = Math.PI - start; // angles beyond horizontal
+  const jx = ARCH.r * Math.cos(start), jy = ARCH.cy + ARCH.r * Math.sin(start);
+  for (let i = 0; i < N; i++) {
+    const q = R(); let p;
+    if (q < .55) { // the arch frame, double band
+      const band = R() < .5 ? ARCH.r + .25 : ARCH.r + .95, th = start + (end - start) * R();
+      const rr = band + G() * .07;
+      p = [Math.cos(th) * rr, ARCH.cy + Math.sin(th) * rr, G() * .12];
+    } else if (q < .78) { // jambs
+      const side = R() < .5 ? -1 : 1, inner = R() < .5 ? .25 : .95;
+      const x = side * (jx + inner * Math.cos(start) * 1.05) + G() * .06;
+      p = [x, jy - R() * (jy + 5), G() * .12];
+    } else if (q < .9) { // zellige star ring above the arch
+      const k = Math.floor(R() * 8), th = k * .785 + (R() < .5 ? 0 : .3927), rr = (R() < .5 ? .45 : .2);
+      p = [Math.cos(th) * rr + G() * .02, ARCH.cy + ARCH.r + 2.3 + Math.sin(th) * rr + G() * .02, 0];
+    } else p = [(R() - .5) * 26, -5 + G() * .04, (R() - .2) * -12]; // floor
+    a.set(p, i * 3);
+  }
+  return a;
+}
+function ring() {
+  const a = new Float32Array(N * 3);
+  for (let i = 0; i < N; i++) {
+    const th = rand[i * 4 + 1] * 6.2831853, k = Math.floor(rand[i * 4 + 2] * 4);
+    const r = [1.6, 2.6, 3.5, 4.3][k] + G() * .05;
+    a.set([Math.cos(th) * r, Math.sin(th) * r, G() * .25], i * 3);
+  }
+  return a;
+}
+function galaxy() {
+  const a = new Float32Array(N * 3);
+  for (let i = 0; i < N; i++) {
+    const arm = Math.floor(R() * 4), t = Math.pow(R(), .6), r = .4 + t * 11;
+    const th = arm * 1.5708 + Math.log(r) * 1.9 + G() * .22;
+    a.set([Math.cos(th) * r + G() * .25, G() * .25 * (1.2 - t), Math.sin(th) * r + G() * .25], i * 3);
+  }
+  return a;
+}
+async function word() {
+  try { await document.fonts.load('800 200px Syne'); } catch (e) {}
+  const c = document.createElement('canvas'), W = 1400, H = 320; c.width = W; c.height = H;
+  const g = c.getContext('2d'); g.fillStyle = '#fff'; g.textAlign = 'center'; g.textBaseline = 'middle';
+  let fs = 260; g.font = `800 ${fs}px Syne, "Arial Black", sans-serif`;
+  while (g.measureText('ARGANA').width > W * .94 && fs > 60) { fs -= 8; g.font = `800 ${fs}px Syne, "Arial Black", sans-serif`; }
+  g.fillText('ARGANA', W / 2, H / 2);
+  const d = g.getImageData(0, 0, W, H).data, pts = [];
+  for (let y = 0; y < H; y += 2) for (let x = 0; x < W; x += 2) if (d[(y * W + x) * 4 + 3] > 128) pts.push(x, y);
+  const a = new Float32Array(N * 3), sc = 18 / W, n = pts.length / 2;
+  for (let i = 0; i < N; i++) {
+    if (n && R() < .9) { const j = Math.floor(R() * n); a.set([(pts[j * 2] - W / 2) * sc + G() * .02, -(pts[j * 2 + 1] - H / 2) * sc + 1.2 + G() * .02, G() * .15], i * 3); }
+    else a.set([(R() - .5) * 30, (R() - .5) * 16, (R() - .5) * 10 - 4], i * 3);
+  }
+  return a;
+}
+
+/* ---------- scene ---------- */
+const scene = new THREE.Scene();
+scene.fog = new THREE.FogExp2(0x050302, .028);
+const camera = new THREE.PerspectiveCamera(50, innerWidth / innerHeight, .1, 200);
+const geo = new THREE.BufferGeometry();
+const bands = new Float32Array(32);
+const uniforms = {
+  uStage: { value: 0 }, uTime: { value: 0 }, uBass: { value: 0 }, uPix: { value: 1 },
+  uBands: { value: bands }, uGold: { value: new THREE.Color('#D9A441') }, uEmber: { value: new THREE.Color('#C8432B') }, uCream: { value: new THREE.Color('#F4EADC') }
+};
+const vert = `
+attribute vec3 p1; attribute vec3 p2; attribute vec3 p3; attribute vec3 p4; attribute vec3 p5; attribute vec3 p6;
+attribute vec4 aR;
+uniform float uStage, uTime, uBass, uPix; uniform float uBands[32];
+uniform vec3 uGold, uEmber, uCream;
+varying vec3 vC; varying float vA;
+vec3 shp(int i){ if(i==0) return position; if(i==1) return p1; if(i==2) return p2; if(i==3) return p3; if(i==4) return p4; if(i==5) return p5; return p6; }
+void main(){
+  float s = clamp(uStage, 0., 6.);
+  int i = int(floor(s)); float f = s - float(i);
+  float g = smoothstep(0., 1., clamp((f - aR.x * .35) / .65, 0., 1.));
+  vec3 a = shp(i), b = shp(min(i + 1, 6));
+  vec3 p = mix(a, b, g);
+  float swirl = sin(g * 3.14159);
+  p += (aR.yzw - .5) * 3.2 * swirl;
+  p += .05 * vec3(sin(uTime * .7 + aR.x * 40.), cos(uTime * .6 + aR.y * 40.), sin(uTime * .5 + aR.z * 40.));
+  float w4 = 1. - min(abs(uStage - 4.), 1.);
+  if (w4 > 0.) { int bi = int(aR.y * 31.99); float bv = uBands[bi]; vec2 d = normalize(p.xy + 1e-4); p.xy += d * bv * 2.2 * w4 * (.4 + aR.w); p.z += bv * w4 * (aR.z - .5) * 2.; }
+  float w0 = 1. - min(uStage, 1.);
+  p.y += w0 * .25 * sin(p.x * .5 + uTime * .6) * sin(p.z * .4 + uTime * .3);
+  p *= 1. + uBass * .05 * aR.w;
+  vec4 mv = modelViewMatrix * vec4(p, 1.);
+  gl_Position = projectionMatrix * mv;
+  gl_PointSize = uPix * (.7 + aR.z * 1.6) * (1. + uBass * .6 * aR.w) * (11. / -mv.z);
+  vec3 c = mix(uGold, uEmber, smoothstep(.78, .95, aR.x));
+  c = mix(c, uCream, step(.97, aR.y));
+  vC = c * (1.15 + uBass * 1.1 + swirl * .5);
+  vA = .55 + .45 * aR.w;
+}`;
+const frag = `
+varying vec3 vC; varying float vA;
+void main(){ float d = length(gl_PointCoord - .5); float a = smoothstep(.5, .0, d); a *= a; gl_FragColor = vec4(vC * a * vA, a * vA); }`;
+
+let points, ready = false;
+async function build() {
+  if (!renderer) return;
+  geo.setAttribute('position', new THREE.BufferAttribute(dunes(), 3));
+  geo.setAttribute('p1', new THREE.BufferAttribute(tree(), 3));
+  geo.setAttribute('p2', new THREE.BufferAttribute(shores(), 3));
+  geo.setAttribute('p3', new THREE.BufferAttribute(arch(), 3));
+  geo.setAttribute('p4', new THREE.BufferAttribute(ring(), 3));
+  geo.setAttribute('p5', new THREE.BufferAttribute(galaxy(), 3));
+  geo.setAttribute('p6', new THREE.BufferAttribute(await word(), 3));
+  geo.setAttribute('aR', new THREE.BufferAttribute(rand, 4));
+  geo.boundingSphere = new THREE.Sphere(new THREE.Vector3(), 60);
+  const mat = new THREE.ShaderMaterial({ uniforms, vertexShader: vert, fragmentShader: frag, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending });
+  points = new THREE.Points(geo, mat);
+  scene.add(points);
+  ready = true;
+}
+
+/* camera per movement: [x,y,z, lookX,lookY,lookZ] */
+const CAM = [
+  [0, 1.2, 15, 0, -2.4, -6],
+  [0, 1.6, 15.5, 0, 1.4, 0],
+  [0, .6, 17, 0, .2, 0],
+  [-4.2, -.4, 13, -4.2, -.4, 0],
+  [0, 0, 12.5, 0, 0, 0],
+  [0, 9, 13, 0, -1, 0],
+  [0, .6, 15, 0, .9, 0],
+];
+const lerp = (a, b, t) => a + (b - a) * t;
+function camAt(s) {
+  const i = Math.min(Math.floor(s), 5), f = s - i, e = f * f * (3 - 2 * f);
+  return CAM[i].map((v, k) => lerp(v, CAM[i + 1][k], e));
+}
+
+function resize() {
+  if (!renderer) return;
+  const dpr = Math.min(devicePixelRatio || 1, small ? 1.5 : 1.75);
+  renderer.setPixelRatio(dpr); renderer.setSize(innerWidth, innerHeight, false);
+  camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix();
+  uniforms.uPix.value = dpr * (small ? 3.0 : 2.8);
+}
+addEventListener('resize', resize); resize();
+
+/* ---------- audio ---------- */
+const aud = $('aud'); let actx, analyser, fdata, soundOn = false;
+function startAudio() {
+  try {
+    if (!actx) {
+      actx = new (window.AudioContext || window.webkitAudioContext)();
+      const src = actx.createMediaElementSource(aud);
+      analyser = actx.createAnalyser(); analyser.fftSize = 256; analyser.smoothingTimeConstant = .78;
+      src.connect(analyser); analyser.connect(actx.destination);
+      fdata = new Uint8Array(analyser.frequencyBinCount);
+    }
+    actx.resume();
+  } catch (e) {}
+  aud.play().then(() => setSound(true)).catch(() => setSound(false));
+}
+function setSound(on) {
+  soundOn = on; const b = $('snd'); b.classList.toggle('on', on); b.setAttribute('aria-pressed', on);
+  b.querySelector('span').textContent = on ? 'Sound on' : 'Sound';
+}
+$('snd').addEventListener('click', () => { if (soundOn) { aud.pause(); setSound(false); } else startAudio(); });
+
+/* ---------- gate ---------- */
+function enter(withSound) {
+  $('gate').classList.add('out'); document.body.classList.remove('locked');
+  setTimeout(() => $('gate').hidden = true, 1400);
+  if (withSound) startAudio();
+}
+$('go-sound').addEventListener('click', () => enter(true));
+$('go-silent').addEventListener('click', () => enter(false));
+
+/* ---------- movements, HUD ---------- */
+const META = [
+  ['Arrival', '30.42° N · 9.60° W', 'Souss · argan forest'],
+  ['Rooted', '30.42° N · 9.60° W', 'Argania spinosa'],
+  ['Two shores', '41.39° N → 30.42° N', 'Barcelona · Casablanca · Agadir'],
+  ['The ritual', '41.39° N · 2.17° E', 'ZAYA · Hotel El Palace'],
+  ['The sound', '41.39° N · 2.17° E', 'Afro House · Afrotech'],
+  ['In the room', '41.39° N · 2.17° E', 'Films by ARGANA'],
+  ['Next stage', '??.??° N · ?.??° E', 'Your coordinates'],
+];
+const mvs = [...document.querySelectorAll('.mv')];
+let stage = 0, target = 0, cur = -1;
+function measure() {
+  const y = scrollY + innerHeight * .5; let s = 0;
+  for (let i = 0; i < mvs.length; i++) { const top = mvs[i].offsetTop, h = mvs[i].offsetHeight; if (y >= top) s = i + Math.min(1, (y - top) / h); }
+  // hold each shape for the middle of its movement, morph across boundaries
+  const i = Math.floor(s), f = s - i; const hold = .35;
+  target = Math.min(6, i + (f < hold ? 0 : Math.min(1, (f - hold) / (1 - hold))));
+  if (i >= 6) target = 6;
+  $('prog').style.width = (Math.min(1, scrollY / (document.documentElement.scrollHeight - innerHeight)) * 100) + '%';
+  const k = Math.min(6, Math.round(target));
+  if (k !== cur) {
+    cur = k; $('ch').innerHTML = `<b>0${k + 1}</b> / 07`; $('chn').textContent = META[k][0];
+    $('coord').textContent = META[k][1]; $('place').textContent = META[k][2];
+    mvs.forEach((m, j) => m.classList.toggle('on', j === k));
+    reelPlay(k === 5); archPlay(k === 3);
+  }
+}
+addEventListener('scroll', measure, { passive: true });
+
+const reelVids = [...document.querySelectorAll('[data-r]')];
+function reelPlay(on) { reelVids.forEach(v => { if (on) { v.preload = 'auto'; v.play().catch(() => {}); } else v.pause(); }); }
+const av = $('av');
+function archPlay(on) { if (on) { av.preload = 'auto'; av.play().catch(() => {}); } else av.pause(); }
+
+/* ---------- overlays tied to 3D ---------- */
+const v3 = new THREE.Vector3();
+function toScreen(x, y, z) { v3.set(x, y, z).project(camera); return [(v3.x * .5 + .5) * innerWidth, (-v3.y * .5 + .5) * innerHeight]; }
+const L = [['l-bcn', -7, 3.4, 0], ['l-cas', 5.4, 1.3, 0], ['l-aga', 6.6, -3.9, .4]].map(([id, x, y, z]) => [$(id), x, y, z]);
+const archEl = $('archv');
+function overlays() {
+  const w2 = Math.max(0, 1 - Math.abs(stage - 2) * 2.2);
+  for (const [el, x, y, z] of L) { const [sx, sy] = toScreen(x, y, z); el.style.transform = `translate(${sx}px,${sy}px) translate(-50%,-50%)`; el.style.opacity = w2.toFixed(2); }
+  const w3 = Math.max(0, 1 - Math.abs(stage - 3) * 2.4);
+  const start = -Math.asin(ARCH.jaw * .55);
+  const ix = ARCH.r * Math.cos(start) * .96, top = ARCH.cy + ARCH.r * .96, bot = -4.9;
+  const [x0, y0] = toScreen(-ix, top, 0), [x1, y1] = toScreen(ix, bot, 0);
+  archEl.style.transform = `translate(${x0}px,${y0}px)`; archEl.style.width = (x1 - x0) + 'px'; archEl.style.height = (y1 - y0) + 'px';
+  archEl.style.opacity = (w3 * .92).toFixed(2);
+}
+
+/* ---------- pointer ---------- */
+let mx = 0, my = 0, tmx = 0, tmy = 0;
+addEventListener('pointermove', e => { tmx = (e.clientX / innerWidth - .5); tmy = (e.clientY / innerHeight - .5); }, { passive: true });
+
+/* ---------- loop ---------- */
+const clock = new THREE.Clock(); let bassS = 0, rotY = 0;
+const beatEl = $('beat');
+function frame() {
+  const t = clock.getElapsedTime();
+  stage += (target - stage) * (reduce ? 1 : .06);
+  // audio or simulated 123 BPM pulse
+  let bass;
+  if (soundOn && analyser) {
+    analyser.getByteFrequencyData(fdata);
+    let b = 0; for (let k = 0; k < 5; k++) b += fdata[k]; bass = Math.max(0, (b / 5 / 255 - .45) / .55);
+    for (let k = 0; k < 32; k++) { const v = (fdata[k * 3] + fdata[k * 3 + 1] + fdata[k * 3 + 2]) / 765; bands[k] += (Math.pow(v, 1.6) - bands[k]) * .5; }
+  } else {
+    const ph = (t * 123 / 60) % 1; bass = Math.pow(1 - ph, 6) * .8;
+    for (let k = 0; k < 32; k++) bands[k] = (.25 + .25 * Math.sin(t * 2.1 + k * .7) * Math.sin(t * .9 + k * 1.3)) * (.4 + bass * .9);
+  }
+  bassS += ((reduce ? .2 : bass) - bassS) * .35;
+  uniforms.uBass.value = bassS; uniforms.uTime.value = reduce ? 0 : t; uniforms.uStage.value = stage;
+  if (beatEl) beatEl.style.transform = `scale(${1 + bassS * .9})`;
+  mx += (tmx - mx) * .04; my += (tmy - my) * .04;
+  const c = camAt(Math.min(stage, 6));
+  const portrait = innerWidth < innerHeight;
+  const ZP = [1.35, 1.6, 3.0, 2.0, 1.6, 1.45, 3.1], YP = [0, -.6, -2.6, -3.6, 0, 0, -4.2];
+  const si = Math.min(Math.floor(stage), 5), sf = stage - si;
+  const zk = portrait ? lerp(ZP[si], ZP[si + 1], sf * sf * (3 - 2 * sf)) : 1;
+  const xk = portrait ? 0 : 1;
+  const yo = portrait ? lerp(YP[si], YP[si + 1], sf * sf * (3 - 2 * sf)) : 0;
+  const orbit = reduce ? 0 : Math.sin(t * .12) * .9;
+  camera.position.set(c[0] * xk + mx * 2.2 + orbit, c[1] - my * 1.4 + yo, c[2] * zk);
+  camera.lookAt(c[3] * xk, c[4] + yo, c[5]);
+  const w1 = Math.max(0, 1 - Math.abs(stage - 1) * 1.5);
+  if (points) { rotY = reduce ? 0 : rotY + .004 * w1; if (w1 === 0) rotY *= .97; points.rotation.y = rotY; }
+  overlays();
+  if (ready) renderer.render(scene, camera);
+  requestAnimationFrame(frame);
+}
+
+build().then(() => { measure(); if (renderer) frame(); });
+</script>
+</body>
+</html>
