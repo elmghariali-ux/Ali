@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://arganamusic.com/sitemap.xml
