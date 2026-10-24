@@ -1,5 +1,5 @@
 const crypto = require('crypto');
-const { read, FIELDS, defaults, loadSaved } = require('./_lib');
+const { read, fields, defaults, loadSaved } = require('./_lib');
 
 const same = (a, b) => {
   const x = Buffer.from(String(a)), y = Buffer.from(String(b));
@@ -7,6 +7,11 @@ const same = (a, b) => {
 };
 
 module.exports = async (req, res) => {
+  try { await handle(req, res); } catch (e) { res.statusCode = 500; res.setHeader('Content-Type','application/json'); res.end(JSON.stringify({ error: 'Server error: ' + e.message })); }
+};
+
+async function handle(req, res) {
+  const FIELDS = fields();
   res.setHeader('Cache-Control', 'no-store');
   const pass = process.env.ADMIN_PASSWORD;
   const given = req.headers['x-admin-password'] || '';
@@ -36,4 +41,4 @@ module.exports = async (req, res) => {
     return;
   }
   res.status(405).json({ error: 'Method not allowed' });
-};
+}

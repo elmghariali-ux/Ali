@@ -1,9 +1,13 @@
 const fs = require('fs');
 const path = require('path');
 
-const ROOT = path.join(process.cwd(), 'tpl');
-const read = (f) => fs.readFileSync(path.join(ROOT, f), 'utf8');
-const FIELDS = JSON.parse(read('fields.json'));
+const ROOTS = [path.join(process.cwd(), 'tpl'), path.join(__dirname, '..', 'tpl'), path.join(process.cwd(), 'argana', 'tpl')];
+const read = (f) => {
+  for (const r of ROOTS) { const p = path.join(r, f); if (fs.existsSync(p)) return fs.readFileSync(p, 'utf8'); }
+  throw new Error('Template not found: ' + f + ' in ' + ROOTS.join(', ') + ' cwd=' + process.cwd() + ' ls=' + fs.readdirSync(process.cwd()).join(','));
+};
+let _fields;
+const fields = () => (_fields = _fields || JSON.parse(read('fields.json')));
 const MARK = /<!--e:([a-z_]+)-->([\s\S]*?)<!--\/e:\1-->/g;
 
 const esc = (t) => String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -52,4 +56,4 @@ function render(tpl, values) {
   });
 }
 
-module.exports = { read, FIELDS, defaults, loadSaved, render };
+module.exports = { read, fields, defaults, loadSaved, render };
