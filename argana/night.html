@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ARGANA · One Night</title>
+<meta name="description" content="One night with ARGANA, in seven scenes. Afro House and Afrotech from Barcelona, with Moroccan roots. Founder and resident of ZAYA.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#000000">
+<meta property="og:title" content="ARGANA · One Night">
+<meta property="og:description" content="One night with ARGANA, in seven scenes.">
+<meta property="og:image" content="https://arganamusic.com/media/og.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23000'/%3E%3Ccircle cx='16' cy='16' r='3' fill='%23D9A441'/%3E%3C/svg%3E">
+<script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300;1,400&family=Jost:wght@300;400&display=swap">
+<style>
+/* One night, seven scenes. A fixed screen plays the film; the page scroll is the timeline.
+   Type behaves like a film: tiny tracked credits, italic subtitles, a running timecode. */
+:root{
+  --black:#000; --ink:#F3EBE1; --dim:rgba(243,235,225,.58); --faint:rgba(243,235,225,.22);
+  --oil:#D9A441; --ember:#C8432B;
+  --serif:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+  --sans:"Jost",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --bar:clamp(28px,7vh,72px);
+  color-scheme:dark;
+}
+*{box-sizing:border-box;margin:0}
+[hidden]{display:none!important}
+html{background:#000}
+body{background:#000;color:var(--ink);font-family:var(--sans);font-weight:300;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body.held{overflow:hidden;height:100%}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:1px solid var(--oil);outline-offset:4px}
+.cr{font-family:var(--sans);font-weight:300;font-size:10px;letter-spacing:.42em;text-transform:uppercase}
+
+/* the screen */
+.screen{position:fixed;inset:0;z-index:0;overflow:hidden;background:#000}
+.layer{position:absolute;inset:0;opacity:0;transition:opacity 1.6s ease;will-change:opacity}
+.layer.on{opacity:1}
+.layer img.blur{position:absolute;inset:-8%;width:116%;height:116%;object-fit:cover;filter:blur(38px) brightness(.38) saturate(1.15)}
+.layer video,.layer img.still{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.04);transition:transform 9s ease-out}
+.layer.on video,.layer.on img.still{transform:scale(1)}
+@media (min-aspect-ratio:1/1){
+  .layer.v video{left:50%;width:auto;height:100%;aspect-ratio:9/16;transform:translateX(-50%) scale(1.02);-webkit-mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent)}
+  .layer.v.on video{transform:translateX(-50%) scale(1)}
+}
+.shade{position:fixed;inset:0;z-index:1;pointer-events:none;background:
+  radial-gradient(ellipse at 50% 45%,transparent 40%,rgba(0,0,0,.6) 100%),
+  linear-gradient(180deg,rgba(0,0,0,.35),transparent 22%,transparent 62%,rgba(0,0,0,.75))}
+.grain{position:fixed;inset:-50%;z-index:2;pointer-events:none;opacity:.08;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");animation:grain 1s steps(5) infinite}
+@keyframes grain{0%{transform:translate(0,0)}25%{transform:translate(-2%,3%)}50%{transform:translate(3%,-2%)}75%{transform:translate(-3%,-1%)}100%{transform:translate(0,0)}}
+/* letterbox */
+.lb{position:fixed;left:0;right:0;height:var(--bar);background:#000;z-index:3;pointer-events:none;transition:transform 1.4s cubic-bezier(.7,0,.2,1)}
+.lb.t{top:0}.lb.b{bottom:0}
+body.open .lb.t{transform:translateY(-100%)}body.open .lb.b{transform:translateY(100%)}
+
+/* chrome */
+.top,.bot{position:fixed;left:0;right:0;z-index:10;display:flex;justify-content:space-between;align-items:center;gap:16px;padding-left:max(4vw,20px,env(safe-area-inset-left));padding-right:max(4vw,20px,env(safe-area-inset-right));color:var(--dim);transition:opacity 1s}
+.top{top:0;padding-top:calc(22px + env(safe-area-inset-top))}
+.bot{bottom:0;padding-bottom:calc(20px + env(safe-area-inset-bottom))}
+body.held .top,body.held .bot{opacity:0;pointer-events:none}
+.mk{color:var(--ink);letter-spacing:.6em}
+.top nav{display:flex;gap:26px}
+.top nav a:hover,.bot button:hover{color:var(--ink)}
+.book{color:var(--ink);border-bottom:1px solid var(--faint);padding-bottom:3px}
+.tc{font-variant-numeric:tabular-nums;letter-spacing:.24em}
+.bot button{background:none;border:0;color:inherit;font:inherit;letter-spacing:inherit;text-transform:inherit;cursor:pointer;display:flex;align-items:center;gap:10px;padding:10px 0;min-height:40px}
+.dot{width:5px;height:5px;border-radius:50%;border:1px solid var(--dim)}
+.snd.on .dot{background:var(--ember);border-color:var(--ember);box-shadow:0 0 10px var(--ember)}
+.scrub{position:fixed;left:0;bottom:0;height:1px;background:var(--oil);z-index:11;width:0;opacity:.8}
+@media (max-width:640px){.top nav .o{display:none}.bot .tc{display:none}}
+
+/* subtitles */
+.subs{position:fixed;left:50%;bottom:calc(var(--bar) + 9vh);transform:translateX(-50%);z-index:9;width:min(860px,88vw);text-align:center;pointer-events:none}
+.sc{color:var(--oil);margin-bottom:18px;opacity:0;transition:opacity .9s}
+.line{font-family:var(--serif);font-style:italic;font-weight:300;font-size:clamp(19px,1.9vw,27px);line-height:1.38;color:var(--ink);text-shadow:0 2px 24px rgba(0,0,0,.9);opacity:0;transform:translateY(8px);transition:opacity .9s ease,transform .9s ease;min-height:2.8em}
+.subs.show .sc,.subs.show .line{opacity:1;transform:none}
+
+/* gate */
+.gate{position:fixed;inset:0;z-index:30;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:30px;text-align:center;padding:24px;background:#000;transition:opacity 1.6s ease}
+.gate.out{opacity:0;pointer-events:none}
+.gate .t1{color:var(--dim)}
+.gate h1{font-family:var(--sans);font-weight:300;font-size:clamp(26px,3.4vw,46px);letter-spacing:.8em;padding-left:.8em;color:var(--ink)}
+.gate p{font-family:var(--serif);font-style:italic;font-weight:300;font-size:clamp(18px,1.6vw,22px);color:var(--dim)}
+.gate .row{display:flex;gap:30px;flex-wrap:wrap;justify-content:center;margin-top:10px}
+.gate button{background:none;border:0;border-bottom:1px solid var(--faint);color:var(--ink);font:inherit;padding:8px 0;cursor:pointer;min-height:40px}
+.gate button:hover{border-color:var(--oil)}
+.gate .hint{color:var(--faint)}
+
+/* timeline */
+main{position:relative;z-index:5}
+.scene{height:230vh}
+.scene.short{height:170vh}
+.credits{position:relative;z-index:5;background:linear-gradient(180deg,transparent,#000 22vh);padding:40vh max(6vw,20px) 22vh;text-align:center;display:flex;flex-direction:column;align-items:center;gap:15vh}
+.cblock{display:flex;flex-direction:column;align-items:center;gap:14px}
+.cblock .role{color:var(--dim)}
+.cblock .who{font-family:var(--serif);font-weight:300;font-size:clamp(20px,2vw,28px);color:var(--ink);line-height:1.3}
+.cblock .who i{font-style:italic}
+.cname{font-family:var(--sans);font-weight:300;font-size:clamp(30px,4vw,56px);letter-spacing:.7em;padding-left:.7em}
+.fin{display:flex;flex-direction:column;align-items:center;gap:26px}
+.fin .ask{font-family:var(--serif);font-style:italic;font-weight:300;font-size:clamp(22px,2.4vw,32px)}
+.fin .mail{font-size:15px;letter-spacing:.08em;color:var(--ink);user-select:all;border-bottom:1px solid var(--faint);padding-bottom:4px}
+.fin nav{display:flex;gap:28px;flex-wrap:wrap;justify-content:center;color:var(--dim)}
+.fin nav a:hover{color:var(--ink)}
+.end{color:var(--faint);margin-top:6vh}
+@media (prefers-reduced-motion:reduce){.grain{animation:none}.layer video,.layer img.still{transition:none;transform:none!important}}
+</style>
+</head>
+<body class="held">
+
+<div class="screen" id="screen" aria-hidden="true"></div>
+<div class="shade"></div>
+<div class="grain"></div>
+<div class="lb t"></div><div class="lb b"></div>
+
+<header class="top">
+  <a class="cr mk" href="/night">ARGANA</a>
+  <nav class="cr"><a class="o" href="/">Press kit</a><a class="o" href="/experience">The Root System</a><a class="book" href="#credits">Book</a></nav>
+</header>
+<div class="bot cr">
+  <button class="snd" id="snd" type="button" aria-pressed="false"><span class="dot"></span><span>Sound</span></button>
+  <span id="scn">Scene I / VII</span>
+  <span class="tc" id="tc">00:00:00:00</span>
+</div>
+<div class="scrub" id="scrub"></div>
+
+<div class="subs" id="subs" aria-live="polite"><div class="cr sc" id="sc"></div><p class="line" id="line"></p></div>
+
+<div class="gate" id="gate">
+  <span class="cr t1">A film in seven scenes</span>
+  <h1>ARGANA</h1>
+  <p>One night in Barcelona.</p>
+  <div class="row cr">
+    <button type="button" id="go-snd">Play with sound</button>
+    <button type="button" id="go-sil">Watch in silence</button>
+  </div>
+  <span class="cr hint">Scroll to move through the night</span>
+</div>
+
+<main id="main"></main>
+
+<section class="credits" id="credits">
+  <div class="cblock"><span class="cr role">A film by</span><span class="cname">ARGANA</span></div>
+  <div class="cblock"><span class="cr role">Sound</span><span class="who">Afro House <i>&amp;</i> Afrotech</span></div>
+  <div class="cblock"><span class="cr role">Filmed at</span><span class="who">Hotel El Palace, Barcelona<br>City Hall, Barcelona</span></div>
+  <div class="cblock"><span class="cr role">Roots</span><span class="who">Agadir <i>·</i> Casablanca</span></div>
+  <div class="cblock"><span class="cr role">Founder &amp; resident</span><span class="who">ZAYA <i>· the Afro House ritual</i></span></div>
+  <div class="fin">
+    <span class="cr role" style="color:var(--oil)">Booking</span>
+    <span class="ask">For your room, your stage, your night.</span>
+    <a class="mail" href="mailto:zaya.ritual@gmail.com?subject=Booking%20ARGANA">zaya.ritual@gmail.com</a>
+    <nav class="cr"><a href="https://soundcloud.com/arganamusic" target="_blank" rel="noopener">Listen</a><a href="https://www.instagram.com/arganamusic/" target="_blank" rel="noopener">Instagram</a><a href="/">Press kit</a><a href="https://zayaritual.com" target="_blank" rel="noopener">ZAYA</a></nav>
+  </div>
+  <span class="cr end">Fin</span>
+</section>
+
+<audio id="aud" src="/media/set.mp3" loop preload="none"></audio>
+
+<script>
+(function(){
+  var SCENES = [
+    { n:'I',   v:'red-room-3', fit:'v', title:'The room',      lines:['Barcelona. Hotel El Palace.', 'The room, before it fills.'] },
+    { n:'II',  v:'red-room-2', fit:'v', title:'The decks',     lines:['ARGANA.', 'Moroccan roots. Barcelona nights.'] },
+    { n:'III', v:'red-room-4', fit:'v', title:'The floor',     lines:['Afro House. Afrotech.', 'Nothing rushed. Everything deep.'] },
+    { n:'IV',  v:'dj-pov-2',   fit:'h', title:'From the booth', lines:['Two editions of ZAYA.', 'Both sold out. Not one paid ad.'] },
+    { n:'V',   v:'red-room-1', fit:'v', title:'The mirror',    lines:['He built the room he wanted to play in.', 'Invitation only. ARGANA in residence.'] },
+    { n:'VI',  v:'cityhall',   fit:'h', title:'The stage',     lines:['Club stages too.', 'City Hall, Barcelona.'] },
+    { n:'VII', still:'photo7', fit:'h', title:'Last track',    lines:['When the lights come up,', 'the room remembers who played it.'] }
+  ];
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var screen = document.getElementById('screen'), main = document.getElementById('main');
+  var layers = [], sections = [];
+
+  SCENES.forEach(function(s, i){
+    var L = document.createElement('div'); L.className = 'layer ' + s.fit;
+    var poster = '/media/' + (s.v || s.still) + '.jpg';
+    var b = document.createElement('img'); b.className = 'blur'; b.src = poster; b.alt = ''; b.loading = i < 2 ? 'eager' : 'lazy'; L.append(b);
+    if (s.v) {
+      var v = document.createElement('video'); v.muted = true; v.loop = true; v.playsInline = true; v.setAttribute('playsinline', ''); v.preload = 'none'; v.poster = poster;
+      v.dataset.src = '/media/' + s.v + '.mp4'; L.append(v); L.video = v;
+    } else {
+      var im = document.createElement('img'); im.className = 'still'; im.src = '/media/' + s.still + '.jpg'; im.alt = ''; im.loading = 'lazy'; L.append(im);
+    }
+    screen.append(L); layers.push(L);
+    var sec = document.createElement('section'); sec.className = 'scene' + (i === SCENES.length - 1 ? ' short' : '');
+    sec.setAttribute('aria-label', 'Scene ' + s.n + ': ' + s.title + '. ' + s.lines.join(' '));
+    main.append(sec); sections.push(sec);
+  });
+
+  function load(i){ var L = layers[i]; if (L && L.video && !L.video.src) { L.video.src = L.video.dataset.src; L.video.preload = 'auto'; } }
+  load(0); load(1);
+
+  var cur = -1, half = -1;
+  var sc = document.getElementById('sc'), line = document.getElementById('line'), subs = document.getElementById('subs');
+  var scn = document.getElementById('scn'), tc = document.getElementById('tc'), scrub = document.getElementById('scrub');
+  var credits = document.getElementById('credits');
+
+  function setScene(i){
+    if (i === cur) return;
+    layers.forEach(function(L, j){
+      var on = j === i; L.classList.toggle('on', on);
+      if (L.video) { if (on) { load(j); var p = L.video.play(); if (p && p.catch) p.catch(function(){}); } else { L.video.pause(); } }
+    });
+    load(i + 1);
+    cur = i; half = -1;
+    if (i >= 0) scn.textContent = 'Scene ' + SCENES[i].n + ' / VII';
+  }
+  function setLine(i, h){
+    if (i === cur && h === half) return;
+    half = h; subs.classList.remove('show');
+    clearTimeout(setLine.t);
+    setLine.t = setTimeout(function(){
+      if (i < 0 || h < 0) return;
+      sc.textContent = 'Scene ' + SCENES[i].n + ' · ' + SCENES[i].title;
+      line.textContent = SCENES[i].lines[h];
+      subs.classList.add('show');
+    }, reduce ? 0 : 450);
+  }
+
+  function frame(){
+    var vh = innerHeight, y = scrollY, mid = y + vh * .5, idx = 0, prog = 0;
+    for (var i = 0; i < sections.length; i++) {
+      var t = sections[i].offsetTop, h = sections[i].offsetHeight;
+      if (mid >= t) { idx = i; prog = Math.min(1, (mid - t) / h); }
+    }
+    var inCredits = mid >= credits.offsetTop;
+    setScene(idx);
+    if (inCredits) { if (half !== -2) { half = -2; subs.classList.remove('show'); } }
+    else { var h2 = prog < .5 ? 0 : 1; if (h2 !== half) setLine(idx, h2); }
+    var total = document.documentElement.scrollHeight - vh, f = total > 0 ? Math.min(1, y / total) : 0;
+    scrub.style.width = (f * 100) + '%';
+    var secs = f * 7 * 60, hh = 0, mm = Math.floor(secs / 60), ss = Math.floor(secs % 60), ff = Math.floor((secs % 1) * 24);
+    tc.textContent = '00:' + String(mm).padStart(2, '0') + ':' + String(ss).padStart(2, '0') + ':' + String(ff).padStart(2, '0');
+  }
+  addEventListener('scroll', function(){ requestAnimationFrame(frame); }, { passive: true });
+  addEventListener('resize', frame);
+
+  // sound
+  var aud = document.getElementById('aud'), snd = document.getElementById('snd'), soundOn = false;
+  function setSound(on){ soundOn = on; snd.classList.toggle('on', on); snd.setAttribute('aria-pressed', on); snd.lastChild.textContent = on ? 'Sound on' : 'Sound'; }
+  function fade(to){ var v = aud.volume, step = (to - v) / 20, k = 0; clearInterval(fade.t); fade.t = setInterval(function(){ k++; aud.volume = Math.max(0, Math.min(1, v + step * k)); if (k >= 20) { clearInterval(fade.t); if (to === 0) aud.pause(); } }, 60); }
+  function soundStart(){ aud.volume = 0; aud.play().then(function(){ setSound(true); fade(.9); }).catch(function(){ setSound(false); }); }
+  snd.addEventListener('click', function(){ if (soundOn) { setSound(false); fade(0); } else soundStart(); });
+
+  // gate
+  function enter(withSound){
+    document.getElementById('gate').classList.add('out');
+    document.body.classList.remove('held'); document.body.classList.add('open');
+    setTimeout(function(){ document.getElementById('gate').hidden = true; }, 1600);
+    if (withSound) soundStart();
+    frame();
+  }
+  document.getElementById('go-snd').addEventListener('click', function(){ enter(true); });
+  document.getElementById('go-sil').addEventListener('click', function(){ enter(false); });
+
+  setScene(0);
+})();
+</script>
+</body>
+</html>
