@@ -1,0 +1,14 @@
+[
+  {"group": "Top of the page", "key": "hero_kicker", "label": "Small line above your name", "rows": 1},
+  {"group": "Top of the page", "key": "hero_lede", "label": "Sentence under your name", "rows": 2},
+  {"group": "Roots", "key": "roots_text", "label": "The big sentence about the argan tree", "rows": 3, "help": "Put *stars* around a word to make it gold and italic."},
+  {"group": "ZAYA", "key": "proof_title", "label": "ZAYA headline", "rows": 1},
+  {"group": "ZAYA", "key": "proof_text", "label": "ZAYA paragraph", "rows": 4},
+  {"group": "ZAYA", "key": "next_date", "label": "Next date line", "rows": 1},
+  {"group": "Biography", "key": "bio_title", "label": "Bio headline", "rows": 1},
+  {"group": "Biography", "key": "bio_intro", "label": "Bio opening line (large italic)", "rows": 2},
+  {"group": "Biography", "key": "bio_body", "label": "Bio text", "rows": 12, "help": "Leave an empty line between paragraphs."},
+  {"group": "Biography", "key": "why_text", "label": "Why ARGANA (the name)", "rows": 3},
+  {"group": "Biography", "key": "short_bio", "label": "Short bio for flyers and listings", "rows": 4, "help": "This is the text people copy with the Copy button."},
+  {"group": "Booking", "key": "book_title", "label": "Booking headline", "rows": 1, "help": "Put *stars* around a word to make it gold and italic."}
+]

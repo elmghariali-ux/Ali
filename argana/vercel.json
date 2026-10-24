@@ -1,6 +1,52 @@
 {
   "cleanUrls": true,
   "headers": [
-    { "source": "/media/(.*)", "headers": [ { "key": "Cache-Control", "value": "public, max-age=3600, stale-while-revalidate=86400" } ] }
+    {
+      "source": "/media/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, stale-while-revalidate=86400"
+        }
+      ]
+    },
+    {
+      "source": "/admin",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
+        }
+      ]
+    }
+  ],
+  "functions": {
+    "api/page.js": {
+      "includeFiles": "tpl/**"
+    },
+    "api/content.js": {
+      "includeFiles": "tpl/**"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/api/page"
+    },
+    {
+      "source": "/index",
+      "destination": "/api/page"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/tpl/:path*",
+      "destination": "/",
+      "permanent": false
+    }
   ]
 }
