@@ -52,11 +52,11 @@
 <script defer src="/_vercel/insights/script.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Cormorant+Garamond:ital,wght@1,300;1,400&family=Jost:wght@300;400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&display=swap">
 <style>
 /* Same warm room as the press kit, set as a readable long page. */
 :root{--bg:#0B0705;--bg2:#140D09;--line:#2E211A;--ink:#F2E8DB;--soft:#D3C4B2;--mute:#9C8B7A;--oil:#D9A441;
-  --display:"Syne","Arial Black",system-ui,sans-serif;--serif:"Cormorant Garamond",Georgia,serif;--sans:"Jost",system-ui,-apple-system,sans-serif;color-scheme:dark}
+  --display:"Cormorant Garamond",Georgia,"Times New Roman",serif;--serif:"Cormorant Garamond",Georgia,serif;--sans:"Jost",system-ui,-apple-system,sans-serif;color-scheme:dark}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:300;font-size:18px;line-height:1.7;-webkit-font-smoothing:antialiased}
 a{color:var(--oil)}
@@ -65,25 +65,25 @@ a:hover{color:var(--ink)}
 .wrap{max-width:760px;margin:0 auto;padding-left:max(22px,env(safe-area-inset-left));padding-right:max(22px,env(safe-area-inset-right))}
 .top{border-bottom:1px solid var(--line)}
 .top .wrap{max-width:1100px;display:flex;justify-content:space-between;align-items:center;gap:16px;padding-block:20px}
-.mk{font-family:var(--display);font-weight:800;letter-spacing:.32em;font-size:13px;color:var(--ink);text-decoration:none}
+.mk{font-family:var(--display);font-weight:300;letter-spacing:.32em;font-size:13px;color:var(--ink);text-decoration:none}
 .top nav{display:flex;gap:22px;font-size:14px}
 .top nav a{color:var(--soft);text-decoration:none}
 .cap{font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:var(--oil)}
 header.hero{padding-block:12vh 6vh}
-h1{font-family:var(--display);font-weight:800;font-size:clamp(42px,7vw,84px);line-height:.95;letter-spacing:-.015em;margin:18px 0 24px;text-wrap:balance}
+h1{font-family:var(--display);font-weight:300;font-size:clamp(42px,7vw,84px);line-height:.95;letter-spacing:0;margin:18px 0 24px;text-wrap:balance}
 .lede{font-family:var(--serif);font-style:italic;font-size:clamp(24px,2.6vw,32px);line-height:1.3;color:var(--soft);margin:0}
 .hero-img{max-width:1100px;margin:0 auto;padding-left:max(22px,env(safe-area-inset-left));padding-right:max(22px,env(safe-area-inset-right))}
 .hero-img img{display:block;width:100%;height:auto;aspect-ratio:21/9;object-fit:cover;object-position:50% 40%}
 .hero-img figcaption{font-size:13px;color:var(--mute);margin-top:10px}
 section{padding-block:8vh 0}
-h2{font-family:var(--display);font-weight:800;font-size:clamp(28px,3.6vw,42px);line-height:1.05;margin:0 0 20px;text-wrap:balance}
+h2{font-family:var(--display);font-weight:300;font-size:clamp(28px,3.6vw,42px);line-height:1.05;margin:0 0 20px;text-wrap:balance}
 h3{font-family:var(--serif);font-style:italic;font-weight:400;font-size:26px;margin:28px 0 8px}
 p{margin:0 0 1.1em;color:var(--soft)}
 ul{padding-left:1.1em;color:var(--soft)}
 li{margin-bottom:.4em}
 .facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--line);margin:28px 0}
 .facts div{padding:20px 12px 20px 0;border-bottom:1px solid var(--line)}
-.facts b{display:block;font-family:var(--display);font-weight:800;font-size:48px;line-height:1;color:var(--ink)}
+.facts b{display:block;font-family:var(--display);font-weight:300;font-size:48px;line-height:1;color:var(--ink)}
 .facts span{font-size:14px;color:var(--mute)}
 .book{margin-top:10vh;padding:34px;background:var(--bg2);border:1px solid var(--line)}
 .book h2{margin-bottom:12px}
@@ -95,6 +95,14 @@ footer{margin-top:10vh;border-top:1px solid var(--line);padding-block:28px;color
 footer .wrap{max-width:1100px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
 footer a{color:var(--soft)}
 @media (max-width:620px){.top nav .o{display:none}.facts b{font-size:38px}}
+
+/* High-end type pass (ZAYA family): light serif headlines, wide-tracked light sans for names and labels. */
+h1,h2,h3,.h,.big,.book-big,.lede{font-weight:300!important;letter-spacing:0!important}
+.name,.mk,.zaya-word,.gate h1{font-family:var(--sans)!important;font-weight:300!important;text-transform:uppercase}
+.name{letter-spacing:.42em!important;line-height:1!important}
+.mk{letter-spacing:.5em!important}
+.cap,.num,.eyebrow,.t{letter-spacing:.42em!important;font-weight:400!important}
+.nums b,.stats b,.facts b{font-weight:300!important;letter-spacing:0!important}
 </style>
 </head>
 <body>

@@ -8,20 +8,20 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230B0705'/%3E%3Cpath d='M9 26V14a7 7 0 0 1 14 0v12' fill='none' stroke='%23D9A441' stroke-width='2.4'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=Jost:wght@300;400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&display=swap">
 <style>
 /* A quiet workbench in the site's own colours: one column of fields, one bar to publish. */
 :root{--bg:#0B0705;--bg2:#140D09;--line:#2E211A;--ink:#F2E8DB;--soft:#D3C4B2;--mute:#9C8B7A;--oil:#D9A441;--ok:#8DBF7A;--bad:#E0705A;
-  --display:"Syne","Arial Black",system-ui,sans-serif;--sans:"Jost",system-ui,-apple-system,"Segoe UI",sans-serif;color-scheme:dark}
+  --display:"Cormorant Garamond",Georgia,"Times New Roman",serif;--sans:"Jost",system-ui,-apple-system,"Segoe UI",sans-serif;color-scheme:dark}
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:300;font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
 .wrap{max-width:760px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left));padding-right:max(20px,env(safe-area-inset-right))}
 header{border-bottom:1px solid var(--line)}
 header .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-block:18px}
-.mk{font-family:var(--display);font-weight:800;letter-spacing:.3em;font-size:13px}
+.mk{font-family:var(--display);font-weight:300;letter-spacing:.3em;font-size:13px}
 header a{color:var(--soft);font-size:14px}
-h1{font-family:var(--display);font-weight:800;font-size:clamp(30px,5vw,44px);line-height:1;margin:40px 0 10px}
+h1{font-family:var(--display);font-weight:300;font-size:clamp(30px,5vw,44px);line-height:1;margin:40px 0 10px}
 .intro{color:var(--mute);margin:0 0 28px}
 .login{display:flex;flex-direction:column;gap:12px;max-width:380px;margin-top:20px}
 label{font-size:14px;color:var(--soft)}
@@ -43,6 +43,14 @@ textarea{font:inherit;font-size:16px;background:var(--bg2);color:var(--ink);bord
 .bar{position:sticky;bottom:0;background:rgba(11,7,5,.94);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-top:1px solid var(--line);margin-top:30px;padding-bottom:env(safe-area-inset-bottom)}
 .bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-block:14px}
 .bar .actions{display:flex;gap:10px}
+
+/* High-end type pass (ZAYA family): light serif headlines, wide-tracked light sans for names and labels. */
+h1,h2,h3,.h,.big,.book-big,.lede{font-weight:300!important;letter-spacing:0!important}
+.name,.mk,.zaya-word,.gate h1{font-family:var(--sans)!important;font-weight:300!important;text-transform:uppercase}
+.name{letter-spacing:.42em!important;line-height:1!important}
+.mk{letter-spacing:.5em!important}
+.cap,.num,.eyebrow,.t{letter-spacing:.42em!important;font-weight:400!important}
+.nums b,.stats b,.facts b{font-weight:300!important;letter-spacing:0!important}
 </style>
 </head>
 <body>

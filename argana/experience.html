@@ -18,13 +18,13 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23050302'/%3E%3Cpath d='M9 26V14a7 7 0 0 1 14 0v12' fill='none' stroke='%23D9A441' stroke-width='2.4'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@600;800&family=Cormorant+Garamond:ital,wght@1,300;1,400&family=IBM+Plex+Mono:wght@400;500&family=Jost:wght@300;400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=IBM+Plex+Mono:wght@400;500&family=Jost:wght@300;400;500&display=swap">
 <style>
 /* The Root System: one fixed WebGL field of argan-oil light behind seven scrolling movements. */
 :root{
   --void:#050302; --ink:#F4EADC; --soft:#CDBDA9; --mute:#8E7D6C;
   --oil:#D9A441; --ember:#C8432B; --line:rgba(217,164,65,.22);
-  --display:"Syne","Arial Black",system-ui,sans-serif;
+  --display:"Cormorant Garamond",Georgia,"Times New Roman",serif;
   --serif:"Cormorant Garamond",Georgia,serif;
   --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
   --sans:"Jost",system-ui,-apple-system,sans-serif;
@@ -50,7 +50,7 @@ a{color:inherit;text-decoration:none}
 .hud.tr{top:calc(18px + env(safe-area-inset-top));right:max(20px,env(safe-area-inset-right));text-align:right}
 .hud.bl{bottom:calc(18px + env(safe-area-inset-bottom));left:max(20px,env(safe-area-inset-left))}
 .hud.br{bottom:calc(14px + env(safe-area-inset-bottom));right:max(20px,env(safe-area-inset-right));display:flex;align-items:center;gap:16px}
-.hud .mk{font-family:var(--display);font-weight:800;letter-spacing:.32em;font-size:13px;color:var(--ink)}
+.hud .mk{font-family:var(--display);font-weight:300;letter-spacing:.32em;font-size:13px;color:var(--ink)}
 .hud .dim{color:var(--mute)}
 .hud .ch b{color:var(--oil);font-weight:500}
 .prog{position:fixed;z-index:20;left:0;top:0;height:2px;background:var(--oil);width:0;box-shadow:0 0 12px var(--oil)}
@@ -65,7 +65,7 @@ a{color:inherit;text-decoration:none}
 .gate{position:fixed;inset:0;z-index:40;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:34px;text-align:center;padding:24px;background:radial-gradient(ellipse at center,rgba(5,3,2,.2),rgba(5,3,2,.85) 70%);transition:opacity 1.4s ease}
 .gate.out{opacity:0;pointer-events:none}
 .gate .t{font-family:var(--mono);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--oil)}
-.gate h1{margin:0;font-family:var(--display);font-weight:800;font-size:clamp(44px,9vw,128px);letter-spacing:.08em;line-height:.9}
+.gate h1{margin:0;font-family:var(--display);font-weight:300;font-size:clamp(44px,9vw,128px);letter-spacing:.08em;line-height:.9}
 .gate p{margin:0;font-family:var(--serif);font-style:italic;font-size:clamp(20px,2.2vw,28px);color:var(--soft);max-width:30ch}
 .gate .row{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
 .gbtn{font-family:var(--mono);font-size:12px;letter-spacing:.24em;text-transform:uppercase;padding:16px 22px;min-height:48px;cursor:pointer;border:1px solid var(--oil);background:var(--oil);color:var(--void)}
@@ -88,12 +88,12 @@ body.locked main{opacity:0}
 .txt{max-width:520px;display:flex;flex-direction:column;gap:18px;opacity:0;transform:translateY(20px);transition:opacity 1s ease,transform 1s ease}
 .mv.on .txt{opacity:1;transform:none}
 .num{font-family:var(--mono);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--oil)}
-.h{margin:0;font-family:var(--display);font-weight:800;font-size:clamp(38px,5.6vw,84px);line-height:.92;letter-spacing:-.01em;text-wrap:balance;text-shadow:0 4px 40px rgba(0,0,0,.8)}
+.h{margin:0;font-family:var(--display);font-weight:300;font-size:clamp(38px,5.6vw,84px);line-height:.92;letter-spacing:0;text-wrap:balance;text-shadow:0 4px 40px rgba(0,0,0,.8)}
 .h em{font-family:var(--serif);font-style:italic;font-weight:300;color:var(--oil);letter-spacing:0}
 .p{margin:0;font-size:17px;line-height:1.65;color:var(--soft);text-shadow:0 2px 20px rgba(0,0,0,.9)}
 .stats{display:flex;gap:28px;margin-top:6px}
 .stats div{display:flex;flex-direction:column;gap:6px}
-.stats b{font-family:var(--display);font-weight:800;font-size:clamp(44px,5vw,72px);line-height:.85}
+.stats b{font-family:var(--display);font-weight:300;font-size:clamp(44px,5vw,72px);line-height:.85}
 .stats span{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--mute);max-width:12ch}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
 .chips span{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;border:1px solid var(--line);padding:7px 11px;color:var(--soft);background:rgba(5,3,2,.4);backdrop-filter:blur(4px)}
@@ -101,7 +101,7 @@ body.locked main{opacity:0}
 
 /* projected labels (movement 3) */
 .lbl{position:fixed;z-index:12;left:0;top:0;pointer-events:none;font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);opacity:0;transition:opacity .6s;white-space:nowrap;transform:translate(-50%,-50%)}
-.lbl b{display:block;font-family:var(--display);font-weight:800;font-size:clamp(18px,2vw,26px);letter-spacing:.02em;text-transform:none}
+.lbl b{display:block;font-family:var(--display);font-weight:300;font-size:clamp(18px,2vw,26px);letter-spacing:.02em;text-transform:none}
 .lbl i{font-style:normal;color:var(--oil)}
 .lbl::before{content:"";position:absolute;left:50%;top:-14px;width:1px;height:10px;background:var(--oil)}
 
@@ -130,6 +130,14 @@ body.locked main{opacity:0}
 .cta a:hover,.cta button:hover{border-color:var(--oil)}
 .mail{font-family:var(--mono);font-size:13px;letter-spacing:.08em;color:var(--soft);user-select:all}
 .nogl{position:fixed;inset:0;z-index:0;background:url(/media/photo8.jpg) center/cover;filter:brightness(.35)}
+
+/* High-end type pass (ZAYA family): light serif headlines, wide-tracked light sans for names and labels. */
+h1,h2,h3,.h,.big,.book-big,.lede{font-weight:300!important;letter-spacing:0!important}
+.name,.mk,.zaya-word,.gate h1{font-family:var(--sans)!important;font-weight:300!important;text-transform:uppercase}
+.name{letter-spacing:.42em!important;line-height:1!important}
+.mk{letter-spacing:.5em!important}
+.cap,.num,.eyebrow,.t{letter-spacing:.42em!important;font-weight:400!important}
+.nums b,.stats b,.facts b{font-weight:300!important;letter-spacing:0!important}
 </style>
 </head>
 <body class="locked">
@@ -353,11 +361,11 @@ function galaxy() {
   return a;
 }
 async function word() {
-  try { await document.fonts.load('800 200px Syne'); } catch (e) {}
+  try { await document.fonts.load('400 200px Jost'); } catch (e) {}
   const c = document.createElement('canvas'), W = 1400, H = 320; c.width = W; c.height = H;
   const g = c.getContext('2d'); g.fillStyle = '#fff'; g.textAlign = 'center'; g.textBaseline = 'middle';
-  let fs = 260; g.font = `800 ${fs}px Syne, "Arial Black", sans-serif`;
-  while (g.measureText('ARGANA').width > W * .94 && fs > 60) { fs -= 8; g.font = `800 ${fs}px Syne, "Arial Black", sans-serif`; }
+  let fs = 260; g.font = `400 ${fs}px Jost, system-ui, sans-serif`;
+  while (g.measureText('ARGANA').width > W * .94 && fs > 60) { fs -= 8; g.font = `400 ${fs}px Jost, system-ui, sans-serif`; }
   g.fillText('ARGANA', W / 2, H / 2);
   const d = g.getImageData(0, 0, W, H).data, pts = [];
   for (let y = 0; y < H; y += 2) for (let x = 0; x < W; x += 2) if (d[(y * W + x) * 4 + 3] > 128) pts.push(x, y);
