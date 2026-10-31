@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://almasocial.club/sitemap.xml
