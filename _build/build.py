@@ -15,18 +15,18 @@ META = {
     "en": ("Alma Social Club — Private members' club in Barcelona",
            "Alma Social Club is a private association of adults in L'Hospitalet de Llobregat, Barcelona. A members-only space with murals, neon light and good company. Open daily 10:00–22:00. Adults 18+ only."),
     "fr": ("Alma Social Club — Club privé à Barcelone",
-           "Alma Social Club est une association privée de personnes majeures à L'Hospitalet de Llobregat, Barcelone. Un espace réservé aux membres, avec fresques, néons et bonne compagnie. Ouvert tous les jours de 10h à 22h. +18 uniquement."),
+           "Alma Social Club, association privée réservée aux adultes à L'Hospitalet de Llobregat (Barcelone). Street art, néons et bonne ambiance, entre membres. Ouvert 7j/7 de 10h à 22h. +18 uniquement."),
 }
 FAQ_META = {
     "es": ("Preguntas frecuentes — Alma Social Club Barcelona", "Horario, dirección, cómo funciona la membresía y otras preguntas frecuentes sobre Alma Social Club, asociación privada en Barcelona."),
     "en": ("FAQ — Alma Social Club Barcelona", "Opening hours, address, how membership works and other frequently asked questions about Alma Social Club, a private association in Barcelona."),
-    "fr": ("FAQ — Alma Social Club Barcelone", "Horaires, adresse, fonctionnement de l'adhésion et autres questions fréquentes sur Alma Social Club, association privée à Barcelone."),
+    "fr": ("FAQ — Alma Social Club Barcelone", "Horaires, adresse, adhésion : toutes les réponses à vos questions sur Alma Social Club, association privée à Barcelone."),
 }
 OGLOCALE = {"es": "es_ES", "en": "en_GB", "fr": "fr_FR"}
 STATUS = {
     "es": ("ABIERTO AHORA", "CERRADO · ABRE A LAS 10:00"),
     "en": ("OPEN NOW", "CLOSED · OPENS 10:00"),
-    "fr": ("OUVERT", "FERMÉ · OUVRE À 10H"),
+    "fr": ("OUVERT EN CE MOMENT", "FERMÉ · OUVRE À 10H"),
 }
 FAQ_LABEL = {"es": "FAQ", "en": "FAQ", "fr": "FAQ"}
 
@@ -52,17 +52,17 @@ FAQ = {
   ("How can I get in touch?", "On Instagram at @alma.csc.barcelona, or by stopping by the club during opening hours."),
  ],
  "fr": [
-  ("Qu'est-ce qu'Alma Social Club ?", "Alma Social Club est une association privée de personnes majeures à L'Hospitalet de Llobregat (Barcelone). C'est un espace réservé aux membres pour se retrouver, décompresser et créer du lien."),
-  ("Où se trouve le club ?", "Carrer Dos de Maig, 7, 08904 L'Hospitalet de Llobregat, Barcelone. Vous pouvez ouvrir l'itinéraire Google Maps depuis la page d'accueil."),
-  ("Quels sont les horaires ?", "Nous sommes ouverts tous les jours, du lundi au dimanche, de 10h à 22h."),
-  ("Qui peut devenir membre ?", "Les personnes de 18 ans et plus, munies d'une pièce d'identité originale et en cours de validité (carte d'identité, NIE ou passeport), qui lisent et acceptent les statuts et le règlement intérieur. L'adhésion est personnelle et non transférable."),
-  ("Puis-je venir sans être membre ?", "L'accès au local est réservé aux membres. Les conditions d'adhésion sont expliquées sur place, au club."),
-  ("Quelles langues parlez-vous ?", "L'équipe parle espagnol et anglais. Ce site est aussi disponible en français."),
-  ("Ce site vend-il quelque chose ?", "Non. Ce site a un caractère purement informatif et ne constitue ni une publicité ni une offre de produit."),
-  ("Comment vous contacter ?", "Sur Instagram, @alma.csc.barcelona, ou en passant au club pendant les horaires d'ouverture."),
+  ("C'est quoi, Alma Social Club ?", "Alma Social Club est une association privée réservée aux adultes, à L'Hospitalet de Llobregat (Barcelone). Un lieu pour les membres, pensé pour se retrouver, souffler et partager de bons moments."),
+  ("Où se trouve le club ?", "Carrer Dos de Maig, 7, 08904 L'Hospitalet de Llobregat, Barcelone. L'itinéraire Google Maps est accessible depuis la page d'accueil."),
+  ("Quels sont vos horaires ?", "On est ouverts tous les jours, de 10h à 22h."),
+  ("Qui peut devenir membre ?", "Toute personne majeure (18 ans et plus), munie d'une pièce d'identité originale en cours de validité (carte d'identité, NIE ou passeport), qui accepte les statuts et le règlement intérieur de l'association. L'adhésion est nominative et non cessible."),
+  ("Peut-on venir sans être membre ?", "Non, l'accès est réservé aux membres. On vous explique les conditions d'adhésion directement au club."),
+  ("Vous parlez quelles langues ?", "L'équipe parle espagnol et anglais. Le site, lui, est aussi disponible en français."),
+  ("Ce site vend-il quelque chose ?", "Non. Ce site est purement informatif : il ne s'agit ni d'une publicité ni d'une offre de produits."),
+  ("Comment vous contacter ?", "Sur Instagram (@alma.csc.barcelona) ou directement au club, pendant les horaires d'ouverture."),
  ],
 }
-FAQ_HEAD = {"es": ("Preguntas", "frecuentes"), "en": ("Frequently asked", "questions"), "fr": ("Questions", "fréquentes")}
+FAQ_HEAD = {"es": ("Preguntas", "frecuentes"), "en": ("Frequently asked", "questions"), "fr": ("Vos", "questions")}
 BACK = {"es": "← Volver al inicio", "en": "← Back to home", "fr": "← Retour à l'accueil"}
 
 LANG_CSS = """
@@ -154,7 +154,7 @@ def fix_js(html, lang):
     html = html.replace("['#manES','#manEN'].forEach(function(id){var p=$(id),",
                         "document.querySelectorAll('.man .big').forEach(function(p){var ")
     html = html.replace(r"hl=/^(frecuencia\.|frequency\.|tuyo\.|yours\.)$/i;",
-                        r"hl=/^(frecuencia\.|frequency\.|fréquence\.|tuyo\.|yours\.|ressemble\.)$/i;")
+                        r"hl=/^(frecuencia\.|frequency\.|vibe\.|tuyo\.|yours\.|soi\.)$/i;")
     html = re.sub(r"document\.querySelectorAll\('\.man \[data-'.*?\.w'\)",
                   "document.querySelectorAll('.man .big .w')", html)
     return html
